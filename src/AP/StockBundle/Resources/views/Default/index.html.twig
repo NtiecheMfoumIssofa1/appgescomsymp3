@@ -1,0 +1,351 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Entrée de stock </title>
+
+
+
+
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view" style="width:100%;margin-top:-30px;">
+
+                <div class="clearfix"></div>
+
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <ul class="nav side-menu">
+
+                            <li class="active"><a><i class="fa fa-edit"></i> GESTION DE STOCK <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+
+
+
+                                    <li class="current-page"><a href="#">Entrées en stock</a></li>
+                                    <li><a href="{{ path('ap_stock_sorti') }}">Sortie de stock (rebus)</a></li>
+                                    <li><a href="{{ path('ap_stock_histo') }}">Historique des E/S</a></li>
+                                    <li><a href="{{ path('ap_stock_histo') }}">Inventaire</a></li>
+                                    <li><a href="">Liste des commandes</a></li>
+
+
+
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div style="margin-left:230px;">  {{ include("APUsersBundle:Default:topnav.html.twig") }} </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Entrée en stock</h3>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="clearfix"></div>
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-sm-2 col-xs-12 mt8" >Désignation</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" required class="Products form-control" autocomplete="off" id="Products"  placeholder="Veuillez entrer le nom du produit">
+                                        <div id="productList" class="productList" style="position: absolute;z-index:2;width:94.7%;cursor:pointer"></div>
+
+
+                                    </div>
+
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-12 mt8" style="text-align:right;">Quantité</label>
+                                    <div class="col-md-1 col-sm-1 col-xs-12">
+                                        <input type="number" required id="qte" class="form-control" style="width:50px;" placeholder="">
+                                    </div>
+
+
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <button   id="adform" class="btn btn-success">Ajouter</button>
+
+                                    </div>
+
+                                </div>
+
+                      </div>
+
+                            <div class="x_content mt8">
+
+                                <div class="table-responsive mt8">
+                                    <table class="table table-striped jambo_table bulk_action" id="tbl">
+                                        <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">code d'article </th>
+                                            <th class="column-title">Article </th>
+                                            <th class="column-title">Qte stock</th>
+                                            <th class="column-title">Qte ajoutée </th>
+                                            <th class="column-title">Nouv qte </th>
+                                            <th class="column-title">Prix d'achat </th>
+                                            <th class="column-title">prix de vente </th>
+                                            <th class="column-title néo-link last"><span class="nobr">Action</span>
+                                            </th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="tab">
+
+
+                                        </tbody>
+                                    </table>
+<center> <h4 style="color:green;padding:20px;" id="#yes"></h4> </center>
+
+                                        <center>  <button class="btn btn-success" id="valider">Valider l'entrée en stock </button>
+                                        </center>
+
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<!-- gauge.js -->
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+
+
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+
+<script>
+    $(document).ready(function(){
+        $(".Products").keyup(function(){
+            var stock_id_string = $(this).val();
+            if(stock_id_string == ''){
+                $('.productList').fadeOut();
+            }
+            if (stock_id_string != '') {
+                $.ajax({
+                    url: 'http://localhost/affides_pos/web/app_dev.php/prodfetch/'+ stock_id_string ,
+                    method: "GET",
+                    data: "",
+                    success: function(data)
+                    {
+                        $('.productList').fadeIn();
+                        $('.productList').html(data);
+                    }
+                });
+            }
+        });
+
+        $('.productList').on('click', 'li', function(){
+
+
+
+
+            $('.Products').val($(this).text());
+            $('.productList').fadeOut();
+        });
+
+
+
+
+        $('#adform').on('click',function(){
+
+
+          var prod = $('.Products').val();
+            var qte = $("#qte").val();
+
+            if (qte != '' ) {
+
+                $.ajax({
+                    url: 'http://localhost/affides_pos/web/app_dev.php/addrow/' + prod + '/' + qte,
+                    method: "GET",
+                    data: "",
+                    success: function (data) {
+                        $('#tab').fadeIn();
+                        $('#tab').append(data);
+                        $('.Products').val("");
+                        $('#qte').val("");
+
+
+                    }
+                });
+
+            } else{
+                alert("entrez une quatité");
+            }
+
+
+        });
+
+
+        $("#trash").on("click", function(){
+
+alert("veuillez reprendre");
+
+
+
+
+        });
+
+
+
+
+        $("#valider").button().bind("click", function(){
+            var res = "";
+            $('#tbl').find("tbody").find("tr").each(function(){
+                var nom= $(this).find(".code").text();
+                var qte= $(this).find(".qte").text();
+                res += nom+'~'+qte+'|';
+            });
+
+            if(res != '')
+            {
+            $.ajax({
+                url: 'http://localhost/affides_pos/web/app_dev.php/addentry/'+ res,
+                method: "GET",
+                data: "",
+                success: function (data) {
+                    $('#tab').fadeIn();
+                    $('#tab').html(data);
+
+
+
+
+                }
+            });
+
+            }else{
+
+                alert('veuillez ajouter des entrées');
+            }
+
+
+
+        });
+
+
+
+
+
+
+    });
+
+</script>
+
+
+
+
+</body>
+</html>
+
+
+
+

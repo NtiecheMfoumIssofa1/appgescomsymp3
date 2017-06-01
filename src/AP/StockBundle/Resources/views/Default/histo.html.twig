@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Historique des E/S </title>
+
+
+
+
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view" style="width:100%;margin-top:-30px;">
+
+                <div class="clearfix"></div>
+
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <ul class="nav side-menu">
+
+                            <li class="active"><a><i class="fa fa-edit"></i> GESTION DE STOCK </a>
+                                <ul class="nav child_menu">
+
+
+
+                                    <li ><a href="{{ path('ap_stock_homepage') }}">Entrées en stock</a></li>
+                                    <li ><a href="{{ path('ap_stock_sorti') }}">Sortie de stock (rebus)</a></li>
+                                    <li class="current-page" ><a href="#">Historique des E/S</a></li>
+                                    <li><a href="{{ path('ap_stock_histo') }}">Inventaire</a></li>
+                                    <li><a href="">Liste des commandes</a></li>
+
+
+
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div style="margin-left:230px;">  {{ include("APUsersBundle:Default:topnav.html.twig") }} </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Historique des entrées/sortis</h3>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="clearfix"></div>
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+
+                            <div class="col-md-12">
+
+
+                                <div class="form-group">
+                               {#     <label class="control-label col-md-1 col-sm-1 col-xs-12 mt8" >Désignation</label>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input type="text" required class="Products form-control" autocomplete="off" id="Products"  placeholder="Veuillez entrer le nom du produit">
+                                        <div id="productList" class="productList" style="position: absolute;z-index:2;width:94.7%;cursor:pointer"></div>
+
+
+                                    </div>#}
+
+
+
+                                    </div>
+
+
+
+                                </div>
+
+
+                            <div class="x_content mt8">
+
+                                <div class="table-responsive mt8">
+                                    <table class="table table-striped jambo_table bulk_action" id="product">
+                                        <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">date </th>
+                                            <th class="column-title">Article </th>
+                                            <th class="column-title">type </th>
+
+                                            <th class="column-title">Qte prec</th>
+                                            <th class="column-title">Qte ajoutée/sortie </th>
+                                            <th class="column-title">Cause(sorti) </th>
+
+                                            </th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="">
+
+                                      {%   for listeop in liste %}
+                                          <tr class="even pointer">
+                                              <td> {{ listeop.date|date("d-m-Y") }}</td>
+                                              <td>{{ listeop.prod }}</td>
+                                              <td>{% if listeop.type == 1 %}entrée{% else %}sortie{% endif %}</td>
+                                              <td>{{ listeop.quantiteprec }}</td>
+                                              <td>{{ listeop.quantite }}</td>
+                                              <td>{{ listeop.cause }}</td>
+
+                                          </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<!-- gauge.js -->
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+<script src="{{ asset('vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+
+
+
+</body>
+</html>
+
+
+
+

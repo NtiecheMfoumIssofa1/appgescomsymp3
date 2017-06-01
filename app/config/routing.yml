@@ -1,0 +1,18 @@
+ap_stock:
+    resource: "@APStockBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ap_products:
+    resource: "@APProductsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ap_users:
+    resource: "@APUsersBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

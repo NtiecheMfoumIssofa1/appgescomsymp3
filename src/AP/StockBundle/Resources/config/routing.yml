@@ -1,0 +1,31 @@
+ap_stock_homepage:
+    path:     /stock
+    defaults: { _controller: APStockBundle:Default:index }
+
+ap_stock_fetch:
+    path:     /prodfetch/{id}
+    defaults: { _controller: APStockBundle:Default:prodfetch }
+
+ap_stock_addrow:
+    path:     /addrow/{id}/{qt}
+    defaults: { _controller: APStockBundle:Default:addrow }
+
+ap_stock_addentry:
+    path:     /addentry/{id}
+    defaults: { _controller: APStockBundle:Default:addentry }
+
+ap_stock_sorti:
+    path:     /stock/sortis
+    defaults: { _controller: APStockBundle:Default:sorti }
+
+ap_stock_addout:
+    path:     /addout/{id}/{cause}
+    defaults: { _controller: APStockBundle:Default:addout }
+
+ap_stock_histo:
+    path:     /stock/histo
+    defaults: { _controller: APStockBundle:Default:histo }
+
+ap_stock_inv:
+    path:     /stock/inv
+    defaults: { _controller: APStockBundle:Default:inv }

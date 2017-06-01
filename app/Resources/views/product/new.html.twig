@@ -1,0 +1,373 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Produits </title>
+
+
+
+
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view" style="width:100%;margin-top:-30px;">
+
+                <div class="clearfix"></div>
+
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <ul class="nav side-menu">
+
+                            <li class="active"><a><i class="fa fa-edit"></i> CATEGORIES <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    {#
+                                                                        {% for category in categories %}
+
+                                                                            <li><a href="">{{ category.nom }}</a></li>
+
+                                                                        {% endfor %}#}
+
+
+
+
+
+
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div style="margin-left:230px;">  {{ include("APUsersBundle:Default:topnav.html.twig") }} </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Nouveau produit</h3>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="clearfix"></div>
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <button type="button" class="btn btn-success btn-sm"> <a href="{{ path('category_new') }}" class="cw">Nouveau produit</a></button>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <h5>         <a href="{{ path('category_index') }}">
+                                            <i class="fa fa-cubes"></i> Gestion des catégories </a></h5>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+
+
+
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+
+
+                                    {{ form_start(form) }}
+
+
+
+
+
+                                    <label for="email">{{ form_label(form.code, "code d'article") }}</label>
+                                    {{ form_widget(form.code, {'attr': {'class': 'form-control'}}) }}
+
+                                    <br>
+
+                                    <label for="email">{{ form_label(form.designation, "désignation") }}</label>
+                                    {{ form_widget(form.designation, {'attr': {'class': 'form-control'}}) }}
+
+                                    <br>
+
+                                    <label for="email">{{ form_label(form.category, "catégorie") }}</label>
+                                    {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+
+                                    <br>
+
+                                    <div class="col-md-6" style="padding-left: 0">
+                                        <label for="fullname">{{ form_label(form.prixachat, "prix d'achat") }}</label>
+                                        {{ form_widget(form.prixachat, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <div class="col-md-6" style="padding-right: 0">
+                                        <label for="fullname">{{ form_label(form.prixvente, "prix de vente") }}</label>
+                                        {{ form_widget(form.prixvente, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+<br>
+                                    <label for="email">{{ form_label(form.typeproduit, "Type de produit") }}</label>
+                                    {{ form_widget(form.typeproduit, {'attr': {'class': 'form-control'}}) }}
+
+<br>
+                                    <div id="quantite">
+                                    <div class="col-md-6" style="padding-left: 0">
+                                        <label for="fullname">{{ form_label(form.qtestock, "Quantité en stock") }}</label>
+                                        {{ form_widget(form.qtestock, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+
+                                    <div class="col-md-6" style="padding-right: 0">
+                                        <label for="fullname">{{ form_label(form.qtemin, "quantité minimale") }}</label>
+                                        {{ form_widget(form.qtemin, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                        <br>
+
+                                    </div>
+
+
+
+                                    <div id="portion">
+                                    <label for="email">{{ form_label(form.qtepart, "Nombre de portion") }}</label>
+                                    {{ form_widget(form.qtepart, {'attr': {'class': 'form-control'}}) }}
+                                        <br>
+
+                                    </div>
+
+
+
+                                    <div id="nbredivi">
+                                    <label for="email">{{ form_label(form.nbrediv, "conso ou 1/2 bouteille") }}</label>
+                                    {{ form_widget(form.nbrediv, {'attr': {'class': 'form-control'}}) }}
+                                        <br>
+
+                                    </div>
+
+
+
+
+                                    <div id="parent">
+                                    <label for="email">{{ form_label(form.prodparent, "Produit parent") }}</label>
+                                    {{ form_widget(form.prodparent, {'attr': {'class': 'form-control'}}) }}
+                                        <br>
+
+                                    </div>
+
+
+
+                                    <div id="gerer">
+                                    {{ form_widget(form.gerstock) }}
+                                    <label for="email">{{ form_label(form.gerstock, "Gérer le stock") }}</label>
+                                        <br>
+
+                                    </div>
+
+
+
+
+                                    <center>
+
+                                        <input type="submit" class="btn btn-success" value="Valider" />
+
+                                    </center>
+                                    {{ form_rest(form) }}
+
+                                    {{ form_end(form) }}
+
+
+
+
+
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<!-- gauge.js -->
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+
+
+
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+
+
+
+
+<script>
+    $(document).ready(function(){
+
+        var quantite = $('#quantite');
+        var nbredivi = $('#nbredivi');
+        var portion = $('#portion');
+        var gerer = $('#gerer');
+        var parent = $('#parent');
+
+
+        portion.hide();
+        quantite.hide();
+        nbredivi.hide();
+        gerer.hide();
+        parent.hide();
+
+
+
+        $("select#ap_productsbundle_product_typeproduit").change(function(){
+
+            var typeprod =  $("select#ap_productsbundle_product_typeproduit option:selected").attr('value');
+            if (typeprod == '1' ) {
+                quantite.show();
+                gerer.show();
+
+
+                portion.hide();
+                nbredivi.hide();
+                parent.hide();
+
+            }else if( typeprod == '2'){
+
+                quantite.show();
+                gerer.show();
+                portion.show();
+
+
+
+                nbredivi.hide();
+                parent.hide();
+
+
+            }else if (typeprod == '3'){
+
+                nbredivi.show();
+                parent.show();
+
+
+                portion.hide();
+                quantite.hide();
+                gerer.hide();
+
+
+            }
+        });
+
+
+
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Acceuil </title>
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="{{ asset('vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
+
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <!-- top navigation -->
+
+        {{ include("APUsersBundle:Default:topnav.html.twig") }}
+
+
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" style="margin-left: 0" role="main">
+            <!-- top tiles -->
+
+            <!-- /top tiles -->
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard_graph">
+
+                        <div class="row x_title">
+
+                        </div>
+
+                        <div class="col-md-9 col-sm-9 col-xs-12" style="padding: 0 40px 0 0">
+
+
+                            <div class="col-md-3 col-sm-3 col-xs-12 " style="">
+                                <div class="bg-orange acc blockmenu  menublok" >
+
+
+                                    <i class="fa fa-cart-plus"> </i>
+                                    <h6 class="blocktit"
+                                    > Aujourd'hui</h6>
+
+
+                                    <h6 class="blocktit1
+"> 20 couverts servis</h6>
+
+
+
+                                    <h6 class="blocktit1"> 20 clients servis</h6>
+
+
+                                    <h6 style="margin-top: 50px;"> Caisse et gestion</h6>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-3 col-xs-12 " >
+
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad " >
+                                    <div class="bg-blue acc blockmenu h98  menublok">
+
+
+
+                                        <i class="fa fa-users"> </i>
+
+                                        <h6> Clients</h6>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad " >
+                                    <a href="{{ path('product_index') }}">     <div class="bg-red acc blockmenu h98  menublok  menublok" >
+
+
+                                            <i class="fa fa-cubes"> </i>
+
+                                            <h6> Produits</h6>
+
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
+                                    <div class="bg-blue-sky acc blockmenu h98 menublok" >
+
+
+                                        <i class="fa fa-clock-o"> </i>
+
+                                        <h6> Pointage</h6>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
+                                    <a href="{{ path('ap_stock_homepage') }}" >
+                                    <div class="bg-green acc blockmenu h98  menublok " >
+
+
+
+                                        <i class="fa fa-exchange"> </i>
+
+                                        <h6> Gestion de stock</h6>
+
+                                    </div>
+                                    </a>
+                                </div>
+
+
+
+
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+
+                                <div class="bg-green-sky acc blockmenu  menublok" >
+
+
+                                    <i class="fa fa-money"> </i>
+
+
+
+                                    <h6 class="blocktit"> Dernière clôture :</h6>
+
+
+                                    <h6 class="blocktit1"> 20 mai 2017</h6>
+
+
+
+                                    <h6 class="blocktit1"> 190 000 Fcfa</h6>
+
+
+                                    <h6 style="margin-top: 50px;"> Cloture de caisse</h6>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-3 col-xs-12" >
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
+                                    <div class="bg-purple acc blockmenu h98  menublok" >
+
+                                        <i class="fa fa-folder"> </i>
+
+                                        <h6> Dossiers</h6>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
+                                    <div class="bg-purple-sky acc blockmenu h98  menublok">
+
+                                        <i class="fa fa-calendar-check-o"> </i>
+
+                                        <h6> Réservations</h6>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-3 col-xs-12" >
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
+                                    <div class="bg-purple acc blockmenu h98  menublok" >
+
+                                        <i class="fa fa-folder"> </i>
+
+                                        <h6> Dossiers</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-12 " >
+
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad " >
+                                    <div class="bg-blue acc blockmenu h98  menublok">
+
+
+
+                                        <i class="fa fa-users"> </i>
+
+                                        <h6> Clients</h6>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad " >
+                                    <div class="bg-red acc blockmenu h98  menublok" >
+
+
+                                        <i class="fa fa-info"> </i>
+
+                                        <h6> Aide</h6>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3 col-sm-3">
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
+                                    <div class="bg-blue-sky acc blockmenu h98  menublok" >
+
+
+                                        <i class="fa fa-wrench"> </i>
+
+                                        <h6> Outils</h6>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
+                                    <div class="bg-green acc blockmenu h98  menublok" >
+
+
+
+                                        <i class="fa fa-heart"> </i>
+
+                                        <h6> Fidelité</h6>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-12" >
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
+                                    <div class="bg-orange acc blockmenu h98  menublok" >
+
+                                        <i class="fa fa-cogs"> </i>
+
+                                        <h6> Paramètres</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="x_panel tile" style="    min-height: 305px;">
+
+                                <div class="x_content">
+                                    <div class="dashboard-widget-content">
+
+                                        <div class="sidebar-widget">
+                                            <h4>Objectif journalier</h4>
+                                            <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 9160px; height: 100px;"></canvas>
+                                            <div class="goal-wrapper" style="padding: 0 15%;">
+                                                <span id="gauge-text" class="gauge-value pull-left">0</span>
+                                                <span class="gauge-value pull-left">%</span>
+                                                <span id="goal-text" class="goal-value pull-right">1 000 000 FCFA</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="separator"></div>
+
+
+                                        <div class="col-md-2">
+                                            <i class="fa fa-thumb-tack" style="font-size:40px;"></i>
+
+                                        </div>
+
+                                        <div class="col-md-10">
+                                            <p> Ici on mettra un short message destiné à tous les employés utulisant l'application</p>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+            </div>
+            <br />
+
+
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div>
+                <br><br><br><br>
+                <h4 style="margin-bottom:10px;"><i class="fa fa-paw"></i> Affides Pos</h4>
+                <p style="font-size: 11px;">©2016 All Rights Reserved. Affides POS! Contact Assistance :<br> <span style="background-color: white;color:black;padding:2px 10px;"> 697511214 / 676013924 </span> </p>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<script src="{{ asset('vendors/Chart.js/dist/Chart.min.js') }}"></script>
+<!-- gauge.js -->
+<script src="{{ asset('vendors/gauge.js/dist/gauge.min.js') }}"></script>
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+</body>
+</html>
