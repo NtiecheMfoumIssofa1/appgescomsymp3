@@ -55,7 +55,7 @@
                                     <li ><a href="{{ path('ap_stock_sorti') }}">Sortie de stock (rebus)</a></li>
                                     <li><a href="{{ path('ap_stock_histo') }}">Historique des E/S</a></li>
                                     <li class="current-page"><a href="#">Inventaire</a></li>
-                                    <li><a href="">Liste des commandes</a></li>
+                                    <li><a href="{{ path('ap_stock_cmd') }}">Liste des commandes</a></li>
 
 
 
@@ -113,7 +113,7 @@
                                     </div>
 
                                     <div class="col-md-8 col-sm-8 col-xs-12 nopad" style="text-align: right">
-                                        <a href="#"  class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
+                                        <a href="{{ path('ap_print_inv') }}" target="_blank" class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
                                     </div>
 
 
@@ -136,7 +136,7 @@
                                         <tr class="headings">
                                             <th class="column-title">code article </th>
                                             <th class="column-title">Article </th>
-                                            <th class="column-title">Prix vente</th>
+                                            <th class="column-title">Prix de vente</th>
 
                                             <th class="column-title">Qte en stock</th>
                                             <th class="column-title">total</th>

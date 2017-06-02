@@ -56,7 +56,10 @@ class ProductType extends AbstractType
 
 
 
-            ->add('category');
+            ->add('category')
+            ->add('thumbnail', thumbnailType::class,array('required' => false))
+
+        ;
     }
     
     /**

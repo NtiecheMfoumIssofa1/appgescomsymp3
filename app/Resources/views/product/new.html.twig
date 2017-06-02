@@ -126,10 +126,10 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <button type="button" class="btn btn-success btn-sm"> <a href="{{ path('category_new') }}" class="cw">Nouveau produit</a></button>
+                                <button type="button" class="btn btn-success btn-sm"> <a href="{{ path('product_new') }}" class="cw">Nouveau produit</a></button>
                                 <ul class="nav navbar-right panel_toolbox">
-                                    <h5>         <a href="{{ path('category_index') }}">
-                                            <i class="fa fa-cubes"></i> Gestion des catégories </a></h5>
+                                    <h5>         <a href="{{ path('product_index') }}">
+                                            <i class="fa fa-cubes"></i> Liste des Produits </a></h5>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -230,7 +230,9 @@
                                     </div>
 
 
-
+                                    <label for="email">{{ form_label(form.thumbnail, "Vignette produit") }}</label>
+                                    {{ form_widget(form.thumbnail, {'attr': {'class': 'form-control'}}) }}
+                                    <br>
 
                                     <center>
 

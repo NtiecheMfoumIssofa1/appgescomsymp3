@@ -29,3 +29,11 @@ ap_stock_histo:
 ap_stock_inv:
     path:     /stock/inv
     defaults: { _controller: APStockBundle:Default:inv }
+
+ap_print_inv:
+    path:     /print/inv
+    defaults: { _controller: APStockBundle:Default:printinv }
+
+ap_stock_cmd:
+    path:     /stock/cmd
+    defaults: { _controller: APStockBundle:Default:cmd }

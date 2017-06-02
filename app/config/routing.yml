@@ -1,3 +1,7 @@
+ap_caisse:
+    resource: "@APCaisseBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ap_stock:
     resource: "@APStockBundle/Resources/config/routing.yml"
     prefix:   /

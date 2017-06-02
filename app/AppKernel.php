@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new AP\UsersBundle\APUsersBundle(),
             new AP\ProductsBundle\APProductsBundle(),
             new AP\StockBundle\APStockBundle(),
+            new AP\CaisseBundle\APCaisseBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

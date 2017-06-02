@@ -417,6 +417,35 @@ body .container.body .right_col {
 .dark {
     color: #34495E
 }
+
+.hash{
+    border-radius:4px;
+    padding: 0 0 30px 0;
+}
+
+.hash:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: -1px;
+    width: 100.7%;
+    height: 36px;
+    background: -webkit-linear-gradient(#FFFFFF 0%, transparent 0%), -webkit-linear-gradient(135deg, #2A3F54 33.33%, transparent 33.33%) 0 0%, #2A3F54 -webkit-linear-gradient(45deg, #2A3F54 33.33%, #FFFFFF 33.33%) 0 0%;
+    background: -o-linear-gradient(#FFFFFF 0%, transparent 0%), -o-linear-gradient(135deg, #2A3F54 33.33%, transparent 33.33%) 0 0%, #2A3F54 -o-linear-gradient(45deg, #2A3F54 33.33%, #FFFFFF 33.33%) 0 0%;
+    background: -moz-linear-gradient(#FFFFFF 0%, transparent 0%), -moz-linear-gradient(135deg, #2A3F54 33.33%, transparent 33.33%) 0 0%, #2A3F54 -moz-linear-gradient(45deg, #2A3F54 33.33%, #FFFFFF 33.33%) 0 0%;
+    background-repeat: repeat-x;
+    background-size: 0px 100%, 14px 27px, 14px 27px;
+}
+
+
+.amount-block {
+    border-top: 1px dashed #D0D3D8;
+    border-bottom: 1px dashed #D0D3D8;
+    margin-bottom: 25px;
+    padding:5px;
+}
+
 .border-blue {
     border-color: #3498DB !important
 }

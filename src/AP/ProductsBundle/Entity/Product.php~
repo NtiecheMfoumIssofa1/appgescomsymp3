@@ -20,6 +20,10 @@ class Product
     private $category;
 
 
+    /**
+     * @ORM\OneToOne(targetEntity="AP\ProductsBundle\Entity\thumbnail", cascade={"persist"})
+     */
+    public $thumbnail;
 
     /**
      * @var int
@@ -61,14 +65,14 @@ class Product
     /**
      * @var int
      *
-     * @ORM\Column(name="qtestock", type="integer")
+     * @ORM\Column(name="qtestock", type="integer", nullable=true)
      */
     private $qtestock;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="qtemin", type="integer")
+     * @ORM\Column(name="qtemin", type="integer", nullable=true)
      */
     private $qtemin;
 
@@ -110,7 +114,7 @@ class Product
     /**
      * @var int
      *
-     * @ORM\Column(name="prodparent", type="integer", nullable=true)
+     * @ORM\Column(name="prodparent", type="text", nullable=true)
      */
     private $prodparent;
 
@@ -412,5 +416,32 @@ class Product
     {
         return $this->prodparent;
     }
-}
 
+    /**
+     * Set category
+     *
+     * @param \AP\ProductsBundle\Entity\Category $category
+     *
+     * @return Product
+     */
+    public function setCategory(\AP\ProductsBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AP\ProductsBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+    public function __toString() {
+        $no = $this->getCode();
+        return $no ;
+    }
+}

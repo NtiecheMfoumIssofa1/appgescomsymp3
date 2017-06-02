@@ -20,6 +20,10 @@ class Product
     private $category;
 
 
+    /**
+     * @ORM\OneToOne(targetEntity="AP\ProductsBundle\Entity\thumbnail", cascade={"persist"})
+     */
+    public $thumbnail;
 
     /**
      * @var int
@@ -439,5 +443,29 @@ class Product
     public function __toString() {
         $no = $this->getCode();
         return $no ;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param \AP\ProductsBundle\Entity\thumbnail $thumbnail
+     *
+     * @return Product
+     */
+    public function setThumbnail(\AP\ProductsBundle\Entity\thumbnail $thumbnail = null)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return \AP\ProductsBundle\Entity\thumbnail
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
     }
 }

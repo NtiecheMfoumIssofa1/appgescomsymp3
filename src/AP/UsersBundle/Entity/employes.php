@@ -22,13 +22,6 @@ class employes extends BaseUser
     protected $id;
 
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-
-
     public function __construct()
    {
     parent::__construct();

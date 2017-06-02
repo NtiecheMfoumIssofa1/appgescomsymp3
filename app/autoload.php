@@ -8,4 +8,7 @@ $loader = require __DIR__.'/../vendor/autoload.php';
 
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 
+$loader->add('Html2Pdf_', __DIR__.'/../vendor/html2pdf/lib');
+
+
 return $loader;

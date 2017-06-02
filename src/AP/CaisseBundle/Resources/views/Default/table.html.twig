@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Table  </title>
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="{{ asset('vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
+
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <!-- top navigation -->
+
+        {{ include("APUsersBundle:Default:topnav.html.twig") }}
+
+
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" style="margin-left: 0" role="main">
+            <!-- top tiles -->
+
+            <!-- /top tiles -->
+
+            <div class="row">
+
+
+
+
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="dashboard_graph"  style="padding: 0 40px;">
+
+                        <div class="col-md-9 col-sm-9 col-xs-12" style="padding: 0 40px 0 0;">
+
+
+                            <div class="x_panel" style="border-radius: 2px">
+                                <div class="col-md-4 col-sm-4 col-xs-12 nopad ">
+
+                                <form>
+
+                                    <input type="text"  class="Products form-control" autocomplete="off" id="Products"  placeholder="Veuillez entrer le nom du produit">
+                                    <div id="productList" class="productList" style="position: absolute;z-index:2;width:100%;cursor:pointer"></div>
+
+                                </form>
+
+                                </div>
+
+                                <div class="col-md-8 col-sm-7 col-xs-12 nopad">
+
+
+                                    <ul style="float: left">
+                                        {% for cat in categories %}
+                                        <li class="btn btn-default" style="padding: 1px 5px;"> {{ cat.nom }}</li>
+                                        {% endfor %}
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="row x_title">
+
+                        </div>
+
+                        <div class="col-md-9 col-sm-9 col-xs-12" style="padding: 0 40px 0 0">
+
+
+
+
+               {% for prod in produits %}
+
+                            <div class="col-md-3 col-sm-3 col-xs-12" >
+
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
+                                    <div class="acc blockmenu h98  menublok" style="background-color: white" >
+                                        <div class="col-md-3 col-sm-3 col-xs-12" >
+
+                                            {% if prod.thumbnail is  null  %}
+                                                <img src="{{ asset('imgprod/def.jpg') }}" style="width: 80%">
+
+                                            {% else %}
+                                                <img src="{{ asset( prod.thumbnail.uploadDir() ~ prod.thumbnail.url) }}" style="width: 58%">
+
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-9 col-sm-9 col-xs-12" style="padding-top: 10px" >
+                                        <h2 style="text-transform: uppercase;color:black;font-size: 16px"> {{ prod.designation }}</h2>
+                                        <h5> {{ prod.prixvente }} Fcfa</h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+               {% endfor %}
+
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+
+                            <div class="x_panel hash" style="    padding: 0 0 40px 0;">
+                                <div class="x_title" style="    border-bottom: 1px solid #ddd;
+    padding-bottom: 2px;
+    margin-bottom: 0;">
+                                    <h4 style="display:inline-block"> Table T20 </h4>
+                                    <a href="#" class="" style="    background-color: #FFEAEA;
+    border: 1px solid #FFA8A8;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #FF7474;
+    font-size: 12px;
+    font-weight: 400;float:right;padding:5px 10px;margin-top:4px;">
+                                        <i class="fa fa-close"></i>
+                                        Annuler commande				</a>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="x_content" style="margin-top: 0;
+    padding: 0;min-height:250px">
+                                    <table class="table" id="tbl">
+                                        <thead>
+                                        <tr style="background-color: #ddd;">
+                                            <th>Article</th>
+                                            <th>Qte</th>
+                                            <th>Total</th>
+
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tab">
+
+                                        </tbody>
+                                    </table>
+
+
+                                    <div class="amount-block">
+                                            <div class="side-heading">
+                                                <center>      Total :  <span style="
+    font-size: 15px;
+    font-weight: 400;" id="tot"> </span> </center>  				</div>
+
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-6 col-xs-12 ">
+                                        <div class=" acc blockmenu" style="height:60px;border: 1px solid #ddd">
+
+
+
+                                            <i class="fa fa-file-text-o" style="
+    line-height: 15px;
+    font-size: 20px;
+    margin-top: 10px;"> </i>
+
+                                            <h6>  Remarque</h6>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="acc blockmenu" style="height:60px;border: 1px solid #ddd">
+
+
+
+                                            <i class="fa fa-percent" style="
+    line-height: 15px;
+    font-size: 20px;
+    margin-top: 10px;"> </i>
+
+                                            <h6> Remise</h6>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <div class="bg-green acc blockmenu" style="height:60px;">
+
+
+
+                                            <i class="fa fa-paper-plane-o" style="
+    line-height: 15px;
+    font-size: 20px;
+    margin-top: 10px;"> </i>
+
+                                            <h6>  commande</h6>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+            </div>
+            <br />
+
+
+
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div>
+                <br><br><br><br>
+                <h4 style="margin-bottom:10px;"><i class="fa fa-paw"></i> Affides Pos</h4>
+                <p style="font-size: 11px;">©2016 All Rights Reserved. Affides POS! Contact Assistance :<br> <span style="background-color: white;color:black;padding:2px 10px;"> 697511214 / 676013924 </span> </p>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<script src="{{ asset('vendors/Chart.js/dist/Chart.min.js') }}"></script>
+<!-- gauge.js -->
+<script src="{{ asset('vendors/gauge.js/dist/gauge.min.js') }}"></script>
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+
+<script>
+    $(document).ready(function(){
+        $(".Products").keyup(function(){
+            var stock_id_string = $(this).val();
+            if(stock_id_string == ''){
+                $('.productList').fadeOut();
+            }
+            if (stock_id_string != '') {
+                $.ajax({
+                    url: 'http://localhost/affides_pos/web/app_dev.php/prodcaisse/'+ stock_id_string ,
+                    method: "GET",
+                    data: "",
+                    success: function(data)
+                    {
+                        $('.productList').fadeIn();
+                        $('.productList').html(data);
+                    }
+                });
+            }
+        });
+
+        $('.productList').on('click', 'li', function(){
+
+
+            var prod =  $(this).text();
+            var prix =  $(this).attr('id');
+
+
+
+            var row = '<tr> <td id="prodo">'+ prod + '</td> <td id="qte"> 1 </td> <td id="total">'+ prix + '</td> <td> <i class="fa fa-plus-circle" id="plus"></i> &nbsp;&nbsp; <i class="fa fa-trash-o"></i> </td></tr>';
+
+            $('#tab').fadeIn();
+            $('#tab').append(row);
+
+
+
+
+            $('.Products').val("");
+
+
+
+            var res = 0;
+            $('#tbl').find("tbody").find("tr").each(function(){
+                var total= $(this).find("#total").text();
+                var t = parseInt(total);
+                res = res + t;
+
+
+
+
+
+
+            });
+
+            $('#tot').html( res +' Fcfa');
+
+
+
+
+
+
+
+        });
+
+
+
+
+
+    });
+    </script>
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+</body>
+</html>

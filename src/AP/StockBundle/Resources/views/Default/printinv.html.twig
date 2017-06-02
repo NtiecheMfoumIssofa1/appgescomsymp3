@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    .column-title{
+        margin:0;
+    }
+   table.jambo_table {
+       border: 1px solid rgba(221, 221, 221, 0.78);
+       margin-top: 10px;
+   }
+ th {
+     background-color: rgba(52, 73, 94, 0.94);
+     color: #ECF0F1;
+     padding: 8px;
+     line-height: 1.42857143;
+   }
+
+
+
+   td{
+       padding: 8px;
+       line-height: 1.42857143;
+       vertical-align: top;
+       border: 1px solid #ddd;
+   }
+
+</style>
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <div>
+            <div class="">
+
+<div style="display: inline-block;" >
+                <img src="./images/logo.png" style="width:80px;display: inline-block;float:left;margin-right: 20px;" >        <h3 style="font-weight: 100;display:inline-block;float:left;margin-top:10px;" > Inventaire de stock du  {{ "now"|date("d-m-Y H:i") }} </h3>
+
+    <h5 style="font-weight: 100;font-size:13px;display:inline-block;float:right;margin-top:-10px;margin-left:100px; " >effectué par :<strong> {{ app.user.username }} </strong></h5>
+
+</div>
+<br>
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+
+
+                            <div class="x_content mt8">
+
+                                <div class="table-responsive mt8">
+                                    <table class="table table-striped jambo_table bulk_action" id="product">
+                                        <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">code </th>
+                                            <th class="column-title" style="width:200px;">Designation </th>
+                                            <th class="column-title">Qte en stock</th>
+                                            <th class="column-title">Qte verifiée</th>
+
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                      {%   for listeop in liste %}
+                                          <tr class="even pointer">
+                                              <td> {{ listeop.code }}</td>
+                                              <td style="width:200px;" >{{ listeop.designation }}</td>
+                                              <td>{{ listeop.qtestock }}</td>
+                                              <td></td>
+
+                                          </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <!-- /footer content -->
+    </div>
+
+</div>
+
+
+
+
+
+
+<span style="position: fixed;bottom:0px;right:10px;font-size:10px;"> © Affides Pos tous droits reservés  </span>
+
+</body>
+</html>
+
+
+
+
