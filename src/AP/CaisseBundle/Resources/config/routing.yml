@@ -1,0 +1,11 @@
+ap_caisse_homepage:
+    path:     /caisse
+    defaults: { _controller: APCaisseBundle:Default:index }
+
+ap_caisse_table:
+    path:     /caisse/{id}
+    defaults: { _controller: APCaisseBundle:Default:table }
+
+ap_caisse_prodfecth:
+    path:     /prodcaisse/{id}
+    defaults: { _controller: APCaisseBundle:Default:prodcaisse }
