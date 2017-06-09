@@ -22,6 +22,12 @@ class tables
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="AP\CaisseBundle\Entity\ticket",mappedBy="tables")
+     */
+
+    private $tickets;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=10)
@@ -34,6 +40,14 @@ class tables
      * @ORM\Column(name="lieu", type="string", length=50)
      */
     private $lieu;
+
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="occupe", type="boolean")
+     */
+    private $occupe;
 
 
     /**
@@ -93,5 +107,71 @@ class tables
     {
         return $this->lieu;
     }
-}
 
+   
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param \AP\CaisseBundle\Entity\ticket $ticket
+     *
+     * @return tables
+     */
+    public function addTicket(\AP\CaisseBundle\Entity\ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param \AP\CaisseBundle\Entity\ticket $ticket
+     */
+    public function removeTicket(\AP\CaisseBundle\Entity\ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * Set occupe
+     *
+     * @param boolean $occupe
+     *
+     * @return tables
+     */
+    public function setOccupe($occupe)
+    {
+        $this->occupe = $occupe;
+
+        return $this;
+    }
+
+    /**
+     * Get occupe
+     *
+     * @return boolean
+     */
+    public function getOccupe()
+    {
+        return $this->occupe;
+    }
+}

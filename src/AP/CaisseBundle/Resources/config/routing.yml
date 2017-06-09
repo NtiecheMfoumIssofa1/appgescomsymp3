@@ -6,6 +6,12 @@ ap_caisse_table:
     path:     /caisse/{id}
     defaults: { _controller: APCaisseBundle:Default:table }
 
-ap_caisse_prodfecth:
-    path:     /prodcaisse/{id}
-    defaults: { _controller: APCaisseBundle:Default:prodcaisse }
+ap_caisse_commande:
+    path:     /commande/{prod}/{id}
+    defaults: { _controller: APCaisseBundle:Default:commande }
+    requirements:
+            prod : .+
+
+ap_caisse_ticket:
+    path:     /ticket/{id}/{mode}
+    defaults: { _controller: APCaisseBundle:Default:ticket }

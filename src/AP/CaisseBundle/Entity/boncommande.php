@@ -12,6 +12,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class boncommande
 {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AP\CaisseBundle\Entity\ticket",inversedBy="boncommandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $ticket;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AP\CaisseBundle\Entity\commandeprod",mappedBy="bon")
+     */
+
+    private $commandeprods;
+
+
     /**
      * @var int
      *
@@ -34,6 +50,11 @@ class boncommande
      * @ORM\Column(name="annule", type="boolean")
      */
     private $annule;
+
+    public function __construct()
+    {
+        $this->date       = new \Datetime();
+    }
 
 
     /**
@@ -93,5 +114,62 @@ class boncommande
     {
         return $this->annule;
     }
-}
 
+    /**
+     * Set ticket
+     *
+     * @param \AP\CaisseBundle\Entity\ticket $ticket
+     *
+     * @return boncommande
+     */
+    public function setTicket(\AP\CaisseBundle\Entity\ticket $ticket)
+    {
+        $this->ticket = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Get ticket
+     *
+     * @return \AP\CaisseBundle\Entity\ticket
+     */
+    public function getTicket()
+    {
+        return $this->ticket;
+    }
+
+    /**
+     * Add commandeprod
+     *
+     * @param \AP\CaisseBundle\Entity\commandeprod $commandeprod
+     *
+     * @return boncommande
+     */
+    public function addCommandeprod(\AP\CaisseBundle\Entity\commandeprod $commandeprod)
+    {
+        $this->commandeprods[] = $commandeprod;
+
+        return $this;
+    }
+
+    /**
+     * Remove commandeprod
+     *
+     * @param \AP\CaisseBundle\Entity\commandeprod $commandeprod
+     */
+    public function removeCommandeprod(\AP\CaisseBundle\Entity\commandeprod $commandeprod)
+    {
+        $this->commandeprods->removeElement($commandeprod);
+    }
+
+    /**
+     * Get commandeprods
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommandeprods()
+    {
+        return $this->commandeprods;
+    }
+}

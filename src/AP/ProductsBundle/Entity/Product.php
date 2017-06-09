@@ -143,6 +143,14 @@ class Product
         return $this;
     }
 
+
+    public function setStock($qte)
+    {
+        $this->qtestock = $this->getQtestock() - $qte;
+
+        return $this;
+    }
+
     /**
      * Get code
      *

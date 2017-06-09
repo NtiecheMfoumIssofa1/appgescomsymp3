@@ -11,7 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AP\CaisseBundle\Repository\commandeprodRepository")
  */
 class commandeprod
+
 {
+
+
+
+
+
+
     /**
      * @var int
      *
@@ -21,17 +28,18 @@ class commandeprod
      */
     private $id;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="bon", type="integer")
-     */
-    private $bon;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="produit", type="integer")
+     * @ORM\ManyToOne(targetEntity="AP\CaisseBundle\Entity\boncommande",cascade={"persist"},inversedBy="commandeprods")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $bon;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AP\ProductsBundle\Entity\Product",cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $produit;
 
@@ -53,53 +61,8 @@ class commandeprod
         return $this->id;
     }
 
-    /**
-     * Set bon
-     *
-     * @param integer $bon
-     *
-     * @return commandeprod
-     */
-    public function setBon($bon)
-    {
-        $this->bon = $bon;
 
-        return $this;
-    }
 
-    /**
-     * Get bon
-     *
-     * @return int
-     */
-    public function getBon()
-    {
-        return $this->bon;
-    }
-
-    /**
-     * Set produit
-     *
-     * @param integer $produit
-     *
-     * @return commandeprod
-     */
-    public function setProduit($produit)
-    {
-        $this->produit = $produit;
-
-        return $this;
-    }
-
-    /**
-     * Get produit
-     *
-     * @return int
-     */
-    public function getProduit()
-    {
-        return $this->produit;
-    }
 
     /**
      * Set quantite
@@ -124,5 +87,52 @@ class commandeprod
     {
         return $this->quantite;
     }
-}
 
+    /**
+     * Set bon
+     *
+     * @param \AP\CaisseBundle\Entity\boncommande $bon
+     *
+     * @return commandeprod
+     */
+    public function setBon(\AP\CaisseBundle\Entity\boncommande $bon)
+    {
+        $this->bon = $bon;
+
+        return $this;
+    }
+
+    /**
+     * Get bon
+     *
+     * @return \AP\CaisseBundle\Entity\boncommande
+     */
+    public function getBon()
+    {
+        return $this->bon;
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \AP\ProductsBundle\Entity\Product $produit
+     *
+     * @return commandeprod
+     */
+    public function setProduit(\AP\ProductsBundle\Entity\Product $produit)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \AP\ProductsBundle\Entity\Product
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+}

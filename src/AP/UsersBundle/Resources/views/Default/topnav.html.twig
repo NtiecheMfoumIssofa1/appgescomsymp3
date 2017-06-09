@@ -27,54 +27,54 @@
                 <li role="presentation" class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-clone"></i>
-                        <span class="badge bg-green">6</span>
+                        <span class="badge bg-green"> - </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+
+                        {% if app.user.tickets|length == 0  %}
+                        <center><h5> AUCUNE COMMANDE</h5> </center>
+                        {% endif %}
+
+                        {% for  ticket in app.user.tickets %}
+
+                        {% if ticket.etat == 1 %}
                         <li>
-                            <a>
+                            <a href="{{ path('ap_caisse_table', { 'id': ticket.tables.id }) }}">
 
                                 <i class="fa fa-clone"></i>
                                 <span>
-                          <span>Table T20</span>
-                          <span class="time">39 000 Fcfa</span>
+                          <span>table {{ ticket.tables.nom }} </span>
+                          <span class="time">XXX</span>
                         </span>
-                                <span class="message">Chivas Conso, Chicha menthe, Diabolo , Poulet...
+                                <span class="message">
+
+
+                                    {% for  prod in ticket.boncommandes[:1] %}
+
+
+                                    {% for  liste in prod.commandeprods %}
+
+                                    {{ liste.produit.designation }},
+
+                                        {%  endfor %}
+
+                                {% endfor %}
+...
+
                         </span>
                             </a>
                         </li>
 
-                        <li>
-                            <a>
-
-                                <i class="fa fa-clone"></i>
-                                <span>
-                          <span>Table T20</span>
-                          <span class="time">39 000 Fcfa</span>
-                        </span>
-                                <span class="message">Chivas Conso, Chicha menthe, Diabolo , Poulet...
-                        </span>
-                            </a>
-                        </li>
+                        {% endif %}
 
 
-                        <li>
-                            <a>
-
-                                <i class="fa fa-clone"></i>
-                                <span>
-                          <span>Table T20</span>
-                          <span class="time">39 000 Fcfa</span>
-                        </span>
-                                <span class="message">Chivas Conso, Chicha menthe, Diabolo , Poulet...
-                        </span>
-                            </a>
-                        </li>
-
+                        {% endfor %}
 
 
                         <li style="background-color: #1ABB9C;">
                             <div class="text-center">
-                                <a>
+                                <a href="{{ path('ap_caisse_homepage') }}">
                                     <strong>Voir toutes les commandes</strong>
                                 </a>
                             </div>

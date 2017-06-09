@@ -35,96 +35,71 @@
 
         {{ include("APUsersBundle:Default:topnav.html.twig") }}
 
-<div class="col-md-12">
-    <ul style="float: left">
-        <li class="btn btn-primary" style="padding: 3px 40px;"> Interieur</li>
-        <li class="btn btn-default" style="padding: 3px 40px;"> Couloir</li>
-        <li class="btn btn-default" style="padding: 3px 40px;"> Terrasse</li>
+<div class="col-md-12" >
+    <ul style="border:none;list-style: none" class="nav-tabs" >
+        <li class="lieu active" ><a hr="#interieur" style="    padding: 8px 50px;
+    cursor: pointer;"> Interieur </a> </li>
+        <li class="lieu"> <a hr="#couloir" style="    padding: 8px 50px;
+    cursor: pointer;"> Couloir</a></li>
+        <li class="lieu"> <a hr="#terrasse" style="    padding: 8px 50px;
+    cursor: pointer;"> Terrasse</a></li>
 
     </ul>
 
+
+    {% for flashMessage in app.session.flashbag.get('Ticket') %}
+
+
+
+        <div class="alert alert-success alert-dismissible fade in" role="alert" style="    width: 24%;
+    position: fixed;
+    top: 10px;
+    left: 40%;
+    padding: 5px 20px;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+            </button>
+            <strong>{{ flashMessage }}</strong> Le ticket a bien été edité.
+        </div>
+
+
+
+    {% endfor %}
 
     <ul style="float: right;" class="inline">
-        <li class="cw" style="display:inline-block;margin-right:10px;" ><i class="fa fa-square purple"></i> Veronique</li>
 
-        <li class="cw" style="display:inline-block;margin-right:10px;" ><i class="fa fa-square red"></i> Josée</li>
+        {% for serv in serve %}
 
-        <li class="cw" style="display:inline-block;margin-right:10px;" ><i class="fa fa-square blue"></i> Michelle</li>
+            <li class="cw" style="display:inline-block;margin-right:10px;" ><i class="fa fa-square" style="color:{{ serv.couleur }}"></i> {{ serv.username }}</li>
 
 
+
+        {% endfor %}
 
     </ul>
-</div>
+
 
         <!-- page content -->
-        <div class="right_col" style="margin-left: 0" role="main">
+        <div class="tabs-content right_col" style="margin-left: 0" role="main">
             <!-- top tiles -->
 
             <!-- /top tiles -->
 
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 30px;">
+                <div class="col-md-12 col-sm-12 col-xs-12 tab active" id="interieur" style="margin-top: 30px;">
 
                     <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
 <div style="margin-top:20px; margin-left: 30px;
 border: 1px dashed #ddd;padding:10px; ">
                         <ul class="nopad">
-                            <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
 
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
+                            {% for tab in interieur[:32] %}
 
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+{% endfor %}
                         </ul>
 <br><br>
-                        <ul class="nopad">
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
 
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                        </ul>
-
-
-                        <br><br>
-                        <ul class="nopad">
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                        </ul>
-
-
-
-                        <br><br>
-                        <ul class="nopad">
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                            <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                        </ul>
-                    </div>
+                  </div>
 
                     </div>
 
@@ -135,61 +110,15 @@ border: 1px dashed #ddd;padding:10px; ">
                         <div style="margin-top:20px; margin-left: 30px;
 border: 1px dashed #ddd;padding:10px; ">
                             <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
+                                {% for tab in interieur[32:33] %}
 
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
+                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
-                            </ul>
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
+                                {% endfor %}
 
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
 
                             </ul>
 
-
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                            </ul>
-
-
-
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                            </ul>
                         </div>
 
                     </div>
@@ -198,61 +127,15 @@ border: 1px dashed #ddd;padding:10px; ">
                         <div style="margin-top:20px; margin-left: 30px;
 border: 1px dashed #ddd;padding:10px; ">
                             <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
+                                {% for tab in interieur[65:34] %}
 
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
+                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
-                            </ul>
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
+                                {% endfor %}
 
                             </ul>
 
 
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                            </ul>
-
-
-
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                            </ul>
                         </div>
 
                     </div>
@@ -261,61 +144,20 @@ border: 1px dashed #ddd;padding:10px; ">
                         <div style="margin-top:20px; margin-left: 30px;
 border: 1px dashed #ddd;padding:10px; ">
                             <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
 
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
 
-                            </ul>
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
 
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
+                                {% for tab in interieur[99:34] %}
+
+                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                                {% endfor %}
+
 
                             </ul>
 
 
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                            </ul>
-
-
-
-                            <br><br>
-                            <ul class="nopad">
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px "> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;margin-bottom:10px"> VIP 2</li>
-
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 1</li>
-                                <li class="btn btn-default" style="padding: 5px 15px;"> VIP 2</li>
-
-                            </ul>
+<br><br>
                         </div>
 
                     </div>
@@ -329,8 +171,195 @@ border: 1px dashed #ddd;padding:10px; ">
 
                 </div>
 
+
+
+
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12 tab" id="couloir" style="margin-top: 30px;">
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+
+                            {% for tab in couloir[:32] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+                        </ul>
+                        <br><br>
+
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+                            {% for tab in couloir[32:33] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+                            {% for tab in couloir[65:34] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+
+                        </ul>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+
+
+
+                            {% for tab in couloir[99:34] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+
+
+                        </ul>
+
+
+                        <br><br>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
             </div>
-            <br />
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-12 col-sm-12 col-xs-12 tab" id="terrasse" style="margin-top: 30px;">
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+
+                            {% for tab in terasse[:32] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+                        </ul>
+                        <br><br>
+
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+                            {% for tab in terasse[32:33] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+                            {% for tab in terasse[65:34] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+
+                        </ul>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-12 nopad" >
+                    <div style="margin-top:20px; margin-left: 30px;
+border: 1px dashed #ddd;padding:10px; ">
+                        <ul class="nopad">
+
+
+
+                            {% for tab in terasse[99:34] %}
+
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+
+                            {% endfor %}
+
+
+                        </ul>
+
+
+                        <br><br>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+
 
 
 
@@ -365,7 +394,60 @@ border: 1px dashed #ddd;padding:10px; ">
 <!-- iCheck -->
 <!-- Skycons -->
 
+<script>
 
+
+
+    var systemOnglet = function(a){
+
+        var li = a.parentNode
+        var div = a.parentNode.parentNode.parentNode;
+
+//si l'on clique sur la classe active rien ne se passe
+        if(li.classList.contains('active')){
+            return false
+        }
+
+
+
+//on retire la class active
+        div.querySelector('.nav-tabs .active').classList.remove('active')
+
+//on ajoute la classe active sur l'onglet cliqué
+        li.classList.add('active');
+
+        div.querySelector('.tabs-content .active').classList.remove('active');
+
+        div.querySelector(a.getAttribute('hr')).classList.add('active');
+
+    }
+
+
+
+    var tabs = document.querySelectorAll('.nav-tabs a')
+    for (var i=0; i < tabs.length; i++){
+
+        tabs[i].addEventListener('click', function (e) {
+
+            systemOnglet(this);
+        })
+
+    }
+
+
+
+    var hash = window.location.hash
+    var a = document.querySelector('a[hr="'+hash+'"]')
+
+    if(a !== null && !a.parentNode.classList.contains('active') ){
+
+        systemOnglet(a);
+
+    }
+
+
+
+</script>
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('build/js/custom.js') }}"></script>
 

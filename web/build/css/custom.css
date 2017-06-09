@@ -421,6 +421,25 @@ body .container.body .right_col {
 .dark {
     color: #34495E
 }
+.tab {
+    display: none;
+}
+.tab.active {
+    display: block;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: none;
+    border-color: none;
+}
+.nav-tabs>li>a:hover {
+    border-color:none;
+    padding: 8px 50px;
+}
+
 
 .hash{
     border-radius:4px;
@@ -473,8 +492,8 @@ body .container.body .right_col {
     color: #73879C
 }
 .bg-green {
-    background: #1ABB9C !important;
-    border: 1px solid #1ABB9C !important;
+    background: #41AF4B !important;
+    border: 1px solid #41AF4B !important;
     color: #fff
 }
 .bg-red {
@@ -2473,8 +2492,8 @@ a.btn-danger {
     color: #fff
 }
 .btn-success {
-    background: #26B99A;
-    border: 1px solid #169F85
+    background: #41AF4B;
+    border: 1px solid #41AF4B
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -3526,6 +3545,11 @@ ul.project_files li a i {
 }
 .product_social ul li a i {
     font-size: 35px
+}
+
+.login{
+    background: url('../../images/bg.jpg');
+
 }
 .login .fa-paw {
     font-size: 26px

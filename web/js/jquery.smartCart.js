@@ -32,7 +32,7 @@
             productId: 'product_id'
         },
         lang: { // Language variables
-            cartTitle: "Commande",
+            cartTitle: "Nouvelle commande",
             checkout: 'Commander',
             clear: 'Effacer',
             subtotal: 'Total:',
@@ -108,7 +108,7 @@
             this.cart_element.append(cartListElement);
             // Set the cart main element
             this.cart_element.addClass('panel panel-default sc-cart sc-theme-' + this.options.theme);
-            this.cart_element.append('<div class="panel-heading sc-cart-heading">' + this.options.lang.cartTitle + ' <span class="sc-cart-count badge">0</span></div><div style="background-color: #ddd; padding: 5px;"> <span style="display: inline-block;text-align: left;width:60%">Article</span><span style="display: inline-block;text-align: left;width:10%">Qte</span><span style="display: inline-block;text-align: right;width:15%">Total</span></div>');
+            this.cart_element.append('<div class="panel-heading sc-cart-heading" style="padding: 3px;">' + this.options.lang.cartTitle + ' <span class="sc-cart-count badge">0</span></div><div style="background-color: #ddd; padding: 5px;"> <span style="display: inline-block;text-align: left;width:60%">Article</span><span style="display: inline-block;text-align: left;width:10%">Qte</span><span style="display: inline-block;text-align: right;width:15%">Total</span></div> ');
             this.cart_element.append('<div class="list-group sc-cart-item-list"></div>');
         },
         /* 
