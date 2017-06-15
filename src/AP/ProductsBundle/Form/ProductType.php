@@ -22,11 +22,13 @@ class ProductType extends AbstractType
             ->add('prixachat')
             ->add('qtestock')
             ->add('qtemin')
+            ->add('children')
             ->add('gerstock')
             ->add('typeproduit',ChoiceType::class,array('choices'=> array(''=>'',
             'Entier non divisible'=>'1',
             'Entier divisible en part'=>'2',
-            'part de produit'=>'3',
+            'Part de produit'=>'3',
+                'Produit composé'=>'4',
 
         ),
             'label' => 'Type de produit'

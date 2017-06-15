@@ -44,10 +44,16 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $product->getThumbnail()->upload();
+            if ($product->getThumbnail() != null){
+            $product->getThumbnail()->upload();}
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
+
+            $this->addFlash(
+                'Produit',
+                ' Produit enregistré !'
+            );
 
             return $this->redirectToRoute('product_new');
         }

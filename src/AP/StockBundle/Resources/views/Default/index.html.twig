@@ -3,19 +3,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +50,7 @@
                     <div class="menu_section">
                         <ul class="nav side-menu">
 
-                            <li class="active"><a><i class="fa fa-edit"></i> GESTION DE STOCK <span class="fa fa-chevron-down"></span></a>
+                            <li class="active"><a><i class="fa fa-edit"></i> GESTION DE STOCK </a>
                                 <ul class="nav child_menu">
 
 
@@ -217,7 +204,8 @@
 <!-- iCheck -->
 <!-- Skycons -->
 
-
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('build/js/custom.js') }}"></script>
@@ -232,7 +220,7 @@
             }
             if (stock_id_string != '') {
                 $.ajax({
-                    url: 'http://localhost/affides_pos/web/app_dev.php/prodfetch/'+ stock_id_string ,
+                    url:Routing.generate('ap_stock_fetch', { id: stock_id_string }),
                     method: "GET",
                     data: "",
                     success: function(data)
@@ -265,7 +253,7 @@
             if (qte != '' ) {
 
                 $.ajax({
-                    url: 'http://localhost/affides_pos/web/app_dev.php/addrow/' + prod + '/' + qte,
+                    url:Routing.generate('ap_stock_addrow', { id: prod, qt: qte }),
                     method: "GET",
                     data: "",
                     success: function (data) {
@@ -309,7 +297,7 @@ alert("veuillez reprendre");
             if(res != '')
             {
             $.ajax({
-                url: 'http://localhost/affides_pos/web/app_dev.php/addentry/'+ res,
+                url:Routing.generate('ap_stock_addentry', { id:res }),
                 method: "GET",
                 data: "",
                 success: function (data) {

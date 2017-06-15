@@ -1675,14 +1675,8 @@ if (typeof NProgress != 'undefined') {
 			  console.log(start.toISOString(), end.toISOString(), label);
 			});
 
-			$('#reservation-time').daterangepicker({
-			  timePicker: true,
-			  timePickerIncrement: 30,
-			  locale: {
-				format: 'MM/DD/YYYY h:mm A'
-			  }
-			});
-	
+
+
 		}
 	   
 	   /* SMART WIZARD */

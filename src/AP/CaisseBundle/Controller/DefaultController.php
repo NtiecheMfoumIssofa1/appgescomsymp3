@@ -174,7 +174,7 @@ class DefaultController extends Controller
     }
 
 
-    public function ticketAction($id,$mode)
+    public function ticketAction($id,$mode,$total)
     {
 
 
@@ -187,7 +187,7 @@ class DefaultController extends Controller
 
         $ticket->setEtat(0);
         $ticket->setMode($mode);
-        $ticket->setPrix(11110);
+        $ticket->setPrix($total);
         $table->setOccupe(0);
 
         $em->persist($ticket);

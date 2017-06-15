@@ -11,7 +11,11 @@ ap_caisse_commande:
     defaults: { _controller: APCaisseBundle:Default:commande }
     requirements:
             prod : .+
+    options:
+            expose: true
 
 ap_caisse_ticket:
-    path:     /ticket/{id}/{mode}
+    path:     /ticket/{id}/{mode}/{total}
     defaults: { _controller: APCaisseBundle:Default:ticket }
+    options:
+            expose: true

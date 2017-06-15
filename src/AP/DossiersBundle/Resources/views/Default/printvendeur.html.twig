@@ -1,0 +1,111 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> ventes par serveur </title>
+
+
+    <style>
+        .column-title{
+            margin:0;
+        }
+        table.jambo_table {
+            border: 1px solid rgba(221, 221, 221, 0.78);
+            margin-top: 10px;
+        }
+        th {
+            background-color: rgba(52, 73, 94, 0.94);
+            color: #ECF0F1;
+            padding: 8px;
+            line-height: 1.42857143;
+        }
+
+
+
+        td{
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border: 1px solid #ddd;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+                <h3><img src="./images/posnic.png" style="width:90px;display: inline-block;float:left;margin-right: 20px;" ></h3>
+
+
+                <h3 style="color:black;text-align:left;font-size: 16px;">  ventes  par Serveur   du <span style="color:#41AF4B;" id="yes">{{ yes }}</span> au  <span style="color:#41AF4B" id="day">{{ day }}</span></h3>
+
+<br>
+                <div style="text-align: center;width: 100%;position: relative;">
+                                <table class="table  jambo_table " style="margin-left: 80px;"  >
+                                        <thead>
+                                        <tr class="headings">
+                                            <th>Vendeur  </th>
+                                            <th> Especes </th>
+                                            <th>Orange Money </th>
+                                            <th>Mtn Money </th>
+                                            <th>Carte </th>
+                                            <th>Total </th>
+
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="donnees">
+
+
+                                        {% for ven in vendeur %}
+                                        {% if ven.balance != 0 %}
+                                        <tr>
+
+                                            <td>{{ ven.serveur }}</td>
+                                            <td>{{ ven.balance }} Fcfa</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>{{ ven.balance }} Fcfa</td>
+
+                                        </tr>
+
+{% endif %}
+{% endfor %}
+
+                                        <tr>
+
+                                        <td><strong> GRAND TOTAL </strong></td>
+                                            <td > <strong> {{ total }} Fcfa</strong></td>
+                                            <td><strong>0</strong></td>
+                                            <td><strong>0</strong></td>
+                                            <td><strong>0</strong></td>
+                                            <td> <strong>{{ total }} Fcfa</strong></td>
+
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+                </div>
+
+</body>
+</html>
+
+
+
+
+

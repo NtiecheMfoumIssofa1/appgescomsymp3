@@ -1,0 +1,120 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title> details ventes </title>
+
+
+    <style>
+        .column-title{
+            margin:0;
+        }
+        table.jambo_table {
+            border: 1px solid rgba(221, 221, 221, 0.78);
+            margin-top: 10px;
+        }
+        th {
+            background-color: rgba(52, 73, 94, 0.94);
+            color: #ECF0F1;
+            padding: 8px;
+            line-height: 1.42857143;
+        }
+
+
+
+        td{
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border: 1px solid #ddd;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+                        <h3><img src="./images/posnic.png" style="width:90px;display: inline-block;float:left;margin-right: 20px;" ></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <h3 style="color:black;text-align:left;font-size: 15px;margin-top:-3px;line-height:0.1; "> Détails des ventes   du <span style="color:#41AF4B;" id="yes">{{ from|date('d-m-Y H:i') }}</span> au  <span style="color:#41AF4B" id="day">{{ to|date('d-m-Y H:i') }}</span></h3>
+
+                                <h5 style="text-align:left;line-height:0.1;">  TOTAL VENTE:  {{ totalvente }}  Fcfa --- MARGE TOTALE :{{ margetotale }} Fcfa</h5>
+                        <br><br>
+                                <div style="text-align: center;width: 100%;position: relative;" >
+
+                                    <table class="table  jambo_table" style="margin-left: 30px;"  >
+                                        <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">article </th>
+                                            <th class="column-title">Date et heure </th>
+                                            <th class="column-title">Vendeur </th>
+
+                                            <th class="column-title">qte </th>
+                                            <th class="column-title">prix unit </th>
+                                            <th class="column-title">prix vte tot </th>
+
+                                            <th class="column-title">Marge </th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody >
+
+                                        {% for dets in details %}
+
+                                            <tr class="even pointer">
+
+                                                <td class=" ">{{ dets.produit.designation }}</td>
+                                                <td class=" ">{{ dets.date|date("d-m-Y H:i") }} </td>
+                                                <td class="a-right a-right ">{{ dets.bon.ticket.employes.username }} </td>
+
+                                                <td class=" ">{{ dets.quantite }}</td>
+                                                <td class=" ">{{ dets.produit.prixvente|number_format('0', '.', ' ') }}</td>
+                                                <td class=" "> {% set total = dets.quantite*dets.produit.prixvente  %}{{ total|number_format('0', '.', ' ')  }}</td>
+
+
+
+                                                <td class=" last">
+                                                    {% set marge = dets.quantite*dets.produit.prixvente - dets.quantite*dets.produit.prixachat  %}  {{ marge|number_format('0', '.', ' ')  }}
+                                                </td>
+                                            </tr>
+
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+

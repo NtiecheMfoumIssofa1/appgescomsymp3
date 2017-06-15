@@ -10,4 +10,22 @@ namespace AP\CaisseBundle\Repository;
  */
 class commandeprodRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
+    public function getByDate($from,$to)
+    {
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.date BETWEEN :from AND :to')
+            ->orderBy("e.date", 'DESC')
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+
 }

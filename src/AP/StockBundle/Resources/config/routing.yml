@@ -5,14 +5,20 @@ ap_stock_homepage:
 ap_stock_fetch:
     path:     /prodfetch/{id}
     defaults: { _controller: APStockBundle:Default:prodfetch }
+    options:
+            expose: true
 
 ap_stock_addrow:
     path:     /addrow/{id}/{qt}
     defaults: { _controller: APStockBundle:Default:addrow }
+    options:
+            expose: true
 
 ap_stock_addentry:
     path:     /addentry/{id}
     defaults: { _controller: APStockBundle:Default:addentry }
+    options:
+            expose: true
 
 ap_stock_sorti:
     path:     /stock/sortis
@@ -21,6 +27,8 @@ ap_stock_sorti:
 ap_stock_addout:
     path:     /addout/{id}/{cause}
     defaults: { _controller: APStockBundle:Default:addout }
+    options:
+            expose: true
 
 ap_stock_histo:
     path:     /stock/histo

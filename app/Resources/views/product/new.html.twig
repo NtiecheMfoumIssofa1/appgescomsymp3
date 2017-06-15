@@ -140,7 +140,19 @@
 
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
+                                    {% for flashMessage in app.session.flashbag.get('Produit') %}
 
+
+
+                                        <div class="alert alert-success alert-dismissible fade in" role="alert" >
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                            </button>
+                                            <strong>{{ flashMessage }}</strong> Le Produit a bien été edité.
+                                        </div>
+
+
+
+                                    {% endfor %}
 
                                     {{ form_start(form) }}
 
@@ -216,6 +228,14 @@
                                     <div id="parent">
                                     <label for="email">{{ form_label(form.prodparent, "Produit parent") }}</label>
                                     {{ form_widget(form.prodparent, {'attr': {'class': 'form-control'}}) }}
+                                        <br>
+
+                                    </div>
+
+
+                                    <div id="compose">
+                                        <label for="email">{{ form_label(form.children, "composé de:") }}</label>
+                                        {{ form_widget(form.children, {'attr': {'class': 'form-control'}}) }}
                                         <br>
 
                                     </div>
@@ -307,6 +327,7 @@
         var portion = $('#portion');
         var gerer = $('#gerer');
         var parent = $('#parent');
+        var compose = $('#compose');
 
 
         portion.hide();
@@ -314,6 +335,7 @@
         nbredivi.hide();
         gerer.hide();
         parent.hide();
+        compose.hide();
 
 
 
@@ -328,6 +350,8 @@
                 portion.hide();
                 nbredivi.hide();
                 parent.hide();
+                compose.hide();
+
 
             }else if( typeprod == '2'){
 
@@ -339,6 +363,8 @@
 
                 nbredivi.hide();
                 parent.hide();
+                compose.hide();
+                compose.hide();
 
 
             }else if (typeprod == '3'){
@@ -350,9 +376,22 @@
                 portion.hide();
                 quantite.hide();
                 gerer.hide();
+                compose.hide();
+
+            }else if (typeprod == '4'){
+
+                compose.show();
+                nbredivi.hide();
+                parent.hide();
+
+
+                portion.hide();
+                quantite.hide();
+                gerer.hide();
 
 
             }
+
         });
 
 

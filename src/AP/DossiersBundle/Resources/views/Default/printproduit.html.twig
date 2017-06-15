@@ -1,0 +1,102 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> ventes par produit </title>
+
+
+    <style>
+        .column-title{
+            margin:0;
+        }
+        table.jambo_table {
+            border: 1px solid rgba(221, 221, 221, 0.78);
+            margin-top: 10px;
+        }
+        th {
+            background-color: rgba(52, 73, 94, 0.94);
+            color: #ECF0F1;
+            padding: 8px;
+            line-height: 1.42857143;
+        }
+
+
+
+        td{
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border: 1px solid #ddd;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+                <h3><img src="./images/posnic.png" style="width:90px;display: inline-block;float:left;margin-right: 20px;" ></h3>
+
+
+                <h3 style="color:black;text-align:left;font-size: 16px;">  ventes  par produit   du <span style="color:#41AF4B;" id="yes">{{ from }}</span> au  <span style="color:#41AF4B" id="day">{{ to }}</span></h3>
+
+<br>
+                <div style="text-align: center;width: 100%;position: relative;">
+                                <table class="table  jambo_table " style="margin-left: 180px;"  >
+                                        <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">article </th>
+
+                                            <th class="column-title">qte </th>
+                                            <th class="column-title">prix unit </th>
+                                            <th class="column-title">prix vte tot </th>
+
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="donnees">
+
+
+                                        {% for dets in produit %}
+
+                                            <tr class="even pointer">
+
+                                                <td class=" ">{{ dets.produit }}</td>
+
+                                                <td class=" ">{{ dets.quantite }}</td>
+                                                <td class=" ">{{ dets.prix|number_format('0', '.', ' ') }}</td>
+                                                <td class=" "> {% set tot = dets.quantite * dets.prix %} {{ tot|number_format('0', '.', ' ') }}</td>
+
+
+
+
+                                            </tr>
+
+                                        {% endfor %}
+
+
+
+                                        </tbody>
+                                    </table>
+
+
+                </div>
+
+</body>
+</html>
+
+
+
+
+

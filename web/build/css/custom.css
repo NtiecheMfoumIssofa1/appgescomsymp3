@@ -1647,7 +1647,9 @@ ul.msg_list li a .message {
     left: auto;
     width: 170px;}
 .navbar-nav .open .dropdown-menu.msg_list {
-    width: 300px
+    width: 300px;
+    max-height: 500px;
+    overflow-y: scroll;
 }
 .info-number .badge {
     font-size: 10px;

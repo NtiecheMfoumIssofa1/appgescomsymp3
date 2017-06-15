@@ -1,0 +1,56 @@
+ap_dossiers_print_details:
+    path:     /dossiers/print/details/print/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:printdetails }
+    options:
+                expose: true
+
+ap_dossiers_homepage:
+    path:     /dossiers
+    defaults: { _controller: APDossiersBundle:Default:index }
+
+
+ap_dossiers_vendeur:
+    path:     /dossiers/vendeur
+    defaults: { _controller: APDossiersBundle:Default:vendeur }
+
+ap_dossiers_produit:
+    path:     /dossiers/produit
+    defaults: { _controller: APDossiersBundle:Default:produit }
+
+ap_dossiers_fetch_vendeur:
+    path:     /dossiers/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:fetchvendeur }
+    requirements:
+                prod : .+
+    options:
+            expose: true
+
+ap_dossiers_fetch_produit:
+    path:     /dossiers/produit/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:fetchproduit }
+    requirements:
+                prod : .+
+    options:
+            expose: true
+
+ap_dossiers_print_produit:
+    path:     /dossiers/print/produit/print/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:printproduit }
+    options:
+            expose: true
+
+ap_dossiers_print_vendeur:
+    path:     /dossiers/print/vendeur/print/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:printvendeur }
+    options:
+            expose: true
+
+
+
+ap_dossiers_fetch_details:
+    path:     /dossiers/details/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:fetchdetails }
+    requirements:
+                prod : .+
+    options:
+            expose: true

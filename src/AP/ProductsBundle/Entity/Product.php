@@ -120,6 +120,17 @@ class Product
 
 
     /**
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="children")
+     */
+    protected $parent;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Product", inversedBy="parent")
+     */
+    protected $children;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -475,5 +486,94 @@ class Product
     public function getThumbnail()
     {
         return $this->thumbnail;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->parent = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add parent
+     *
+     * @param \AP\ProductsBundle\Entity\Product $parent
+     *
+     * @return Product
+     */
+    public function addParent(\AP\ProductsBundle\Entity\Product $parent)
+    {
+        $this->parent[] = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Remove parent
+     *
+     * @param \AP\ProductsBundle\Entity\Product $parent
+     */
+    public function removeParent(\AP\ProductsBundle\Entity\Product $parent)
+    {
+        $this->parent->removeElement($parent);
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set children
+     *
+     * @param \AP\ProductsBundle\Entity\Product $children
+     *
+     * @return Product
+     */
+    public function setChildren(\AP\ProductsBundle\Entity\Product $children = null)
+    {
+        $this->children = $children;
+
+        return $this;
+    }
+
+    /**
+     * Get children
+     *
+     * @return \AP\ProductsBundle\Entity\Product
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Add child
+     *
+     * @param \AP\ProductsBundle\Entity\Product $child
+     *
+     * @return Product
+     */
+    public function addChild(\AP\ProductsBundle\Entity\Product $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param \AP\ProductsBundle\Entity\Product $child
+     */
+    public function removeChild(\AP\ProductsBundle\Entity\Product $child)
+    {
+        $this->children->removeElement($child);
     }
 }
