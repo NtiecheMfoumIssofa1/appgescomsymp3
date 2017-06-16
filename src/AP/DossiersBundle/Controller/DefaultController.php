@@ -596,4 +596,147 @@ $output='';
 
 
 
+    public function categorieAction()
+    {
+
+        $from = date("Y-m-d H:i:s",mktime(6, 0, 0, date("m"),date("d"), date("Y")));
+        $to = date("Y-m-d H:i:s",mktime(date("H"), date("i"), 0, date("m"),date("d"), date("Y")));
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $cat = $em->getRepository('APProductsBundle:Category')->findAll();
+
+        $dql = "SELECT IDENTITY(e.produit) AS prod,IDENTITY(e.bon) AS bon,SUM(e.quantite) AS qte FROM APCaisseBundle:commandeprod e WHERE e.date BETWEEN '{$from}' AND '{$to}'  GROUP BY prod ORDER BY qte DESC " ;
+
+
+        $resultat = $em->createQuery($dql)
+            ->getScalarResult();
+
+        $produit = [];
+        foreach ($resultat as $b){
+
+            $tmp = [];
+
+
+            $nom = $em->getRepository('APProductsBundle:Product')->find($b['prod']);
+
+            $tmp['produit'] = $nom->getDesignation();
+
+            $tmp['quantite'] = $b['qte'];
+
+            $tmp['prix'] = $nom->getPrixvente();
+
+            $tmp['categorie'] = $nom->getCategory()->getNom();
+
+
+            $produit[] = $tmp;
+
+
+        }
+
+
+
+
+
+
+        return $this->render('APDossiersBundle:Default:categorie.html.twig',array('produit'=>$produit,'from'=>$from,'to'=>$to,'cat'=>$cat));
+
+
+
+    }
+
+
+
+    public function fetchcategorieAction($start,$end)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $cat = $em->getRepository('APProductsBundle:Category')->findAll();
+
+        $dql = "SELECT IDENTITY(e.produit) AS prod,IDENTITY(e.bon) AS bon,SUM(e.quantite) AS qte FROM APCaisseBundle:commandeprod e WHERE e.date BETWEEN '{$start}' AND '{$end}'  GROUP BY prod ORDER BY qte DESC " ;
+
+
+        $resultat = $em->createQuery($dql)
+            ->getScalarResult();
+
+        $produit = [];
+        foreach ($resultat as $b){
+
+            $tmp = [];
+
+
+            $nom = $em->getRepository('APProductsBundle:Product')->find($b['prod']);
+
+            $tmp['produit'] = $nom->getDesignation();
+
+            $tmp['quantite'] = $b['qte'];
+
+            $tmp['prix'] = $nom->getPrixvente();
+            $tmp['categorie'] = $nom->getCategory()->getNom();
+
+
+            $produit[] = $tmp;
+
+
+        }
+
+
+
+
+
+
+
+foreach ($cat as $cate) {
+    echo $cate->getNom();
+    foreach ($produit as $prod) {
+        if($prod['categorie'] == $cate->getNom()){
+
+
+
+        $output = ' <table class="table table-striped jambo_table bulk_action" id="product1">
+                                        <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">article </th>
+
+                                            <th class="column-title">qte </th>
+                                            <th class="column-title">prix unit </th>
+                                            <th class="column-title">prix vte tot </th>
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody >';
+
+        $output .= '<tr class="even pointer"><td>' . $prod['produit'] . '</td> <td >' . $prod['quantite'] . '</td><td>' . $prod['prix'] . ' </td><td>' . $prod['quantite'] * $prod['prix'] . '</td>  </tr>';
+
+
+
+
+
+
+
+    $output .= '</tbody> </table>';
+    }
+    }
+}
+
+
+
+
+
+
+
+
+        return new Response($output);
+
+
+
+
+
+    }
+
+
+
 }

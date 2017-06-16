@@ -2,6 +2,7 @@
 
 namespace AP\ProductsBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -157,7 +158,9 @@ class Product
 
     public function setStock($qte)
     {
-        $this->qtestock = $this->getQtestock() - $qte;
+
+
+            $this->qtestock = $this->getQtestock() - $qte;
 
         return $this;
     }

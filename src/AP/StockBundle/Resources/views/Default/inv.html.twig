@@ -153,7 +153,9 @@
                                               <td> {{ listeop.code }}</td>
                                               <td>{{ listeop.designation }}</td>
                                               <td>{{ listeop.prixvente }}</td>
-                                              <td>{{ listeop.qtestock }}</td>
+                                              <td>{% if listeop.divvendu is not null and listeop.divvendu != 0 %}
+                                                      {{ listeop.qtestock - 1  }} + {% if listeop.qtepart/2 == listeop.divvendu %} 1/2btlle {% else %} {% set nbreconso = listeop.qtepart-listeop.divvendu  %} {{ nbreconso }} conso {% endif %}
+                                                  {% else %} {{ listeop.qtestock }} {% endif %} </td>
                                               <td>{{ listeop.prixvente * listeop.qtestock }}</td>
 
                                           </tr>

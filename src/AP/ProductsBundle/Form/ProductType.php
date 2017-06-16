@@ -34,7 +34,7 @@ class ProductType extends AbstractType
             'label' => 'Type de produit'
             ))
             ->add('qtepart')
-            ->add('nbrediv',ChoiceType::class,array('choices'=> array(''=>'',
+            ->add('nbrediv',ChoiceType::class,array('choices'=> array(''=>'0',
                 'Conso'=>'1',
                 'demi bouteille'=>'2',
 

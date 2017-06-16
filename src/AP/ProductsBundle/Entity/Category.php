@@ -27,6 +27,13 @@ class Category
      * @ORM\Column(name="nom", type="string", length=100)
      */
     private $nom;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="impression", type="string", length=50,nullable=true)
+     */
+    private $impression;
 
 
     /**
@@ -69,5 +76,28 @@ class Category
         return $no ;
     }
 
-}
 
+    /**
+     * Set impression
+     *
+     * @param string $impression
+     *
+     * @return Category
+     */
+    public function setImpression($impression)
+    {
+        $this->impression = $impression;
+
+        return $this;
+    }
+
+    /**
+     * Get impression
+     *
+     * @return string
+     */
+    public function getImpression()
+    {
+        return $this->impression;
+    }
+}

@@ -31,36 +31,25 @@
 
 </head>
 
-<body class="nav-md">
-<div class="container body">
-    <div class="main_container">
+<body >
 
-        <div>
-            <div class="">
 
-<div style="display: inline-block;" >
-                <img src="./images/logo.png" style="width:80px;display: inline-block;float:left;margin-right: 20px;" >        <h3 style="font-weight: 100;display:inline-block;float:left;margin-top:10px;" > Inventaire de stock du  {{ "now"|date("d-m-Y H:i") }} </h3>
+<div  >
+    <img src="./images/posnic.png" style="width:80px;display: inline-block;float:left;margin-right: 20px;" >        <h3 style="color:black;text-align:left;font-size: 16px;display:inline-block;margin-top:10px;" > Inventaire de stock du  <span style="color:#41AF4B;">{{ "now"|date("d-m-Y H:i") }}</span> </h3>
 
     <h5 style="font-weight: 100;font-size:13px;display:inline-block;float:right;margin-top:-10px;margin-left:100px; " >effectué par :<strong> {{ app.user.username }} </strong></h5>
 
 </div>
 <br>
-                <div class="row">
-
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
 
 
-                            <div class="x_content mt8">
-
-                                <div class="table-responsive mt8">
-                                    <table class="table table-striped jambo_table bulk_action" id="product">
+                                    <table class="table table-striped jambo_table "  style="margin-left: 100px;" >
                                         <thead>
-                                        <tr class="headings">
-                                            <th class="column-title">code </th>
-                                            <th class="column-title" style="width:200px;">Designation </th>
-                                            <th class="column-title">Qte en stock</th>
-                                            <th class="column-title">Qte verifiée</th>
+                                        <tr >
+                                            <th>code </th>
+                                            <th style="width:200px;">Designation </th>
+                                            <th>Qte en stock</th>
+                                            <th>Qte verifiée</th>
 
 
                                         </tr>
@@ -72,7 +61,9 @@
                                           <tr class="even pointer">
                                               <td> {{ listeop.code }}</td>
                                               <td style="width:200px;" >{{ listeop.designation }}</td>
-                                              <td>{{ listeop.qtestock }}</td>
+                                              <td>{% if listeop.divvendu is not null and listeop.divvendu != 0 %}
+                                                      {{ listeop.qtestock - 1  }} + {% if listeop.qtepart/2 == listeop.divvendu %} 1/2btlle {% else %} {% set nbreconso = listeop.qtepart-listeop.divvendu  %} {{ nbreconso }} conso {% endif %}
+                                                  {% else %} {{ listeop.qtestock }} {% endif %}</td>
                                               <td></td>
 
                                           </tr>
@@ -84,31 +75,17 @@
 
 
 
-                                </div>
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <!-- /footer content -->
-    </div>
-
-</div>
 
 
 
 
 
 
-<span style="position: fixed;bottom:0px;right:10px;font-size:10px;"> © Affides Pos tous droits reservés  </span>
+
+
+
+
+
 
 </body>
 </html>

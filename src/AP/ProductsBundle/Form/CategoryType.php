@@ -3,8 +3,10 @@
 namespace AP\ProductsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormBuilderInterface;
+
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CategoryType extends AbstractType
 {
@@ -13,7 +15,10 @@ class CategoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom');
+        $builder->add('nom')
+		->add('impression',ChoiceType::class,array('choices'=> array('Bar'=>'Bar',
+            'Cuisine'=>'Cuisine',
+            'Chicha'=>'Chicha' )));
     }
     
     /**

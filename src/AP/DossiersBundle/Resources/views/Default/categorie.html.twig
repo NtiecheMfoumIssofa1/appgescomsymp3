@@ -1,0 +1,426 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> ventes par categorie </title>
+
+
+
+
+
+
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view" style="width:100%;margin-top:-30px;">
+
+                <div class="clearfix"></div>
+
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <ul class="nav side-menu">
+
+                            <li class="active"><a><i class="fa fa-folder"></i> DOSSIERS</a>
+                                <ul class="nav child_menu">
+
+
+
+
+
+
+
+                                            <li ><a href="{{ path('ap_dossiers_homepage') }}">Détails des ventes</a></li>
+                                    <li class=""><a href="{{ path('ap_dossiers_vendeur') }}"> Ventes par serveur</a></li>
+                                    <li ><a href="{{ path('ap_dossiers_produit') }}">Ventes par produits </a></li>
+                                    <li class="current-page"><a href="">Ventes par catégories</a></li>
+                                    <li><a href="">tickets de caisse</a></li>
+                                            <li><a href=""> bons de fabrication</a></li>
+
+                                            <li><a href="">Réglements </a></li>
+                                            <li><a href="">Livres des recettes</a></li>
+                                            <li><a href="">Livre de caisse</a></li>
+                                            <li><a href="">Totaux par catégorie</a></li>
+                                            <li><a href="">Rapports financiers</a></li>
+
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div style="margin-left:230px;">  {{ include("APUsersBundle:Default:topnav.html.twig") }} </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Ventes par catégorie</h3>
+                    </div>
+
+                  {#  <div class="title_right">
+                        <h5 style="    width: auto;
+    background-color: #41AF4B;
+    border: 1px dashed white;
+    padding: 10px;
+    color: white;">  TOTAL VENTE: <span id="tt"> --  </span> Fcfa </h5>
+
+                    </div>#}
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="clearfix"></div>
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+
+                            <div class="x_title">
+
+                                <div class="col-md-4">
+                                    Date et heure
+                                    <form class="form-horizontal">
+                                        <fieldset><div class="control-group">
+                                                <div class="controls">
+                                                    <div class="input-prepend input-group">
+                                                        <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                                        <input type="text" name="reservation-time" id="reservation-time" class="form-control" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+
+                                <ul class="nav navbar-right panel_toolbox" id="impression">
+
+                                    <a href="{{ path('ap_dossiers_print_produit', { 'start': from,'end':to }) }}" target="_blank" id="print" class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
+
+
+                                </ul>
+
+
+
+<div class="clearfix"></div>
+                            </div>
+
+
+                            <div class="x_content mt8">
+
+                                <div class="table-responsive mt8" id="matable">
+
+
+                                    {% for categorie in cat %}
+                                        {% for det in produit %}
+                                            {% if det.categorie == categorie.nom %}<h4> {{ categorie.nom }} </h4> {% endif %}
+
+                                        {% endfor %}
+
+                                    <table class="table table-striped jambo_table bulk_action" >
+                                        <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">article </th>
+
+                                            <th class="column-title">qte </th>
+                                            <th class="column-title">prix unit </th>
+                                            <th class="column-title">prix vte tot </th>
+
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody >
+
+                                        {% for dets in produit %}
+                                            {% if det.categorie == categorie.nom %}
+
+                                        <tr class="even pointer">
+
+                                            <td class=" ">{{ dets.produit }}</td>
+
+                                            <td class=" ">{{ dets.quantite }}</td>
+                                            <td class=" ">{{ dets.prix|number_format('0', '.', ' ') }}</td>
+                                            <td class=" "> {% set tot = dets.quantite * dets.prix %} {{ tot|number_format('0', '.', ' ') }}</td>
+
+
+
+
+                                        </tr>
+                                            {% endif %}
+{% endfor %}
+                                        </tbody>
+                                    </table>
+
+
+                                    {% endfor %}
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<!-- gauge.js -->
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+<!-- iCheck -->
+<!-- Skycons -->
+<script src="{{ asset('vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendors/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script src="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+
+
+
+<script>
+    $(document).ready(function(){
+
+
+       table =  $('#product1').DataTable({
+            "bSort" :false,
+
+
+            language: {
+                processing:     "Traitement en cours...",
+                search:         "Rechercher&nbsp;:",
+                lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                infoPostFix:    "",
+                loadingRecords: "Chargement en cours...",
+                zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                emptyTable:     "Aucune donnée disponible dans le tableau",
+                paginate: {
+                    first:      "Premier",
+                    previous:   "Pr&eacute;c&eacute;dent",
+                    next:       "Suivant",
+                    last:       "Dernier"
+                },
+                aria: {
+                    sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                    sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                }
+            }
+
+
+
+        });
+
+        $('#reservation-time').daterangepicker({
+            "timePicker": true,
+            "timePicker24Hour": true,
+            "autoApply": true,
+            "ranges": {
+                "Aujourdhui": [
+                    moment().hours(6).minutes(0),
+                    moment()
+                ],
+                "Hier": [
+                    moment().subtract(1, 'days').hours(6).minutes(0),
+                    moment().hours(6).minutes(0),
+                ],
+                "Cette semaine": [
+                    moment().startOf('week').add('d', 1).hours(6).minutes(0),
+                    moment()
+                ],
+                "semaine dernière": [
+                    moment().subtract(1,'week').startOf('week').add(1,'day').hours(6).minutes(0),
+                    moment().day(1).hours(6).minutes(0)
+                ],
+                "Ce mois": [
+                    moment().startOf('month').hours(6).minutes(0),
+                    moment()
+                ],
+                "mois passé": [
+                    moment().subtract(1,'months').startOf('month').hours(6).minutes(0),
+                    moment().subtract(1,'months').endOf('month').add(1,'day').hours(6).minutes(0)
+
+                ]
+            },
+
+            "locale": {
+                "format": "DD-MM-YYYY H:mm",
+                "separator": " au ",
+                "applyLabel": "valider",
+                "cancelLabel": "Annuler",
+                "fromLabel": "De",
+                "toLabel": "A",
+                "customRangeLabel": "Personnalisé",
+                "weekLabel": "W",
+                "daysOfWeek": [
+                    "Dim",
+                    "Lun",
+                    "Mar",
+                    "Mer",
+                    "Jeu",
+                    "Ven",
+                    "Sam"
+                ],
+                "monthNames": [
+                    "Janvier",
+                    "Fevrier",
+                    "Mars",
+                    "Avril",
+                    "Mai",
+                    "Juin",
+                    "Juillet",
+                    "Aout",
+                    "Septembre",
+                    "Octobre",
+                    "Novembre",
+                    "Decembre"
+                ],
+                "firstDay": 1
+            },
+            "startDate": moment().hours(6).minutes(0),
+            "endDate": moment()
+
+        }, function(start, end, label) {
+
+            var dateprev = start.format('YYYY-MM-DD H:mm:S');
+            var dateprec = end.format('YYYY-MM-DD H:mm:S');
+
+            var  lien =  Routing.generate('ap_dossiers_print_produit', { start:dateprev,end:dateprec});
+
+            $.ajax({
+                url:Routing.generate('ap_dossiers_fetch_categorie', { start:dateprev,end:dateprec}),
+                method: "GET",
+                data: "",
+                success: function (data) {
+                    table.destroy();
+
+                    $('#matable').html(data);
+
+
+
+
+
+                }
+            });
+
+            $('#impression').html('<a href="'+lien+'" target="_blank" id="print" class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>');
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+

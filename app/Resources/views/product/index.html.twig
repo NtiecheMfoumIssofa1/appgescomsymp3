@@ -170,7 +170,7 @@
                                                 <td>{{ product.category }}</td>
                                                 <td>{% if product.gerstock %}Oui{% else %}Non{% endif %}</td>
 
-                                                <td>{{ product.qtestock }}</td>
+                                                <td> {% if product.divvendu is not null and product.divvendu != 0 %} {{ product.qtestock - 1  }} + {% if product.qtepart/2 == product.divvendu %} 1/2btlle {% else %} {% set nbreconso = product.qtepart-product.divvendu  %} {{ nbreconso }} conso {% endif %}   {% else %} {{ product.qtestock }} {% endif %}  </td>
                                                 <td>{{ product.qtemin }}</td>
 
 
