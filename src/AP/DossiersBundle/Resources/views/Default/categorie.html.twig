@@ -68,15 +68,11 @@
                                             <li ><a href="{{ path('ap_dossiers_homepage') }}">Détails des ventes</a></li>
                                     <li class=""><a href="{{ path('ap_dossiers_vendeur') }}"> Ventes par serveur</a></li>
                                     <li ><a href="{{ path('ap_dossiers_produit') }}">Ventes par produits </a></li>
-                                    <li class="current-page"><a href="">Ventes par catégories</a></li>
-                                    <li><a href="">tickets de caisse</a></li>
+                                    <li class="current-page"><a href="#">Ventes par catégories</a></li>
+                                    <li><a href="{{ path('ap_dossiers_ticket') }}">tickets de caisse</a></li>
                                             <li><a href=""> bons de fabrication</a></li>
 
-                                            <li><a href="">Réglements </a></li>
-                                            <li><a href="">Livres des recettes</a></li>
-                                            <li><a href="">Livre de caisse</a></li>
-                                            <li><a href="">Totaux par catégorie</a></li>
-                                            <li><a href="">Rapports financiers</a></li>
+
 
 
                                 </ul>
@@ -166,45 +162,77 @@
 
 
                                     {% for categorie in cat %}
+
+                                    <h4 style="background-color: #eae9e9;
+    padding: 5px 10px;"> {{ categorie.nom }} </h4>
+                                        <table class="table table-striped jambo_table bulk_action" >
+                                            <thead>
+                                            <tr class="headings">
+                                                <th class="column-title" style="width:65%;">article </th>
+
+                                                <th class="column-title">qte </th>
+                                                <th class="column-title">prix unit </th>
+                                                <th class="column-title">prix vte tot </th>
+
+
+                                            </tr>
+                                            </thead>
+
+                                            <tbody >
+
+                                            {% set toto = 0 %}
                                         {% for det in produit %}
-                                            {% if det.categorie == categorie.nom %}<h4> {{ categorie.nom }} </h4> {% endif %}
-
-                                        {% endfor %}
-
-                                    <table class="table table-striped jambo_table bulk_action" >
-                                        <thead>
-                                        <tr class="headings">
-                                            <th class="column-title">article </th>
-
-                                            <th class="column-title">qte </th>
-                                            <th class="column-title">prix unit </th>
-                                            <th class="column-title">prix vte tot </th>
 
 
-                                        </tr>
-                                        </thead>
-
-                                        <tbody >
-
-                                        {% for dets in produit %}
                                             {% if det.categorie == categorie.nom %}
 
-                                        <tr class="even pointer">
-
-                                            <td class=" ">{{ dets.produit }}</td>
-
-                                            <td class=" ">{{ dets.quantite }}</td>
-                                            <td class=" ">{{ dets.prix|number_format('0', '.', ' ') }}</td>
-                                            <td class=" "> {% set tot = dets.quantite * dets.prix %} {{ tot|number_format('0', '.', ' ') }}</td>
 
 
+
+
+
+
+
+                                                            <tr class="even pointer">
+
+                                                                <td class=" " style="width:65%;">{{ det.produit }}</td>
+
+                                                                <td class=" ">{{ det.quantite }}</td>
+                                                                <td class=" ">{{ det.prix|number_format('0', '.', ' ') }}</td>
+                                                                <td class=" "> {% set tot = det.quantite * det.prix %} {{ tot|number_format('0', '.', ' ') }}</td>
+
+
+{% set toto = toto + tot %}
+
+                                                            </tr>
+
+
+
+                                            {% endif %}
+
+
+
+
+
+
+                                        {% endfor %}
+                                        <tr class="headings">
+                                            <th class="column-title" colspan="3">TOTAL VENTE  </th>
+
+                                            <th class="column-title">{{ toto }} </th>
 
 
                                         </tr>
-                                            {% endif %}
-{% endfor %}
+
                                         </tbody>
-                                    </table>
+                                        </table>
+
+
+
+
+
+
+
 
 
                                     {% endfor %}
@@ -264,37 +292,6 @@
 <script>
     $(document).ready(function(){
 
-
-       table =  $('#product1').DataTable({
-            "bSort" :false,
-
-
-            language: {
-                processing:     "Traitement en cours...",
-                search:         "Rechercher&nbsp;:",
-                lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-                info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                infoPostFix:    "",
-                loadingRecords: "Chargement en cours...",
-                zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                emptyTable:     "Aucune donnée disponible dans le tableau",
-                paginate: {
-                    first:      "Premier",
-                    previous:   "Pr&eacute;c&eacute;dent",
-                    next:       "Suivant",
-                    last:       "Dernier"
-                },
-                aria: {
-                    sortAscending:  ": activer pour trier la colonne par ordre croissant",
-                    sortDescending: ": activer pour trier la colonne par ordre décroissant"
-                }
-            }
-
-
-
-        });
 
         $('#reservation-time').daterangepicker({
             "timePicker": true,
@@ -370,14 +367,13 @@
             var dateprev = start.format('YYYY-MM-DD H:mm:S');
             var dateprec = end.format('YYYY-MM-DD H:mm:S');
 
-            var  lien =  Routing.generate('ap_dossiers_print_produit', { start:dateprev,end:dateprec});
+            var  lien =  Routing.generate('ap_dossiers_print_categorie', { start:dateprev,end:dateprec});
 
             $.ajax({
                 url:Routing.generate('ap_dossiers_fetch_categorie', { start:dateprev,end:dateprec}),
                 method: "GET",
                 data: "",
                 success: function (data) {
-                    table.destroy();
 
                     $('#matable').html(data);
 

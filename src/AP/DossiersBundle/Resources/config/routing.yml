@@ -21,6 +21,10 @@ ap_dossiers_categorie:
     path:     /dossiers/categorie
     defaults: { _controller: APDossiersBundle:Default:categorie }
 
+ap_dossiers_ticket:
+    path:     /dossiers/ticket
+    defaults: { _controller: APDossiersBundle:Default:ticket }
+
 ap_dossiers_fetch_vendeur:
     path:     /dossiers/{start}/{end}
     defaults: { _controller: APDossiersBundle:Default:fetchvendeur }
@@ -57,11 +61,25 @@ ap_dossiers_print_vendeur:
     options:
             expose: true
 
+ap_dossiers_print_categorie:
+    path:     /dossiers/print/categorie/print/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:printcategorie }
+    options:
+            expose: true
+
 
 
 ap_dossiers_fetch_details:
     path:     /dossiers/details/{start}/{end}
     defaults: { _controller: APDossiersBundle:Default:fetchdetails }
+    requirements:
+                prod : .+
+    options:
+            expose: true
+
+ap_dossiers_fetch_ticket:
+    path:     /dossiers/ticket/{start}/{end}
+    defaults: { _controller: APDossiersBundle:Default:fetchticket }
     requirements:
                 prod : .+
     options:

@@ -28,4 +28,26 @@ class commandeprodRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
+
+    public function getByBons($bons)
+    {
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->select("SUM(e.quantite) AS qte,IDENTITY(e.produit) AS prod,IDENTITY(e.bon) AS bon")
+            ->Where('e.bon = :bons' )
+
+
+            ->groupBy('e.produit')
+            ->setParameter('bons', $bons )
+
+
+        ;
+        $tickets = $qb->getQuery()->getResult();
+
+        return $tickets;
+    }
+
+
+
 }

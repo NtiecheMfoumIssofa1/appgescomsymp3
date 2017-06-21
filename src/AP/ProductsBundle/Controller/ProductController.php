@@ -89,6 +89,8 @@ class ProductController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if ($product->getThumbnail() != null){
+                $product->getThumbnail()->upload();}
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('product_edit', array('id' => $product->getId()));

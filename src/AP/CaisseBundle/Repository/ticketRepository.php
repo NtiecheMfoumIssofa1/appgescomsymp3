@@ -10,4 +10,47 @@ namespace AP\CaisseBundle\Repository;
  */
 class ticketRepository extends \Doctrine\ORM\EntityRepository
 {
+
+
+
+    public function getByDate($from,$to)
+    {
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->andWhere('e.date BETWEEN :from AND :to')
+            ->orderBy("e.date", 'DESC')
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        $result = $qb->getQuery()->getResult();
+
+        return $result;
+    }
+
+
+    public function getByTick($from,$to,$id)
+    {
+
+        $qb = $this->createQueryBuilder("e");
+        $qb
+            ->Where('e.id = :id' )
+
+            ->andWhere('e.date BETWEEN :from AND :to')
+
+            ->orderBy("e.date", 'DESC')
+            ->setParameter('id', $id )
+
+            ->setParameter('from', $from )
+            ->setParameter('to', $to)
+        ;
+        $tickets = $qb->getQuery()->getResult();
+
+        return $tickets;
+    }
+
+
+
+
+    
 }

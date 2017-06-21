@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\Query\Expr\Join;
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 
 class DefaultController extends Controller
@@ -138,10 +139,20 @@ class DefaultController extends Controller
 
     /* Print a "Hello world" receipt" */
     $printer = new Printer($bar);
-	 $printer -> setJustification(Printer::JUSTIFY_LEFT);
-	 $printer -> text(date('d/m/Y '));
-	$printer -> setJustification(Printer::JUSTIFY_RIGHT);
-	 $printer -> text(date('H:i')."\n");
+	$printer -> feed();
+	$printer -> setJustification(Printer::JUSTIFY_CENTER);
+	    
+        $printer -> text("Carrefour Bastos\n");
+         $printer -> setJustification(Printer::JUSTIFY_CENTER);
+        $printer -> text("2626 Yaoundé\n");
+        $printer -> setJustification(Printer::JUSTIFY_CENTER);
+        $printer -> text("Tel: 655 55 55 55 \n");
+        $printer -> feed(1);
+	
+	
+	
+	 $printer -> setJustification(Printer::JUSTIFY_CENTER);
+	 $printer -> text(date('d/m/Y  H:i ')."\n");
 	$printer -> feed(1);
 	
 	$printer -> setJustification(Printer::JUSTIFY_CENTER);
@@ -163,10 +174,10 @@ class DefaultController extends Controller
 	 $printer ->setReverseColors(false);
 	 $printer -> setTextSize(2, 1);
 	$printer -> text("Table: ".$table->getNom()."     Ticket:".$ticket->getId()."\n");
-	$printer -> text("--------------------\n");
+	$printer -> text("------------------------\n");
 	 $printer -> setTextSize(1, 1);
 	$printer -> text("QTE   ARTICLE\n");
-	$printer -> text("-------------------------------\n");
+	$printer -> text("-----------------------------------\n");
 		
 		
 		
@@ -177,10 +188,23 @@ class DefaultController extends Controller
 	
 	   /* Print a "Hello world" receipt" */
     $printer1 = new Printer($cuisine);
-	 $printer1 -> setJustification(Printer::JUSTIFY_LEFT);
-	 $printer1 -> text(date('d/m/Y '));
-	$printer1 -> setJustification(Printer::JUSTIFY_RIGHT);
-	 $printer1 -> text(date('H:i')."\n");
+	
+	
+      $printer1 -> feed();
+	$printer1 -> setJustification(Printer::JUSTIFY_CENTER);
+	    
+        $printer1 -> text("Carrefour Bastos\n");
+         $printer1 -> setJustification(Printer::JUSTIFY_CENTER);
+        $printer1 -> text("2626 Yaoundé\n");
+        $printer1 -> setJustification(Printer::JUSTIFY_CENTER);
+        $printer1 -> text("Tel: 655 55 55 55 \n");
+        $printer1 -> feed(1);
+	
+	
+	
+	 $printer1 -> setJustification(Printer::JUSTIFY_CENTER);
+	 $printer1 -> text(date('d/m/Y  H:i ')."\n");
+	
 	$printer1 -> feed(1);
 	
 	$printer1 -> setJustification(Printer::JUSTIFY_CENTER);
@@ -300,12 +324,13 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
 			
 		if($pr->getCategory()->getImpression() == "Cuisine"){
 			$cui = "on";
-			$printer1 -> setTextSize(2, 1);
+			$printer1 -> setTextSize(1, 2);
 	$printer1 -> text($p->product_quantity." ".$pr->getDesignation()."\n");
 	$printer1 -> feed(1);
 			}else
   {
-	 $printer -> setTextSize(2, 1);
+	  $baron = "on";
+	 $printer -> setTextSize(1, 2);
 	$printer -> text($p->product_quantity."  ".$pr->getDesignation()."\n");
 	$printer -> feed(1);
 
@@ -319,29 +344,31 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
 //		if(isset($cui)){
 //
 //	$printer1 -> setJustification();
-//      $printer1 -> cut();
+//     $printer1 -> cut();
 //
-//    /* Close printer */
-//    $printer1 -> close();
+//   /* Close printer */
+//   $printer1 -> close();
 //	}
+//if(isset($baron)){
 //$printer -> setJustification();
 //      $printer -> cut();
 //
-//    /* Close printer */
-//    $printer -> close();
-
+//   /* Close printer */
+//   $printer -> close();
+//}
         $em->flush();
-		
-		
-	
+
+
+        $route = $this->generateUrl('ap_caisse_homepage');
 		
 		
 
 
-        $output = ' <div class="alert alert-success alert-dismissible fade in" role="alert" style="width: 100%;position: relative;top: 10px;padding:5px 20px;">
+        $output = ' <div class="alert alert-success alert-dismissible fade in" role="alert" style="width: 100%;position: relative;top: 10px;padding:10px;text-align:center;">
            
-            <strong>  <i class="fa fa-paper-plane-o"> </i> COMMANDE ENVOYEE</strong> 
-        </div>';
+            <strong>  <i class="fa fa-paper-plane-o" style="display: block;
+    font-size: 40px;"> </i> COMMANDE ENVOYEE</strong> 
+        </div> <div> <a href="'.$route.'"><i class="fa fa-chevron-circle-left"></i> Retour </a> </div> ';
 
 
 
@@ -388,35 +415,35 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
         /* Print a "Hello world" receipt" */
         $printer = new Printer($bar);
 
-
+$printer -> feed();
         $printer -> setJustification(Printer::JUSTIFY_CENTER);
-        $printer -> text("Bastos \n");
-        $printer -> feed(1);
+        $printer -> text("Carrefour Bastos\n");
+         $printer -> setJustification(Printer::JUSTIFY_CENTER);
+        $printer -> text("2626 Yaoundé\n");
         $printer -> setJustification(Printer::JUSTIFY_CENTER);
         $printer -> text("Tel: 655 55 55 55 \n");
-        $printer -> feed(2);
-
-        $printer -> setJustification(Printer::JUSTIFY_CENTER);
-        $printer -> setTextSize(3, 1);
-        $printer -> text("TICKET DE CAISSE  # ".$ticket->getId(). "\n");
         $printer -> feed(1);
 
+        $printer -> setJustification(Printer::JUSTIFY_CENTER);
+        $printer -> setTextSize(2, 2);
+        $printer -> text("TICKET DE CAISSE #".$ticket->getId(). "\n");
+        $printer -> feed(1);
 
+        $printer -> selectPrintMode();
         $printer -> setJustification(Printer::JUSTIFY_LEFT);
         $printer -> setTextSize(1, 1);
         $printer -> text("Table : ".$ticket->getTables()->getNom(). "\n");
-        $printer -> feed(1);
 
 
         $printer -> setJustification(Printer::JUSTIFY_LEFT);
         $printer -> setTextSize(1, 1);
-        $printer -> text("Serveur : ".$ticket->getEmployes()->getUsername()."                 ".date('d/m/Y  H:i')."\n");
+        $printer -> text("Serveur: ".$ticket->getEmployes()->getUsername()."            ".date('d/m/Y  H:i')."\n");
         $printer -> feed(2);
 
 
         $printer -> setTextSize(1, 1);
-        $printer -> text("QTE   ARTICLE            PRIX   TOT\n");
-        $printer -> text("-------------------------------\n");
+        $printer -> text("QTE ARTICLE                        PRIX   TOTAL\n");
+        $printer -> text("------------------------------------------------\n");
 
 
 
@@ -424,10 +451,11 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
         foreach($ticket->getBoncommandes() as $bon) {
 
 
-            foreach($bon as $cmd) {
-
-                $printer -> text($cmd->getCommandeprods()->getQuantite()."  ".$cmd->getCommandeprods()->getProduit()->getDesignation()."      ".$cmd->getCommandeprods()->getProduit()->getPrixvente()."  ".$cmd->getCommandeprods()->getQuantite()*$cmd->getCommandeprods()->getProduit()->getPrixvente()."\n");
-                $printer -> feed(1);
+            foreach($bon->getCommandeprods() as $cmd) {
+ $taille = strlen($cmd->getProduit()->getDesignation());
+ $ajout = 32 - $taille  ;
+                $printer -> text($cmd->getQuantite()."  ".$cmd->getProduit()->getDesignation().str_repeat(" ", $ajout) .$cmd->getProduit()->getPrixvente()."  ".$cmd->getQuantite()*$cmd->getProduit()->getPrixvente()."\n");
+               $printer -> feed();
             }
 
 
@@ -435,13 +463,13 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
 
 
         }
-
+$printer -> text("------------------------------------------------\n");
         $printer -> feed(1);
 
-        $printer -> setJustification(Printer::JUSTIFY_RIGHT);
+        $printer -> setJustification(Printer::JUSTIFY_CENTER);
         $printer -> setTextSize(2, 1);
-        $printer -> text("TOTAL:  ".number_format($total, '0', '.', ' ')."\n");
-        $printer -> feed(3);
+        $printer -> text("TOTAL:  ".number_format($total, '0', '.', ' ')." Fcfa\n");
+        $printer -> feed(2);
 
 
 
@@ -451,11 +479,11 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
 
 
 
-        $printer -> setJustification();
-        $printer -> cut();
-
-        /* Close printer */
-        $printer -> close();
+//        $printer -> setJustification();
+//        $printer -> cut();
+//
+//        /* Close printer */
+//        $printer -> close();
 
 
 
@@ -477,6 +505,194 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
     }
 
 
+
+
+
+    public function detailAction(Request $request, $id)
+    {
+
+
+        $em = $this->getDoctrine()->getManager();
+        $ticket = $em
+            ->getRepository('APCaisseBundle:ticket')->find($id);
+
+
+
+        if($request->isXmlHttpRequest()){
+
+
+            return $this->render('APCaisseBundle:Default:ticketdetail.html.twig',array('ticketid'=>$ticket));
+
+
+         }else{
+            return $this->render('APCaisseBundle:Default:ticketdetail.html.twig',array('ticketid'=>$ticket));
+
+        }
+
+
+
+
+
+    }
+
+
+
+
+    public function detailvendeurAction(Request $request, $id,$total,$from,$to)
+    {
+
+
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        $user = $em
+            ->getRepository('APUsersBundle:employes')->find($id);
+
+
+
+
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("select commandeprod.produit_id AS produit, ticket.id,boncommande.ticket_id,ticket.date, sum(commandeprod.quantite) AS qte from commandeprod
+inner join boncommande on commandeprod.bon_id = boncommande.id
+inner join ticket on boncommande.ticket_id = ticket.id
+WHERE ticket.employes_id = $id AND ticket.date BETWEEN '$from' AND '$to'
+group by commandeprod.produit_id");
+        $statement->execute();
+        $cmd = $statement->fetchAll();
+
+
+
+
+        $data = [];
+        foreach ($cmd as $b){
+
+            $tmp = [];
+
+
+            $produit = $em->getRepository('APProductsBundle:Product')->find($b['produit']);
+
+
+
+
+            $tmp['produit'] = $produit->getDesignation();
+            $tmp['vente'] = $produit->getPrixvente();
+            $tmp['qte'] = $b['qte'];
+
+
+
+            $data[] = $tmp;
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if($request->isXmlHttpRequest()){
+
+
+            return $this->render('APCaisseBundle:Default:vendeurdetails.html.twig',array('cmd'=>$data,'user'=>$user,'total'=>$total));
+
+
+        }else{
+            return $this->render('APCaisseBundle:Default:vendeurdetails.html.twig',array('cmd'=>$data,'user'=>$user,'total'=>$total));
+
+
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+    public function clotureAction(Request $request,$id,$from,$to)
+    {
+
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        $user = $em
+            ->getRepository('APUsersBundle:employes')->find($id);
+
+
+
+
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("select commandeprod.produit_id AS produit, ticket.id,boncommande.ticket_id,ticket.date, sum(commandeprod.quantite) AS qte from commandeprod
+inner join boncommande on commandeprod.bon_id = boncommande.id
+inner join ticket on boncommande.ticket_id = ticket.id
+WHERE ticket.employes_id = $id AND ticket.date BETWEEN '$from' AND '$to'
+group by commandeprod.produit_id");
+        $statement->execute();
+        $cmd = $statement->fetchAll();
+
+
+
+
+        $data = [];
+        foreach ($cmd as $b){
+
+            $tmp = [];
+
+
+            $produit = $em->getRepository('APProductsBundle:Product')->find($b['produit']);
+
+
+
+
+            $tmp['produit'] = $produit->getDesignation();
+            $tmp['vente'] = $produit->getPrixvente();
+            $tmp['qte'] = $b['qte'];
+
+
+
+            $data[] = $tmp;
+
+
+
+
+        }
+
+
+        if($request->isXmlHttpRequest()){
+
+
+            return $this->render('APCaisseBundle:Default:cloture.html.twig',array('cmd'=>$data,'user'=>$user,'from'=>$from,'to'=>$to));
+
+
+        }else{
+            return $this->render('APCaisseBundle:Default:cloture.html.twig',array('cmd'=>$data,'user'=>$user,'from'=>$from,'to'=>$to));
+
+        }
+
+
+
+
+
+    }
 
 
 

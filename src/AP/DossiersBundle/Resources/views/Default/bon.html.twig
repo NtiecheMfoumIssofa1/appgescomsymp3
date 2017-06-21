@@ -1,8 +1,4 @@
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> ventes par produit </title>
+    <title> Liste bons de commande </title>
 
 
 
@@ -65,15 +61,14 @@
 
 
 
-                                            <li ><a href="#">Détails des ventes</a></li>
+                                    <li ><a href="{{ path('ap_dossiers_homepage') }}">Détails des ventes</a></li>
                                     <li class=""><a href="{{ path('ap_dossiers_vendeur') }}"> Ventes par serveur</a></li>
-                                    <li class="current-page"><a href="{{ path('ap_dossiers_produit') }}">Ventes par produits </a></li>
+                                    <li><a href="{{ path('ap_dossiers_produit') }}">Ventes par produits </a></li>
                                     <li><a href="{{ path('ap_dossiers_categorie') }}">Ventes par catégories</a></li>
 
-                                    <li><a href="{{ path('ap_dossiers_ticket') }}">tickets de caisse</a></li>
-                                            <li><a href=""> bons de fabrication</a></li>
 
-
+                                    <li class="current-page"><a href="#">tickets de caisse</a></li>
+                                    <li><a href=""> bons de fabrication</a></li>
 
 
                                 </ul>
@@ -100,17 +95,17 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Ventes par produit</h3>
+                        <h3>Liste des tickets</h3>
                     </div>
 
-                  {#  <div class="title_right">
+                    <div class="title_right">
                         <h5 style="    width: auto;
     background-color: #41AF4B;
     border: 1px dashed white;
     padding: 10px;
-    color: white;">  TOTAL VENTE: <span id="tt"> --  </span> Fcfa </h5>
+    color: white;">  TOTAL VENTE: <span id="tt"> {{ totalvente }}   </span> Fcfa </h5>
 
-                    </div>#}
+                    </div>
 
                 </div>
 
@@ -146,7 +141,7 @@
 
                                 <ul class="nav navbar-right panel_toolbox" id="impression">
 
-                                    <a href="{{ path('ap_dossiers_print_produit', { 'start': from,'end':to }) }}" target="_blank" id="print" class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
+                                    <a href="{{ path('ap_dossiers_print_details', { 'start': from,'end':to }) }}" target="_blank" id="print" class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
 
 
                                 </ul>
@@ -163,28 +158,31 @@
                                     <table class="table table-striped jambo_table bulk_action" id="product1">
                                         <thead>
                                         <tr class="headings">
-                                            <th class="column-title">article </th>
+                                            <th class="column-title">N° </th>
+                                            <th class="column-title">Date</th>
+                                            <th class="column-title">heure </th>
 
-                                            <th class="column-title">qte </th>
-                                            <th class="column-title">prix unit </th>
-                                            <th class="column-title">prix vte tot </th>
+                                            <th class="column-title">Montant </th>
+                                            <th class="column-title">paiement </th>
+                                            <th class="column-title">Vendeur </th>
 
-                                            </th>
 
                                         </tr>
                                         </thead>
 
                                         <tbody >
 
-                                        {% for dets in produit %}
+                                        {% for dets in details %}
 
                                         <tr class="even pointer">
 
-                                            <td class=" ">{{ dets.produit }}</td>
+                                            <td class=" ">{{ dets.id }}</td>
+                                            <td class=" ">{{ dets.date|date("d-m-Y") }} </td>
+                                            <td class="a-right a-right ">{{ dets.date|date("H:i") }}  </td>
 
-                                            <td class=" ">{{ dets.quantite }}</td>
                                             <td class=" ">{{ dets.prix|number_format('0', '.', ' ') }}</td>
-                                            <td class=" "> {% set tot = dets.quantite * dets.prix %} {{ tot|number_format('0', '.', ' ') }}</td>
+                                            <td class=" ">{{ dets.mode }}</td>
+                                            <td class=" ">{{ dets.employes.username }}</td>
 
 
 
@@ -354,10 +352,10 @@
             var dateprev = start.format('YYYY-MM-DD H:mm:S');
             var dateprec = end.format('YYYY-MM-DD H:mm:S');
 
-            var  lien =  Routing.generate('ap_dossiers_print_produit', { start:dateprev,end:dateprec});
+            var  lien =  Routing.generate('ap_dossiers_print_details', { start:dateprev,end:dateprec});
 
             $.ajax({
-                url:Routing.generate('ap_dossiers_fetch_produit', { start:dateprev,end:dateprec}),
+                url:Routing.generate('ap_dossiers_fetch_ticket', { start:dateprev,end:dateprec}),
                 method: "GET",
                 data: "",
                 success: function (data) {
@@ -365,7 +363,9 @@
 
                     $('#matable').html(data);
 
+                    var total = $('#total').text();
 
+                    $('#tt').html(total);
 
 
                     $('#product1').DataTable({

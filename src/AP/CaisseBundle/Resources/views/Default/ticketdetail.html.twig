@@ -1,0 +1,58 @@
+
+
+
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel2">Ticket #{{ ticketid.id }}</h4>
+        </div>
+        <div class="modal-body">
+
+
+            <div style="    text-align: center;
+    background-color: rgba(255, 235, 0, 0.28);
+"> Commande(s)  </div>
+            {% set total = 0 %}
+
+
+            {% for prods in ticketid.boncommandes %}
+
+                {% for  liste in prods.commandeprods %}
+
+
+
+                    <div style=" padding:0 5px;"> <span style="display: inline-block;text-align: center;width:5%">{{ liste.quantite }}</span> <span style="display: inline-block;text-align: left;width:76%">{{ liste.produit.designation }}</span> <span style="display: inline-block;text-align: center;width:15%"> {% set ptotal = liste.quantite*liste.produit.prixvente %}{{ ptotal|number_format('0', '.', ' ')  }}</span>  </div>
+
+                    {% set total = total + liste.quantite*liste.produit.prixvente %}
+
+                {%  endfor %}
+
+                {% if not loop.last %}
+                    <hr style="margin:0">
+
+                {% endif %}
+
+
+            {%  endfor %}
+
+        </div>
+        <div class="modal-footer">
+           <h5> TOTAL : {{ ticketid.prix|number_format('0', '.', ' ') }} Fcfa</h5>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

@@ -19,3 +19,15 @@ ap_caisse_ticket:
     defaults: { _controller: APCaisseBundle:Default:ticket }
     options:
             expose: true
+
+ap_caisse_detail_ticket:
+    path:     /ticket/details/{id}
+    defaults: { _controller: APCaisseBundle:Default:detail }
+
+ap_caisse_detail_vendeur:
+    path:     /detail/vendeur/{id}/{total}/{from}/{to}
+    defaults: { _controller: APCaisseBundle:Default:detailvendeur }
+
+ap_caisse_cloture:
+    path:     /cloture/{id}/{from}/{to}
+    defaults: { _controller: APCaisseBundle:Default:cloture }

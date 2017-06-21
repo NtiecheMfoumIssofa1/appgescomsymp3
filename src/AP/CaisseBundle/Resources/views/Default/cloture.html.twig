@@ -1,0 +1,81 @@
+
+
+
+<div class="modal-dialog modal-lg" style="width: 50%;height: 50%" >
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Cloture de caisse {{ app.user.username }} </h4>
+                <h6 class="modal-title" id="">Du <strong>{{ from }}</strong>  au <strong>{{ to }}</strong> </h6>
+            </div>
+            <div class="modal-body" style="height: 45em;">
+
+                <div class="row">
+                    <div class="col-md-7" style="    height: 40em;
+    overflow: scroll;">
+
+
+                        <table class="table table-striped jambo_table bulk_action" >
+                            <thead>
+                            <tr class="headings" >
+                                <th class="column-title" style="padding: 5px 2px "> produit  </th>
+                                <th class="column-title" style="padding: 5px 2px "> qte </th>
+                                <th class="column-title" style="padding: 5px  2px "> tot </th>
+
+
+                                </th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody id="donnees">
+
+                            {% for prod in cmd %}
+
+
+
+
+
+
+
+
+                                <tr class="even pointer">
+
+                                    <td style="padding: 2px ">{{ prod.produit }}</td>
+                                    <td style="padding: 2px ">{{ prod.qte }}</td>
+                                    <td style="padding: 2px ">{{ prod.qte*prod.vente }}</td>
+
+                                </tr>
+
+
+
+                            {%  endfor %}
+
+
+
+                            </tbody>
+                        </table>
+
+
+
+
+                    </div>
+
+                    <div class="col-md-5"></div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-success"><i class="fa fa-print"></i> Cloturer et imprimer</button>
+            </div>
+
+        </div>
+</div>
+
+
+
+

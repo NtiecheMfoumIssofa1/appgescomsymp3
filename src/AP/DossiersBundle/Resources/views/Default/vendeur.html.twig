@@ -66,19 +66,15 @@
 
 
                                             <li class=""><a href="{{ path('ap_dossiers_homepage') }}">Détails des ventes</a></li>
-                                    <li class="current-page"><a href=""> Ventes par serveur</a></li>
+                                    <li class="current-page"><a href="#"> Ventes par serveur</a></li>
 
                                     <li><a href="{{ path('ap_dossiers_produit') }}">Ventes par produits </a></li>
                                     <li><a href="{{ path('ap_dossiers_categorie') }}">Ventes par catégories</a></li>
 
-                                    <li><a href="">tickets de caisse</a></li>
+                                    <li><a href="{{ path('ap_dossiers_ticket') }}">tickets de caisse</a></li>
                                     <li><a href=""> bons de fabrication</a></li>
 
-                                    <li><a href="">Réglements </a></li>
-                                    <li><a href="">Livres des recettes</a></li>
-                                    <li><a href="">Livre de caisse</a></li>
-                                    <li><a href="">Totaux par catégorie</a></li>
-                                    <li><a href="">Rapports financiers</a></li>
+
 
 
                                 </ul>
@@ -113,7 +109,7 @@
     background-color: #41AF4B;
     border: 1px dashed white;
     padding: 10px;
-    color: white;"> TOTAL VENTES : <span id="tt"> {{ total }}  </span>  </h5>
+    color: white;"> TOTAL VENTES : <span id="tt"> {{ total }} Fcfa </span>  </h5>
 
                     </div>
 
@@ -174,8 +170,9 @@
                                             <th class="column-title"> Especes </th>
                                             <th class="column-title">Orange Money </th>
                                             <th class="column-title">Mtn Money </th>
-                                            <th class="column-title">Carte </th>
+                                            <th class="column-title">Credit </th>
                                             <th class="column-title">Total </th>
+                                            <th class="column-title"> </th>
 
                                             </th>
 
@@ -196,6 +193,8 @@
                                             <td class=" ">0</td>
                                             <td class=" ">0</td>
                                             <td class=" ">{{ ven.balance }} Fcfa</td>
+                                            <td  align="center"><a href="{{path('ap_caisse_detail_vendeur', {  'id':ven.id,'total':ven.balance,'from':from,'to':to }) }}" data-toggle="modal" data-target=".bs-example-modal-sm"  ><i class="fa fa-plus-circle" style="font-size:14px;"></i> - </a>
+                                            </td>
 
                                         </tr>
                                         {% endif %}
@@ -210,7 +209,7 @@
                                             <td class=" ">0</td>
                                             <td class=" ">0</td>
                                             <td class=" ">0</td>
-                                            <td > {{ total }} Fcfa</td>
+                                            <td colspan="2"> {{ total }} Fcfa</td>
 
                                         </tr>
 
@@ -364,9 +363,27 @@
 
                     $('#tt').html(total);
 
+                    $('[data-toggle="modal"]').on('click',
+                        function(e) {
 
+                            e.preventDefault();
+                            var $this = $(this)
+                                , $remote = $this.data('remote') || $this.attr('href')
+                                , $modal = $('<div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"></div>');
+                            $('body').append($modal);
+                            $modal.modal({ keyboard: false});
+                            $modal.load($remote);
+
+
+
+
+
+
+                        }
+                    );
                 }
             });
+
 
 
 
@@ -382,7 +399,24 @@
 
 
 
+        $('[data-toggle="modal"]').on('click',
+            function(e) {
 
+                e.preventDefault();
+                var $this = $(this)
+                    , $remote = $this.data('remote') || $this.attr('href')
+                    , $modal = $('<div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"></div>');
+                $('body').append($modal);
+                $modal.modal({ keyboard: false});
+                $modal.load($remote);
+
+
+
+
+
+
+            }
+        );
 
 
 

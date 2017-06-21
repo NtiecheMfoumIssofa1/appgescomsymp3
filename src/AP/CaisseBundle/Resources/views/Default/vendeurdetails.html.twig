@@ -1,0 +1,75 @@
+
+
+
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel2">Details ventes {{ user.username }}</h4>
+        </div>
+        <div class="modal-body">
+
+
+            <table class="table table-striped jambo_table bulk_action" >
+                <thead>
+                <tr class="headings" >
+                    <th class="column-title" style="padding: 5px 2px "> produit  </th>
+                    <th class="column-title" style="padding: 5px 2px "> qte </th>
+                    <th class="column-title" style="padding: 5px  2px "> tot </th>
+
+
+                    </th>
+
+                </tr>
+                </thead>
+
+                <tbody id="donnees">
+
+                {% for prod in cmd %}
+
+
+
+
+
+
+
+
+                    <tr class="even pointer">
+
+                        <td style="padding: 2px ">{{ prod.produit }}</td>
+                        <td style="padding: 2px ">{{ prod.qte }}</td>
+                        <td style="padding: 2px ">{{ prod.qte*prod.vente }}</td>
+
+                    </tr>
+
+
+
+                {%  endfor %}
+
+
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+        <div class="modal-footer">
+           <h5> TOTAL : {{ total }}  Fcfa</h5>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

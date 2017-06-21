@@ -93,7 +93,7 @@ border: 1px dashed #ddd;padding:10px; ">
 
                             {% for tab in interieur[:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
 {% endfor %}
                         </ul>
@@ -112,7 +112,7 @@ border: 1px dashed #ddd;padding:10px; ">
                             <ul class="nopad">
                                 {% for tab in interieur[20:20] %}
 
-                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                                 {% endfor %}
 
@@ -129,7 +129,7 @@ border: 1px dashed #ddd;padding:10px; ">
                             <ul class="nopad">
                                 {% for tab in interieur[40:20] %}
 
-                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                                 {% endfor %}
 
@@ -149,7 +149,7 @@ border: 1px dashed #ddd;padding:10px; ">
 
                                 {% for tab in interieur[60:20] %}
 
-                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                    <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                                 {% endfor %}
 
@@ -184,7 +184,7 @@ border: 1px dashed #ddd;padding:10px; ">
 
                             {% for tab in couloir[:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
                         </ul>
@@ -203,7 +203,7 @@ border: 1px dashed #ddd;padding:10px; ">
                         <ul class="nopad">
                             {% for tab in couloir[20:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
 
@@ -220,7 +220,7 @@ border: 1px dashed #ddd;padding:10px; ">
                         <ul class="nopad">
                             {% for tab in couloir[40:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
 
@@ -240,7 +240,7 @@ border: 1px dashed #ddd;padding:10px; ">
 
                             {% for tab in couloir[60:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
 
@@ -280,7 +280,7 @@ border: 1px dashed #ddd;padding:10px; ">
 
                             {% for tab in terasse[:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
                         </ul>
@@ -298,7 +298,7 @@ border: 1px dashed #ddd;padding:10px; ">
                         <ul class="nopad">
                             {% for tab in terasse[20:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
 
@@ -315,7 +315,7 @@ border: 1px dashed #ddd;padding:10px; ">
                         <ul class="nopad">
                             {% for tab in terasse[40:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
 
@@ -335,7 +335,7 @@ border: 1px dashed #ddd;padding:10px; ">
 
                             {% for tab in terasse[60:20] %}
 
-                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10px;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.employes == app.user %}  {{ path('ap_caisse_table', { 'id': tab.id }) }} {% else %} # {% endif %}{% endfor %}{% endif %}" style="color: inherit;"> {{ tab.nom }}   </a></li>
+                                <li class="btn btn-default menublok" style="padding: 5px 15px;margin-bottom:10;{% if tab.tickets is not null %} {% for tabs in tab.tickets %} {% if tabs.etat == 1 %}  background-color:{{ tabs.employes.couleur }};color:white; {% endif %}{% endfor %}{% endif %}  "><a href="{{ path('ap_caisse_table', { 'id': tab.id }) }}" style="color: inherit;"> {{ tab.nom }}   </a></li>
 
                             {% endfor %}
 

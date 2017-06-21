@@ -142,6 +142,7 @@
 
 
                             <div class="col-md-3 col-sm-3 col-xs-12">
+                                <a href="{{ path('ap_caisse_cloture',{'id':app.user.id,'from':from,'to':to}) }}" data-toggle="modal" data-target=".bs-example-modal-lg"  >
 
                                 <div class="bg-green-sky acc blockmenu  menublok" >
 
@@ -153,7 +154,7 @@
                                     <h5 class="blocktit"> Dernière clôture :</h5>
 
 
-                                    <h5 class="blocktit1"> 20 mai 2017</h5>
+                                    <h5 class="blocktit1"> {{ from }}</h5>
 
 
 
@@ -163,7 +164,7 @@
                                     <h6 style="margin-top: 50px;"> Cloture de caisse</h6>
 
                                 </div>
-
+                                </a>
 
                             </div>
 
@@ -368,6 +369,39 @@
 
 <!-- Custom Theme Scripts -->
 <script src="{{ asset('build/js/custom.js') }}"></script>
+
+
+<script>
+    $(document).ready(function(){
+
+
+$('[data-toggle="modal"]').on('click',
+function(e) {
+
+e.preventDefault();
+var $this = $(this)
+, $remote = $this.data('remote') || $this.attr('href')
+, $modal = $('<div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"></div>');
+$('body').append($modal);
+$modal.modal({ keyboard: false});
+$modal.load($remote);
+
+
+
+
+
+
+}
+);
+
+
+    });
+
+
+
+
+
+</script>
 
 </body>
 </html>
