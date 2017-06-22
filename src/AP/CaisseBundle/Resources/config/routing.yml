@@ -25,8 +25,12 @@ ap_caisse_detail_ticket:
     defaults: { _controller: APCaisseBundle:Default:detail }
 
 ap_caisse_detail_vendeur:
-    path:     /detail/vendeur/{id}/{total}/{from}/{to}
+    path:     /detail/vendeur/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}
     defaults: { _controller: APCaisseBundle:Default:detailvendeur }
+
+ap_caisse_detail_vendeur_print:
+    path:     /detail/print/vendeur/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}
+    defaults: { _controller: APCaisseBundle:Default:detailvendeurprint }
 
 ap_caisse_cloture:
     path:     /cloture/{id}/{from}/{to}

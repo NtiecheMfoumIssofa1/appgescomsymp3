@@ -111,7 +111,7 @@
 
                                         {% endfor %}
                                         <tr >
-                                            <th  colspan="3">TOTAL VENTE  </th>
+                                            <th  colspan="3">TOTAL VENTE {{ categorie.nom }}  </th>
 
                                             <th >{{ toto|number_format('0', '.', ' ') }} FCFA </th>
 
@@ -131,6 +131,11 @@
 
                                     {% endfor %}
 
+                                    <div  style="background-color:#eee;padding: 15px;margin:10px 80px;width:90%;">
+                                        <strong style="margin-right: 300px;"> GRAND TOTAL </strong>
+                                        <span style="margin-left: 300px;font-size: 16px "> {{ total|number_format('0', '.', ' ') }} Fcfa</span>
+
+                                    </div>
 
                                 </div>
 

@@ -368,7 +368,8 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
            
             <strong>  <i class="fa fa-paper-plane-o" style="display: block;
     font-size: 40px;"> </i> COMMANDE ENVOYEE</strong> 
-        </div> <div> <a href="'.$route.'"><i class="fa fa-chevron-circle-left"></i> Retour </a> </div> ';
+        </div> <div style="text-align: center;
+    margin: 25px;"> <a href="'.$route.'"><i class="fa fa-chevron-circle-left"></i> Retour </a> </div> ';
 
 
 
@@ -390,20 +391,7 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
         $table = $em
             ->getRepository('APCaisseBundle:tables')->find($ticket->getTables());
 
-        $ticket->setEtat(0);
-        $ticket->setMode($mode);
-        $ticket->setPrix($total);
-        $table->setOccupe(0);
 
-        $em->persist($ticket);
-        $em->persist($table);
-
-        $em->flush();
-
-        $this->addFlash(
-            'Ticket',
-            ' ticket enregistré !'
-        );
 
 
 
@@ -491,7 +479,20 @@ $printer -> text("------------------------------------------------\n");
 
 
 
+        $ticket->setEtat(0);
+        $ticket->setMode($mode);
+        $ticket->setPrix($total);
+        $table->setOccupe(0);
 
+        $em->persist($ticket);
+        $em->persist($table);
+
+        $em->flush();
+
+        $this->addFlash(
+            'Ticket',
+            ' ticket enregistré !'
+        );
 
 
 
@@ -538,7 +539,7 @@ $printer -> text("------------------------------------------------\n");
 
 
 
-    public function detailvendeurAction(Request $request, $id,$total,$from,$to)
+    public function detailvendeurAction(Request $request, $id,$total,$from,$to,$espece,$orange,$carte)
     {
 
 
@@ -558,7 +559,7 @@ $printer -> text("------------------------------------------------\n");
         $statement = $connection->prepare("select commandeprod.produit_id AS produit, ticket.id,boncommande.ticket_id,ticket.date, sum(commandeprod.quantite) AS qte from commandeprod
 inner join boncommande on commandeprod.bon_id = boncommande.id
 inner join ticket on boncommande.ticket_id = ticket.id
-WHERE ticket.employes_id = $id AND ticket.date BETWEEN '$from' AND '$to'
+WHERE ticket.employes_id = $id AND ticket.etat=0 AND ticket.date BETWEEN '$from' AND '$to'
 group by commandeprod.produit_id");
         $statement->execute();
         $cmd = $statement->fetchAll();
@@ -605,11 +606,11 @@ group by commandeprod.produit_id");
         if($request->isXmlHttpRequest()){
 
 
-            return $this->render('APCaisseBundle:Default:vendeurdetails.html.twig',array('cmd'=>$data,'user'=>$user,'total'=>$total));
+            return $this->render('APCaisseBundle:Default:vendeurdetails.html.twig',array('cmd'=>$data,'user'=>$user,'total'=>$total,'from'=>$from,'to'=>$to,'espece'=>$espece,'orange'=>$orange,'carte'=>$carte));
 
 
         }else{
-            return $this->render('APCaisseBundle:Default:vendeurdetails.html.twig',array('cmd'=>$data,'user'=>$user,'total'=>$total));
+            return $this->render('APCaisseBundle:Default:vendeurdetails.html.twig',array('cmd'=>$data,'user'=>$user,'total'=>$total,'from'=>$from,'to'=>$to,'espece'=>$espece,'orange'=>$orange,'carte'=>$carte));
 
 
         }
@@ -621,6 +622,145 @@ group by commandeprod.produit_id");
     }
 
 
+
+
+    public function detailvendeurprintAction(Request $request, $id,$total,$from,$to,$espece,$orange,$carte)
+    {
+
+
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+
+        $user = $em
+            ->getRepository('APUsersBundle:employes')->find($id);
+
+
+
+
+        $connection = $em->getConnection();
+        $statement = $connection->prepare("select commandeprod.produit_id AS produit, ticket.id,boncommande.ticket_id,ticket.date, sum(commandeprod.quantite) AS qte from commandeprod
+inner join boncommande on commandeprod.bon_id = boncommande.id
+inner join ticket on boncommande.ticket_id = ticket.id
+WHERE ticket.employes_id = $id AND ticket.etat=0 AND ticket.date BETWEEN '$from' AND '$to'
+group by commandeprod.produit_id");
+        $statement->execute();
+        $cmd = $statement->fetchAll();
+
+
+
+
+        $data = [];
+        foreach ($cmd as $b){
+
+            $tmp = [];
+
+
+            $produit = $em->getRepository('APProductsBundle:Product')->find($b['produit']);
+
+
+
+
+            $tmp['produit'] = $produit->getDesignation();
+            $tmp['vente'] = $produit->getPrixvente();
+            $tmp['qte'] = $b['qte'];
+
+
+
+            $data[] = $tmp;
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $bar = new WindowsPrintConnector("EPSON TM-T20II Receipt5");
+
+        /* Print a "Hello world" receipt" */
+        $printer = new Printer($bar);
+
+
+        $printer -> setTextSize(2, 2);
+        $printer -> text('Details ventes '.$user->getUsername(). "\n");
+        $printer -> text('du'.$from. 'au' .$to.  "\n");
+
+        $printer -> feed(1);
+
+
+
+
+        $printer -> setTextSize(1, 1);
+        $printer -> text("PRODUIT                        QTE   TOTAL\n");
+        $printer -> text("------------------------------------------------\n");
+
+
+
+
+
+
+            foreach ( $data as $prod){
+
+
+
+
+            $taille = strlen($prod['produit']);
+            $ajout = 32 - $taille  ;
+            $printer -> text($prod['produit']." ".str_repeat(" ", $ajout) .$prod['qte']."  ".$prod['qte']*$prod['vente']."\n");
+            $printer -> feed();
+
+
+    }
+
+
+        $printer -> text("------------------------------------------------\n");
+        $printer -> feed(1);
+
+        $printer -> setJustification(Printer::JUSTIFY_CENTER);
+        $printer -> setTextSize(2, 1);
+        $printer -> text("TOTAL ESPECES:  ".number_format($espece, '0', '.', ' ')." Fcfa\n");
+        $printer -> text("TOTAL ORANGE MONEY:  ".number_format($orange, '0', '.', ' ')." Fcfa\n");
+        $printer -> text("TOTAL CARTE:  ".number_format($carte, '0', '.', ' ')." Fcfa\n");
+        $printer -> feed(1);
+        $printer -> text("TOTAL GLOBAL:  ".$total." Fcfa\n");
+        $printer -> feed(1);
+
+
+
+
+
+
+
+//        $printer -> setJustification();
+//        $printer -> cut();
+//
+//        /* Close printer */
+//        $printer -> close();
+
+
+
+        return $this->redirectToRoute('ap_dossiers_vendeur');
+
+
+
+
+
+
+
+    }
 
 
 

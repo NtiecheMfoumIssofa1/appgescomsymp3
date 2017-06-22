@@ -52,53 +52,56 @@
 
 <br>
                 <div style="text-align: center;width: 100%;position: relative;">
-                                <table class="table  jambo_table " style="margin-left: 80px;"  >
-                                        <thead>
-                                        <tr class="headings">
-                                            <th>Vendeur  </th>
-                                            <th> Especes </th>
-                                            <th>Orange Money </th>
-                                            <th>Mtn Money </th>
-                                            <th>Carte </th>
-                                            <th>Total </th>
+                    <table class="table table-striped jambo_table bulk_action" style="margin-left:50px;">
+                        <thead>
+                        <tr class="headings">
+                            <th style="width: 200px;">Vendeur  </th>
+                            <th> Espèces </th>
+                            <th>Orange Money </th>
+                            <th>Carte </th>
+                            <th>Total </th>
 
 
-                                        </tr>
-                                        </thead>
+                        </tr>
+                        </thead>
 
-                                        <tbody id="donnees">
+                        <tbody id="donnees">
+
+                        {% set totalespece = 0 %}
+                        {% set totalorange = 0 %}
+                        {% set totalcarte = 0 %}
+                        {% for ven in vendeur %}
+
+                            {% if ven.balance != 0 %}
+                                <tr class="even pointer">
+
+                                    <td>{{ ven.serveur }}</td>
+                                    <td>{{ ven.espece|number_format('0', '.', ' ') }} </td>
+                                    <td>{{ ven.orange|number_format('0', '.', ' ') }}</td>
+                                    <td>{{ ven.carte|number_format('0', '.', ' ') }} </td>
+                                    <td>{{ ven.balance }} </td>
+
+                                    {% set totalespece = totalespece + ven.espece  %}
+                                    {% set totalorange = totalorange + ven.orange  %}
+                                    {% set totalcarte = totalcarte + ven.carte  %}
+                                </tr>
+                            {% endif %}
 
 
-                                        {% for ven in vendeur %}
-                                        {% if ven.balance != 0 %}
-                                        <tr>
+                        {% endfor %}
 
-                                            <td>{{ ven.serveur }}</td>
-                                            <td>{{ ven.balance }} Fcfa</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>{{ ven.balance }} Fcfa</td>
+                        <tr class="headings" style="background-color:#eee;">
 
-                                        </tr>
+                            <td ><strong> GRAND TOTAL </strong></td>
+                            <td > {{ totalespece|number_format('0', '.', ' ') }} Fcfa </td>
+                            <td class=" ">{{ totalorange|number_format('0', '.', ' ') }} Fcfa </td>
+                            <td class=" ">{{ totalcarte|number_format('0', '.', ' ') }} Fcfa</td>
+                            <td > {{ total }} Fcfa</td>
 
-{% endif %}
-{% endfor %}
+                        </tr>
 
-                                        <tr>
-
-                                        <td><strong> GRAND TOTAL </strong></td>
-                                            <td > <strong> {{ total }} Fcfa</strong></td>
-                                            <td><strong>0</strong></td>
-                                            <td><strong>0</strong></td>
-                                            <td><strong>0</strong></td>
-                                            <td> <strong>{{ total }} Fcfa</strong></td>
-
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-
+                        </tbody>
+                    </table>
 
                 </div>
 

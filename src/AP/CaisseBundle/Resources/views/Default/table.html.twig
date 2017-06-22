@@ -29,6 +29,27 @@
 
     <link href="{{ asset('css/smart_cart.min.css') }}" rel="stylesheet" type="text/css" />
 
+<style>
+
+    ul.tabss{
+    margin: 0px;
+    padding: 5px;
+    list-style: none;
+    }
+    ul.tabss li{
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 5px 15px;
+    cursor: pointer;
+        border-radius: 2px;
+    }
+
+    ul.tabss li.current{
+    background: #41AF4B;
+    color: #fff;
+    }
+</style>
 </head>
 
 <body class="nav-md">
@@ -108,7 +129,7 @@
                                                 <img src="{{ asset('imgprod/def.jpg') }}" style="width: 80%">
 
                                             {% else %}
-                                                <img src="{{ asset( prod.thumbnail.uploadDir() ~ prod.thumbnail.url) }}" style="width: 58%">
+                                                <img src="{{ asset( prod.thumbnail.uploadDir() ~ prod.thumbnail.url) }}" style="width: 80%">
 
                                             {% endif %}
                                         </div>
@@ -203,22 +224,19 @@
 
                                         {%  endfor %}
 
-<div>
-<div class="paiement" style="margin-top:15px;" >
-    <a hre="" class="btn btn-success" style="    padding: 2px 10px;font-size: 1em;"> Especes </a>
-                                                <a hre="" class="btn btn-default" style="    padding: 2px 10px;
-    font-size: 1em;"> Orange money </a>
-                                                <a hre="" class="btn btn-default" style="    padding: 2px 10px;
-    font-size: 1em;"> MTN </a>
-                                                <a hre="" class="btn btn-default" style="    padding: 2px 10px;
-    font-size: 1em;"> Carte </a>
 
-</div>
-</div>
-                                                <a href="{{ path('ap_caisse_ticket', { 'id': ticketid,'mode':"espece",'total':total }) }}" class="btn btn-success" style="width: 100%;
+                                                <ul class="tabss">
+                                                    <li class="tab-link current" data-tab="tab-1">Espèces</li>
+                                                    <li class="tab-link" data-tab="tab-2">Orange Money</li>
+                                                    <li class="tab-link" data-tab="tab-3">Carte</li>
+                                                </ul>
+
+
+
+                                              <span id="liens">  <a href="{{ path('ap_caisse_ticket', { 'id': ticketid,'mode':"especes",'total':total }) }}" class="btn btn-success" style="width: 100%;
     margin: 15px auto 3px;
     padding: 10px 5px;
-    "> <span style="float: left;">VALIDER TICKET </span>  <span style="float: right;font-size:15px">{{ total }} Fcfa </span> </a>
+    "> <span style="float: left;" >VALIDER TICKET </span>  <span style="float: right;font-size:15px"><span id="totals">{{ total }}</span> Fcfa </span> </a> </span>
 
 
                                             </div>
@@ -504,22 +522,21 @@
 
                                             {%  endfor %}
 
-                                            <div>
-                                                <div class="paiement" style="margin-top:15px;" >
-                                                    <a hre="" class="btn btn-success" style="    padding: 2px 10px;font-size: 1em;"> Especes </a>
-                                                    <a hre="" class="btn btn-default" style="    padding: 2px 10px;
-    font-size: 1em;"> Orange money </a>
-                                                    <a hre="" class="btn btn-default" style="    padding: 2px 10px;
-    font-size: 1em;"> MTN </a>
-                                                    <a hre="" class="btn btn-default" style="    padding: 2px 10px;
-    font-size: 1em;"> Carte </a>
 
-                                                </div>
-                                            </div>
+
+                                            <ul class="tabss">
+                                                <li class="tab-link current" data-tab="tab-1">Tab One</li>
+                                                <li class="tab-link" data-tab="tab-2">Tab Two</li>
+                                                <li class="tab-link" data-tab="tab-3">Tab Three</li>
+                                                <li class="tab-link" data-tab="tab-4">Tab Four</li>
+                                            </ul>
+
+
+
                                             <a href="{{ path('ap_caisse_ticket', { 'id': ticketid,'mode':"espece",'total':total }) }}" class="btn btn-success" style="width: 100%;
     margin: 15px auto 3px;
     padding: 10px 5px;
-    "> <span style="float: left;">VALIDER TICKET </span>  <span style="float: right;font-size:15px">{{ total }} Fcfa </span> </a>
+    "> <span style="float: left;">VALIDER TICKET </span>  <span style="float: right;font-size:15px" >{{ total }} Fcfa </span> </a>
 
 
                                         </div>
@@ -685,8 +702,27 @@
 
         });
 
+        var ticketid = {{ ticketid }};
+
+        var total = $('#totals').text();
+
+        $('ul.tabss li').click(function(){
+
+            var tab_id = $(this).attr('data-tab');
+
+            $('ul.tabss li').removeClass('current');
+
+            $(this).addClass('current');
+            $("#"+tab_id).addClass('current');
+
+            var mode = $(this).text();
+
+            var  lien =  Routing.generate('ap_caisse_ticket', { id:ticketid,mode:mode,total:total});
+
+            $('#liens').html('<a href="'+lien+'"  class="btn btn-success"  style="width: 100%;margin: 15px auto 3px;padding: 10px 5px;"> <span style="float: left;">VALIDER TICKET </span>  <span style="float: right;font-size:15px">'+total+' Fcfa </span> </a>');
 
 
+        })
 
 
     });
@@ -743,45 +779,6 @@
     if(a !== null && !a.parentNode.classList.contains('active') ){
 
         systemOnglet(a);
-
-    }
-
-
-
-</script>
-
-
-<script>
-
-
-    var paie = document.querySelectorAll('.paiement a');
-
-
-    for (var i=0; i < paie.length; i++){
-
-        paie[i].addEventListener('click', function () {
-
-
-
-//si l'on clique sur la classe active rien ne se passe
-            if(this.classList.contains('btn-success')){
-                return false
-            }
-
-
-            document.querySelector('.paiement  a').classList.remove('btn-success')
-
-//on retire la class active
-
-//on ajoute la classe active sur l'onglet cliqué
-            this.classList.add('btn-success');
-
-
-
-
-
-
-        })
 
     }
 

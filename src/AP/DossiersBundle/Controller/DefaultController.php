@@ -125,14 +125,13 @@ $totalvente = number_format($total, '0', '.', ' ');
 
 
         $yesterday = date("Y-m-d H:i:s",mktime(6, 0, 0, date("m"),date("d"), date("Y")));
-        $day = date("Y-m-d H:i:s",mktime(date("H"), 0, 0, date("m"),date("d"), date("Y")));
+        $day = date("Y-m-d H:i:s",mktime(date("H")+1, 0, 0, date("m"),date("d"), date("Y")));
 
 
         $em = $this->getDoctrine()->getManager();
 
 
         $dql = "SELECT IDENTITY(e.employes) AS serveur,SUM(e.prix) AS balance,e.etat FROM APCaisseBundle:ticket e WHERE e.date BETWEEN '{$yesterday}' AND '{$day}' AND e.etat = 0 GROUP BY serveur " ;
-
         $balance = $em->createQuery($dql)
             ->getScalarResult();
 
@@ -142,13 +141,48 @@ $totalvente = number_format($total, '0', '.', ' ');
 
             $tmp = [];
 
-
             $nom = $em->getRepository('APUsersBundle:employes')->find($b['serveur']);
 
 
+            $u = $nom->getId();
 
 
-                $tmp['serveur'] = $nom->getUsername();
+
+
+            $connection = $em->getConnection();
+            $statement = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='especes' AND ticket.date BETWEEN '$yesterday' AND '$day'");
+            $statement->execute();
+            $cmd = $statement->fetchAll();
+
+            foreach ($cmd as $cmdx) {
+                $tmp['espece'] = $cmdx['paiemode'];
+
+            }
+
+
+
+
+            $statement1 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='carte' AND ticket.date BETWEEN '$yesterday' AND '$day'");
+            $statement1->execute();
+            $cmd1 = $statement1->fetchAll();
+
+            foreach ($cmd1 as $cmdx) {
+                $tmp['carte'] = $cmdx['paiemode'];
+            }
+
+
+            $statement2 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='Orange Money' AND ticket.date BETWEEN '$yesterday' AND '$day'");
+            $statement2->execute();
+            $cmd2 = $statement2->fetchAll();
+
+            foreach ($cmd2 as $cmdx) {
+                $tmp['orange'] = $cmdx['paiemode'];
+            }
+
+
+
+
+            $tmp['serveur'] = $nom->getUsername();
             $tmp['id'] = $nom->getId();
 
                 $tmp['balance'] = number_format($b['balance'], '0', '.', ' ');
@@ -191,15 +225,51 @@ $totalvente = number_format($total, '0', '.', ' ');
         $balance = $em->createQuery($dql)
             ->getScalarResult();
 
-
 $total = 0 ;
 $users = [];
         foreach ($balance as $b){
-
             $tmp = [];
-
-
             $nom = $em->getRepository('APUsersBundle:employes')->find($b['serveur']);
+            $u = $nom->getId();
+
+
+
+
+
+
+            $connection = $em->getConnection();
+            $statement = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='especes' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement->execute();
+            $cmd = $statement->fetchAll();
+
+            foreach ($cmd as $cmdx) {
+                $tmp['espece'] = $cmdx['paiemode'];
+
+            }
+
+
+
+
+            $statement1 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='carte' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement1->execute();
+            $cmd1 = $statement1->fetchAll();
+
+            foreach ($cmd1 as $cmdx) {
+                $tmp['carte'] = $cmdx['paiemode'];
+            }
+
+
+            $statement2 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='Orange Money' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement2->execute();
+            $cmd2 = $statement2->fetchAll();
+
+            foreach ($cmd2 as $cmdx) {
+                $tmp['orange'] = $cmdx['paiemode'];
+            }
+
+
+
+
 
 
             $tmp['serveur'] = $nom->getUsername();
@@ -222,22 +292,29 @@ $totals  =  number_format($total, '0', '.', ' ');
 
 
 $output='';
-        foreach ($users as $u) {
+$totalespece = 0 ;
+$totalorange = 0 ;
+$totalcarte = 0 ;
 
-            $route = $this->generateUrl('ap_caisse_detail_vendeur',array('id'=>$u['id'],'total'=>$u['balance'],'from'=>$start,'to'=>$end) );
+        foreach ($users as $u) {
+            $cartebon = number_format($u['carte'], '0', '.', ' ');
+            $route = $this->generateUrl('ap_caisse_detail_vendeur',array('id'=>$u['id'],'total'=>$u['balance'],'from'=>$start,'to'=>$end,'espece'=>$u['espece'],'orange'=>$u['orange'],'carte'=>$cartebon) );
             if($u['balance']!=0){
-            $output .= '<tr class="even pointer"><td class=" ">'.$u['serveur'].'</td> <td class=" ">'.$u['balance'].'</td> <td class=" ">0</td><td class=" ">0</td><td class=" ">0</td><td class=" ">'.$u['balance'].'
+            $output .= '<tr class="even pointer"><td class=" ">'.$u['serveur'].'</td> <td class=" ">'.number_format($u['espece'], '0', '.', ' ').'</td> <td class=" ">'.number_format($u['orange'], '0', '.', ' ').'</td><td class=" ">'.number_format($u['carte'], '0', '.', ' ').'</td><td class=" ">'.$u['balance'].'
             <td  align="center"><a href="'.$route.'" data-toggle="modal" data-target=".bs-example-modal-sm"  ><i class="fa fa-plus-circle" style="font-size:14px;"></i> </a>
 
 
 </td></tr>';
+$totalespece= $totalespece + $u['espece'];
+$totalorange= $totalorange + $u['orange'];
+$totalcarte= $totalcarte + $u['carte'];
 
             }
         }
 
-        $output .='<tr class="headings"><td> <strong>GRAND TOTAL</strong></td> <td id="total">'.$totals.' Fcfa</td>
-                                            <td class=" ">0</td><td class=" ">0</td>
-                                            <td class=" ">0</td><td colspan="2" >'.$totals.' Fcfa</td></tr>
+        $output .='<tr class="headings" style="background-color: rgba(173, 230, 173, 0.23);"><td> <strong>GRAND TOTAL</strong></td> <td>'.number_format($totalespece, '0', '.', ' ').' Fcfa</td>
+                                            <td class=" ">'.number_format($totalorange, '0', '.', ' ').' Fcfa</td>
+                                            <td class=" ">'.number_format($totalcarte, '0', '.', ' ').' Fcfa</td><td colspan="2" id="total" >'.$totals.' Fcfa</td></tr>
                                             
                                             
                                             ';
@@ -264,11 +341,9 @@ $output='';
         $em = $this->getDoctrine()->getManager();
 
 
-        $dql = "SELECT IDENTITY(e.employes) AS serveur,SUM(e.prix) AS balance FROM APCaisseBundle:ticket e WHERE e.date BETWEEN '{$start}' AND '{$end}'  GROUP BY serveur " ;
-
+        $dql = "SELECT IDENTITY(e.employes) AS serveur,SUM(e.prix) AS balance,e.etat FROM APCaisseBundle:ticket e WHERE e.date BETWEEN '{$start}' AND '{$end}' AND e.etat = 0 GROUP BY serveur " ;
         $balance = $em->createQuery($dql)
             ->getScalarResult();
-
 
         $total=0;
         $users = [];
@@ -276,24 +351,63 @@ $output='';
 
             $tmp = [];
 
-
             $nom = $em->getRepository('APUsersBundle:employes')->find($b['serveur']);
 
 
+            $u = $nom->getId();
+
+
+
+
+            $connection = $em->getConnection();
+            $statement = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='especes' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement->execute();
+            $cmd = $statement->fetchAll();
+
+            foreach ($cmd as $cmdx) {
+                $tmp['espece'] = $cmdx['paiemode'];
+
+            }
+
+
+
+
+            $statement1 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='carte' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement1->execute();
+            $cmd1 = $statement1->fetchAll();
+
+            foreach ($cmd1 as $cmdx) {
+                $tmp['carte'] = $cmdx['paiemode'];
+            }
+
+
+            $statement2 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='Orange Money' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement2->execute();
+            $cmd2 = $statement2->fetchAll();
+
+            foreach ($cmd2 as $cmdx) {
+                $tmp['orange'] = $cmdx['paiemode'];
+            }
+
+
+
+
             $tmp['serveur'] = $nom->getUsername();
+            $tmp['id'] = $nom->getId();
 
             $tmp['balance'] = number_format($b['balance'], '0', '.', ' ');
 
 
             $users[] = $tmp;
 
-            $total=$total+$b['balance'];
+            $total = $total + $b['balance'];
+
 
 
         }
 
-        $totals  =  number_format($total, '0', '.', ' ');
 
+        $totals  =  number_format($total, '0', '.', ' ');
 
 
 
@@ -417,6 +531,7 @@ $output='';
             ->getScalarResult();
 
         $produit = [];
+        $total = 0;
         foreach ($resultat as $b){
 
             $tmp = [];
@@ -430,9 +545,11 @@ $output='';
 
             $tmp['prix'] = $nom->getPrixvente();
 
+            $tot = $b['qte']*$nom->getPrixvente();
 
             $produit[] = $tmp;
 
+            $total = $total + $tot;
 
         }
 
@@ -441,7 +558,7 @@ $output='';
 
 
 
-        return $this->render('APDossiersBundle:Default:produit.html.twig',array('produit'=>$produit,'from'=>$from,'to'=>$to));
+        return $this->render('APDossiersBundle:Default:produit.html.twig',array('produit'=>$produit,'total'=>$total,'from'=>$from,'to'=>$to));
 
 
 
@@ -462,7 +579,7 @@ $output='';
 
         $resultat = $em->createQuery($dql)
             ->getScalarResult();
-
+        $total = 0;
         $produit = [];
         foreach ($resultat as $b){
 
@@ -480,7 +597,10 @@ $output='';
 
             $produit[] = $tmp;
 
+            $tot = $b['qte']*$nom->getPrixvente();
 
+
+            $total = $total + $tot;
         }
 
 
@@ -502,13 +622,13 @@ $output='';
 
                                         </tr>
                                         </thead>
-
+<span id="total" style="opacity:0">'.number_format($total, '0', '.', ' ').'</span>
                                         <tbody >';
         foreach ($produit as $prod){
 
 
 
-            $output .= '<tr class="even pointer"><td>'.$prod['produit'].'</td> <td >'.$prod['quantite'].'</td><td>'.$prod['prix'].' </td><td>'.$prod['quantite']*$prod['prix'].'</td>  </tr>';
+            $output .= '<tr class="even pointer"><td>'.$prod['produit'].'</td> <td >'.$prod['quantite'].'</td><td>'.$prod['prix'].' </td><td>'.number_format($prod['quantite']*$prod['prix'], '0', '.', ' ').'</td>  </tr>';
 
 
         }
@@ -548,6 +668,7 @@ $output='';
             ->getScalarResult();
 
         $produit = [];
+        $total = 0 ;
         foreach ($resultat as $b){
 
             $tmp = [];
@@ -564,6 +685,11 @@ $output='';
 
             $produit[] = $tmp;
 
+            $tot = $b['qte']*$nom->getPrixvente();
+
+
+            $total = $total + $tot;
+
 
         }
 
@@ -577,7 +703,7 @@ $output='';
 
 
         //on stocke la vue à convertir en PDF, en n'oubliant pas les paramètres twig si la vue comporte des données dynamiques
-        $html = $this->renderView('APDossiersBundle:Default:printproduit.html.twig',array('produit'=>$produit,'from'=>$start,'to'=>$end));
+        $html = $this->renderView('APDossiersBundle:Default:printproduit.html.twig',array('produit'=>$produit,'from'=>$start,'to'=>$end,'total'=>$total));
 
         //on instancie la classe Html2Pdf_Html2Pdf en lui passant en paramètre
         //le sens de la page "portrait" => p ou "paysage" => l
@@ -622,6 +748,7 @@ $output='';
             ->getScalarResult();
 
         $produit = [];
+        $total = 0 ;
         foreach ($resultat as $b){
 
             $tmp = [];
@@ -639,7 +766,10 @@ $output='';
 
 
             $produit[] = $tmp;
+            $tot = $b['qte']*$nom->getPrixvente();
 
+
+            $total = $total + $tot;
 
         }
 
@@ -679,7 +809,7 @@ $output='';
 
 
 
-        return $this->render('APDossiersBundle:Default:categorie.html.twig',array('produit'=>$produit,'from'=>$from,'to'=>$to,'cat'=>$catego));
+        return $this->render('APDossiersBundle:Default:categorie.html.twig',array('produit'=>$produit,'from'=>$from,'to'=>$to,'cat'=>$catego,'total'=>$total));
 
 
 
@@ -698,7 +828,7 @@ $output='';
 
         $resultat = $em->createQuery($dql)
             ->getScalarResult();
-
+        $total = 0;
         $produit = [];
         foreach ($resultat as $b) {
 
@@ -717,7 +847,10 @@ $output='';
 
             $produit[] = $tmp;
 
+            $tot = $b['qte']*$nom->getPrixvente();
 
+
+            $total = $total + $tot;
         }
 
 
@@ -754,8 +887,9 @@ $output='';
         foreach ($catego as $categorie) {
 
 
-            $output .= '<h5 style="background-color: #eae9e9;
-    padding: 5px 10px;">'.$categorie['nom'].'</h5>';
+            $output .= ' 
+<h4 style="background-color: #eae9e9;
+    padding: 5px 10px;">'.$categorie['nom'].'</h4>';
             $output .= '  <table class="table table-striped jambo_table bulk_action" >
                                             <thead>
                                             <tr class="headings">
@@ -789,14 +923,13 @@ $output='';
 
             }
 
-            $output .='<tr class="headings">
-                                            <th class="column-title" colspan="3">TOTAL VENTE  </th>
+            $output .='<tr class="headings" style="background-color: rgba(173, 230, 173, 0.13);">
+                                            <th class="column-title" colspan="3">TOTAL VENTE '.$categorie['nom'].' </th>
 
-                                            <th class="column-title">' . number_format($toto, '0', '.', ' ') .' FCFA</th>
-
+                                            <th class="column-title">' . number_format($toto, '0', '.', ' ') .' Fcfa</th>
 
                                         </tr></tbody>
-                                        </table>';
+                                        </table> <span id="total" style="opacity:0 ">'.number_format($total, '0', '.', ' ').'</span>';
         }
 
 
@@ -822,6 +955,7 @@ $output='';
             ->getScalarResult();
 
         $produit = [];
+        $total = 0 ;
         foreach ($resultat as $b){
 
             $tmp = [];
@@ -840,7 +974,10 @@ $output='';
 
             $produit[] = $tmp;
 
+            $tot = $b['qte']*$nom->getPrixvente();
 
+
+            $total = $total + $tot;
         }
 
 
@@ -885,7 +1022,7 @@ $output='';
 
 
         //on stocke la vue à convertir en PDF, en n'oubliant pas les paramètres twig si la vue comporte des données dynamiques
-        $html = $this->renderView('APDossiersBundle:Default:printcategorie.html.twig',array('produit'=>$produit,'from'=>$start,'to'=>$end,'cat'=>$catego));
+        $html = $this->renderView('APDossiersBundle:Default:printcategorie.html.twig',array('produit'=>$produit,'from'=>$start,'to'=>$end,'cat'=>$catego,'total'=>$total));
 
         //on instancie la classe Html2Pdf_Html2Pdf en lui passant en paramètre
         //le sens de la page "portrait" => p ou "paysage" => l

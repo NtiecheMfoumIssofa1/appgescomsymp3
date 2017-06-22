@@ -9,7 +9,7 @@
             </button>
             <h4 class="modal-title" id="myModalLabel2">Ticket #{{ ticketid.id }}</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="padding:0">
 
 
             <div style="    text-align: center;
@@ -24,7 +24,7 @@
 
 
 
-                    <div style=" padding:0 5px;"> <span style="display: inline-block;text-align: center;width:5%">{{ liste.quantite }}</span> <span style="display: inline-block;text-align: left;width:76%">{{ liste.produit.designation }}</span> <span style="display: inline-block;text-align: center;width:15%"> {% set ptotal = liste.quantite*liste.produit.prixvente %}{{ ptotal|number_format('0', '.', ' ')  }}</span>  </div>
+                    <div style=" padding:0 5px;"> <span style="display: inline-block;text-align: center;width:5%">{{ liste.quantite }}</span> <span style="display: inline-block;text-align: left;width:72%">{{ liste.produit.designation }}</span> <span style="display: inline-block;text-align: center;width:19%"> {% set ptotal = liste.quantite*liste.produit.prixvente %}{{ ptotal|number_format('0', '.', ' ')  }}</span>  </div>
 
                     {% set total = total + liste.quantite*liste.produit.prixvente %}
 

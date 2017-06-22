@@ -65,7 +65,7 @@
 
 
 
-                                            <li ><a href="#">Détails des ventes</a></li>
+                                            <li ><a href="{{ path('ap_dossiers_homepage') }}">Détails des ventes</a></li>
                                     <li class=""><a href="{{ path('ap_dossiers_vendeur') }}"> Ventes par serveur</a></li>
                                     <li class="current-page"><a href="{{ path('ap_dossiers_produit') }}">Ventes par produits </a></li>
                                     <li><a href="{{ path('ap_dossiers_categorie') }}">Ventes par catégories</a></li>
@@ -103,14 +103,14 @@
                         <h3>Ventes par produit</h3>
                     </div>
 
-                  {#  <div class="title_right">
+                   <div class="title_right">
                         <h5 style="    width: auto;
     background-color: #41AF4B;
     border: 1px dashed white;
     padding: 10px;
-    color: white;">  TOTAL VENTE: <span id="tt"> --  </span> Fcfa </h5>
+    color: white;">  TOTAL VENTE: <span id="tt"> {{ total|number_format('0', '.', ' ') }} </span> Fcfa </h5>
 
-                    </div>#}
+                    </div>
 
                 </div>
 
@@ -365,6 +365,9 @@
 
                     $('#matable').html(data);
 
+                    var total = $('#total').text();
+
+                    $('#tt').html(total);
 
 
 

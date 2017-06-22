@@ -83,7 +83,7 @@
 
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 nopad " >
-                                    <div class="bg-blue acc blockmenu h98  menublok">
+                                    <div class="bg-blue acc blockmenu h98  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %}>
 
 
 
@@ -99,7 +99,7 @@
 
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 nopad " >
-                                    <a href="{{ path('product_index') }}">     <div class="bg-red acc blockmenu h98  menublok  menublok" >
+                                    <a href="{% if is_granted('ROLE_PRODUIT') %} {{ path('product_index') }} {% else %}# {% endif %} ">     <div class="bg-red acc blockmenu h98  menublok  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %} >
 
 
                                             <i class="fa fa-cubes"> </i>
@@ -111,7 +111,7 @@
                                 </div>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
-                                    <div class="bg-blue-sky acc blockmenu h98 menublok" >
+                                    <div class="bg-blue-sky acc blockmenu h98 menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %}>
 
 
                                         <i class="fa fa-clock-o"> </i>
@@ -122,8 +122,8 @@
                                 </div>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
-                                    <a href="{{ path('ap_stock_homepage') }}" >
-                                    <div class="bg-green acc blockmenu h98  menublok " >
+                                    <a href="{% if is_granted('ROLE_STOCK') %} {{ path('ap_stock_homepage') }} {% else %}# {% endif %}" >
+                                    <div class="bg-green acc blockmenu h98  menublok " {% if not is_granted('ROLE_STOCK') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %} >
 
 
 
@@ -173,9 +173,9 @@
 
 
                                 <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
-                                    <a href="{{ path('ap_dossiers_homepage') }}" >
+                                    <a href="{% if is_granted('ROLE_PRODUIT') %} {{ path('ap_dossiers_homepage') }} {% else %}# {% endif %}" >
 
-                                    <div class="bg-purple acc blockmenu h98  menublok" >
+                                    <div class="bg-purple acc blockmenu h98  menublok" {% if not is_granted('ROLE_DOSSIER') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %} >
 
                                         <i class="fa fa-folder"> </i>
 
@@ -187,7 +187,7 @@
 
 
                                 <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
-                                    <div class="bg-purple-sky acc blockmenu h98  menublok">
+                                    <div class="bg-purple-sky acc blockmenu h98  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %}>
 
                                         <i class="fa fa-calendar-check-o"> </i>
 
@@ -203,7 +203,7 @@
 
 
                                 <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
-                                    <div class="bg-purple acc blockmenu h98  menublok" >
+                                    <div class="bg-purple acc blockmenu h98  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %}>
 
                                         <i class="fa fa-envelope-o"> </i>
 
@@ -217,7 +217,7 @@
 
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 nopad " >
-                                    <div class="bg-blue acc blockmenu h98  menublok">
+                                    <div class="bg-blue acc blockmenu h98  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %}>
 
 
 
@@ -248,7 +248,7 @@
                             <div class="col-md-3 col-sm-3">
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
-                                    <div class="bg-blue-sky acc blockmenu h98  menublok" >
+                                    <div class="bg-blue-sky acc blockmenu h98  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %} >
 
 
                                         <i class="fa fa-wrench"> </i>
@@ -259,7 +259,7 @@
                                 </div>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 nopad" >
-                                    <div class="bg-green acc blockmenu h98  menublok" >
+                                    <div class="bg-green acc blockmenu h98  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %} >
 
 
 
@@ -276,7 +276,7 @@
 
 
                                 <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
-                                    <div class="bg-orange acc blockmenu h98  menublok" >
+                                    <div class="bg-orange acc blockmenu h98  menublok" {% if not is_granted('ROLE_PRODUIT') %} style=" background-color: rgba(156, 156, 148, 0.98) !important;color: rgba(128, 128, 128, 0.4);" {% endif %} >
 
                                         <i class="fa fa-cogs"> </i>
 

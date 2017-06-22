@@ -102,14 +102,14 @@
                         <h3>Ventes par catégorie</h3>
                     </div>
 
-                  {#  <div class="title_right">
+                    <div class="title_right">
                         <h5 style="    width: auto;
     background-color: #41AF4B;
     border: 1px dashed white;
     padding: 10px;
-    color: white;">  TOTAL VENTE: <span id="tt"> --  </span> Fcfa </h5>
+    color: white;">  TOTAL VENTE: <span id="tt"> {{ total|number_format('0', '.', ' ') }} </span> Fcfa </h5>
 
-                    </div>#}
+                    </div>
 
                 </div>
 
@@ -145,7 +145,7 @@
 
                                 <ul class="nav navbar-right panel_toolbox" id="impression">
 
-                                    <a href="{{ path('ap_dossiers_print_produit', { 'start': from,'end':to }) }}" target="_blank" id="print" class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
+                                    <a href="{{ path('ap_dossiers_print_categorie', { 'start': from,'end':to }) }}" target="_blank" id="print" class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
 
 
                                 </ul>
@@ -216,10 +216,10 @@
 
 
                                         {% endfor %}
-                                        <tr class="headings">
-                                            <th class="column-title" colspan="3">TOTAL VENTE  </th>
+                                        <tr class="headings" style="background-color: rgba(173, 230, 173, 0.13);">
+                                            <th class="column-title" colspan="3">TOTAL VENTE {{ categorie.nom }}  </th>
 
-                                            <th class="column-title">{{ toto }} </th>
+                                            <th class="column-title">{{ toto|number_format('0', '.', ' ') }} Fcfa </th>
 
 
                                         </tr>
@@ -378,6 +378,9 @@
                     $('#matable').html(data);
 
 
+                    var total = $('#total').text();
+
+                    $('#tt').html(total);
 
 
 

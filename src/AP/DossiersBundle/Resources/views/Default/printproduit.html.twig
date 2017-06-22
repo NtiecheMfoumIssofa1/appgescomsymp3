@@ -52,10 +52,10 @@
 
 <br>
                 <div style="text-align: center;width: 100%;position: relative;">
-                                <table class="table  jambo_table " style="margin-left: 180px;"  >
+                                <table class="table  jambo_table " style="margin-left: 80px;width: 90%"  >
                                         <thead>
                                         <tr class="headings">
-                                            <th class="column-title">article </th>
+                                            <th class="column-title"  style="width: 50%;text-align: left;" >article </th>
 
                                             <th class="column-title">qte </th>
                                             <th class="column-title">prix unit </th>
@@ -72,7 +72,7 @@
 
                                             <tr class="even pointer">
 
-                                                <td class=" ">{{ dets.produit }}</td>
+                                                <td style="width: 50%;text-align: left;"  >{{ dets.produit }}</td>
 
                                                 <td class=" ">{{ dets.quantite }}</td>
                                                 <td class=" ">{{ dets.prix|number_format('0', '.', ' ') }}</td>
@@ -85,7 +85,12 @@
 
                                         {% endfor %}
 
+                                        <tr class="headings" style="background-color:#eee;">
 
+                                            <td ><strong> GRAND TOTAL </strong></td>
+                                           <td colspan="3" > {{ total|number_format('0', '.', ' ') }} Fcfa</td>
+
+                                        </tr>
 
                                         </tbody>
                                     </table>
