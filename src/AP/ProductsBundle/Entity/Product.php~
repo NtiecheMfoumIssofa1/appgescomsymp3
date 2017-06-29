@@ -2,6 +2,7 @@
 
 namespace AP\ProductsBundle\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,6 +20,12 @@ class Product
      */
     private $category;
 
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="AP\ProductsBundle\Entity\fournisseur")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $fournisseur;
 
     /**
      * @ORM\OneToOne(targetEntity="AP\ProductsBundle\Entity\thumbnail", cascade={"persist"})
@@ -47,6 +54,9 @@ class Product
      * @ORM\Column(name="designation", type="string", length=100)
      */
     private $designation;
+	
+	
+	
 
     /**
      * @var int
@@ -157,7 +167,9 @@ class Product
 
     public function setStock($qte)
     {
-        $this->qtestock = $this->getQtestock() - $qte;
+
+
+            $this->qtestock = $this->getQtestock() - $qte;
 
         return $this;
     }
@@ -552,4 +564,30 @@ class Product
     {
         return $this->children;
     }
+
+    /**
+     * Add child
+     *
+     * @param \AP\ProductsBundle\Entity\Product $child
+     *
+     * @return Product
+     */
+    public function addChild(\AP\ProductsBundle\Entity\Product $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param \AP\ProductsBundle\Entity\Product $child
+     */
+    public function removeChild(\AP\ProductsBundle\Entity\Product $child)
+    {
+        $this->children->removeElement($child);
+    }
+
+    
 }

@@ -1,0 +1,246 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Produits </title>
+
+
+
+
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view" style="width:100%;margin-top:-30px;">
+
+                <div class="clearfix"></div>
+
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                        <ul class="nav side-menu">
+
+                            <li class="active"><a><i class="fa fa-edit"></i> CATEGORIES </a>
+                                <ul class="nav child_menu">
+
+                                   {% for category in categories %}
+
+                                        <li><a href="">{{ category.nom }}</a></li>
+
+                                    {% endfor %}
+
+
+
+
+
+
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div style="margin-left:230px;">  {{ include("APUsersBundle:Default:topnav.html.twig") }} </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Liste des Produits</h3>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="clearfix"></div>
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <button type="button" class="btn btn-success btn-sm"> <a href="{{ path('product_new') }}" class="cw">Nouveau produit</a></button>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <h5><a href="{{ path('category_index') }}"> <i class="fa fa-cubes"></i> Gestion des catégories </a></h5>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action" id="product">
+                                        <thead>
+                                        <tr class="headings">
+
+
+                                            <th class="column-title">code d'article </th>
+                                            <th class="column-title">Désignation </th>
+                                            <th class="column-title">Prix de vente </th>
+                                            <th class="column-title">Prix d'achat </th>
+                                            <th class="column-title">Catégorie </th>
+                                            <th class="column-title">Gérer en stock </th>
+
+                                            <th class="column-title">Qte en stock </th>
+                                            <th class="column-title">Qte min </th>
+                                            <th class="column-title néo-link last"><span class="nobr">Action</span>
+
+
+
+
+
+
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+
+
+
+
+
+                                        {% for product in products %}
+                                            <tr class="even pointer">
+                                                <td>{{ product.code }}</td>
+                                                <td>{{ product.designation }}</td>
+                                                <td>{{ product.prixvente }}</td>
+                                                <td>{{ product.prixachat }}</td>
+                                                <td>{{ product.category }}</td>
+                                                <td>{% if product.gerstock %}Oui{% else %}Non{% endif %}</td>
+
+                                                <td> {% if product.divvendu is not null and product.divvendu != 0 %} {{ product.qtestock - 1  }} + {% if product.qtepart/2 == product.divvendu %} 1/2btlle {% else %} {% set nbreconso = product.qtepart-product.divvendu  %} {{ nbreconso }} conso {% endif %}   {% else %} {{ product.qtestock }} {% endif %}  </td>
+                                                <td>{{ product.qtemin }}</td>
+
+
+
+                                                <td class=" last">
+                                                    <a href="{{ path('product_edit', { 'id': product.id }) }}" title="editer"><i class="fa fa-edit"></i> </a> &nbsp;&nbsp;
+
+
+
+                                                    <a href="#" title="supprimer"><i class="fa fa-trash"></i> </a>&nbsp;&nbsp;
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+
+
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<!-- gauge.js -->
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+<script src="{{ asset('vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+
+</body>
+</html>
+
+
+
+

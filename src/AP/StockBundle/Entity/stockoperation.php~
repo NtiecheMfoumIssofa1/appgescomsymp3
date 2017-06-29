@@ -21,6 +21,13 @@ class stockoperation
      */
     private $id;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AP\UsersBundle\Entity\employes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $employes;
+
     /**
      * @var string
      *
@@ -255,5 +262,28 @@ class stockoperation
     {
         return $this->type;
     }
-}
 
+    /**
+     * Set prod
+     *
+     * @param string $prod
+     *
+     * @return stockoperation
+     */
+    public function setProd($prod)
+    {
+        $this->prod = $prod;
+
+        return $this;
+    }
+
+    /**
+     * Get prod
+     *
+     * @return string
+     */
+    public function getProd()
+    {
+        return $this->prod;
+    }
+}

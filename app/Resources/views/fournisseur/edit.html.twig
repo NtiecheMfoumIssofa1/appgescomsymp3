@@ -1,0 +1,202 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> Fournisseur </title>
+
+
+
+
+    <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('vendors/nprogress/nprogress.css') }}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{ asset('vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('build/css/custom.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view" style="width:100%;margin-top:-30px;">
+
+                <div class="clearfix"></div>
+
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section">
+                     	<ul class="nav side-menu">
+					<li class="active"><a><i class="fa fa-folder"></i> PRODUITS</a>
+                        <ul class="nav side-menu">
+
+                          <li ><a href="{{ path('product_index') }}">Produits</a></li>
+                                    <li  ><a href="{{ path('category_index') }}"> Catégories </a></li>
+                                    <li class="current-page" ><a href="{{ path('fournisseur_index') }}"> Fournisseurs</a></li> 
+
+                        </ul>
+					</li>	
+						</ul>
+                    </div>
+
+                </div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div style="margin-left:230px;">  {{ include("APUsersBundle:Default:topnav.html.twig") }} </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Editer Fournisseur</h3>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="clearfix"></div>
+
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <ul class="nav navbar-right panel_toolbox">
+                                 </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content">
+
+
+
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+
+
+                                    {{ form_start(edit_form) }}
+
+
+
+
+
+                                    <label for="email">{{ form_label(edit_form.nom, "nom") }}</label>
+                                    {{ form_widget(edit_form.nom, {'attr': {'class': 'form-control'}}) }}
+
+<br>
+
+                          <label for="email">{{ form_label(edit_form.adresse, "adresse") }}</label>
+                                    {{ form_widget(edit_form.adresse, {'attr': {'class': 'form-control'}}) }}
+
+<br>
+     <br>
+                                    <center>
+
+                                        <input type="submit" class="btn btn-success" value="Valider" />
+
+                                    </center>
+                                    {{ form_rest(edit_form) }}
+
+                                    {{ form_end(edit_form) }}
+
+
+
+
+
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
+</div>
+
+
+
+
+<!-- jQuery -->
+<script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('vendors/fastclick/lib/fastclick.js') }}"></script>
+<!-- NProgress -->
+<script src="{{ asset('vendors/nprogress/nprogress.js') }}"></script>
+<!-- Chart.js -->
+<!-- gauge.js -->
+<!-- bootstrap-progressbar -->
+<script src="{{ asset('vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+<!-- iCheck -->
+<!-- Skycons -->
+
+
+<!-- Custom Theme Scripts -->
+<script src="{{ asset('build/js/custom.js') }}"></script>
+
+
+</body>
+</html>
+

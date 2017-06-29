@@ -56,16 +56,16 @@
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <ul class="nav side-menu">
+                            <ul class="nav side-menu">
 
-                            <li class="active"><a><i class="fa fa-edit"></i> CATEGORIES <span class="fa fa-chevron-down"></span></a>
+                            <li class="active"><a><i class="fa fa-edit"></i>Produits</a>
                                 <ul class="nav child_menu">
-{#
-                                    {% for category in categories %}
 
-                                        <li><a href="">{{ category.nom }}</a></li>
+                                    <li ><a href="{{ path('product_index') }}">Produits</a></li>
+                                    <li class="current-page"><a href="{{ path('category_index') }}"> Catégories </a></li>
+                                    <li><a href="{{ path('fournisseur_index') }}"> Fournisseurs</a></li>
+                              
 
-                                    {% endfor %}#}
 
 
 
@@ -97,7 +97,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Liste des Categories</h3>
+                        <h3>Nouvelle Categorie</h3>
                     </div>
 
                 </div>

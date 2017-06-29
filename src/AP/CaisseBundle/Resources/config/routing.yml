@@ -25,13 +25,27 @@ ap_caisse_detail_ticket:
     defaults: { _controller: APCaisseBundle:Default:detail }
 
 ap_caisse_detail_vendeur:
-    path:     /detail/vendeur/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}
+    path:     /detail/vendeur/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}/{credit}
     defaults: { _controller: APCaisseBundle:Default:detailvendeur }
 
 ap_caisse_detail_vendeur_print:
-    path:     /detail/print/vendeur/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}
+    path:     /detail/print/vendeur/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}/{credit}
     defaults: { _controller: APCaisseBundle:Default:detailvendeurprint }
 
 ap_caisse_cloture:
-    path:     /cloture/{id}/{from}/{to}
+    path:     /cloture/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}/{credit}
     defaults: { _controller: APCaisseBundle:Default:cloture }
+
+
+ap_caisse_cloture_vendeur_print:
+    path:     /detail/print/cloture/{id}/{total}/{from}/{to}/{espece}/{orange}/{carte}/{credit}
+    defaults: { _controller: APCaisseBundle:Default:detailclotureprint }
+    
+    
+ap_caisse_annultation_produit:
+    path:     /caisse/annulation/{id}/{table}/{user}
+    defaults: { _controller: APCaisseBundle:Default:annulation }
+
+ap_caisse_annulation_produit_print:
+    path:     /caisse/annulation/print/{id}/{table}/{user}
+    defaults: { _controller: APCaisseBundle:Default:annulationprint }

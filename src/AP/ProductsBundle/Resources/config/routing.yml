@@ -5,6 +5,10 @@ ap_products_product:
 ap_products_category:
     resource: "@APProductsBundle/Resources/config/routing/category.yml"
     prefix:   /category
+    
+ap_products_fournisseur:
+    resource: "@APProductsBundle/Resources/config/routing/fournisseur.yml"
+    prefix:   /fournisseur
 
 ap_products_homepage:
     path:     /

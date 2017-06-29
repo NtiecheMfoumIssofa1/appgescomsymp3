@@ -20,6 +20,12 @@ class Product
      */
     private $category;
 
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="AP\ProductsBundle\Entity\fournisseur")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $fournisseur;
 
     /**
      * @ORM\OneToOne(targetEntity="AP\ProductsBundle\Entity\thumbnail", cascade={"persist"})
@@ -48,6 +54,9 @@ class Product
      * @ORM\Column(name="designation", type="string", length=100)
      */
     private $designation;
+	
+	
+	
 
     /**
      * @var int
@@ -578,5 +587,31 @@ class Product
     public function removeChild(\AP\ProductsBundle\Entity\Product $child)
     {
         $this->children->removeElement($child);
+    }
+
+    
+
+    /**
+     * Set fournisseur
+     *
+     * @param \AP\ProductsBundle\Entity\fournisseur $fournisseur
+     *
+     * @return Product
+     */
+    public function setFournisseur(\AP\ProductsBundle\Entity\fournisseur $fournisseur = null)
+    {
+        $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * Get fournisseur
+     *
+     * @return \AP\ProductsBundle\Entity\fournisseur
+     */
+    public function getFournisseur()
+    {
+        return $this->fournisseur;
     }
 }

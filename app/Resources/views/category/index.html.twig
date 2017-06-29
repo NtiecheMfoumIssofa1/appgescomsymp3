@@ -54,14 +54,14 @@
                     <div class="menu_section">
                         <ul class="nav side-menu">
 
-                            <li class="active"><a><i class="fa fa-edit"></i> CATEGORIES <span class="fa fa-chevron-down"></span></a>
+                            <li class="active"><a><i class="fa fa-edit"></i>Produits</a>
                                 <ul class="nav child_menu">
 
-                                    {% for category in categories %}
+                                    <li ><a href="{{ path('product_index') }}">Produits</a></li>
+                                    <li class="current-page"><a href="{{ path('category_index') }}"> Catégories </a></li>
+                                    <li><a href="{{ path('fournisseur_index') }}"> Fournisseurs</a></li>
+                              
 
-                                        <li><a href="">{{ category.nom }}</a></li>
-
-                                    {% endfor %}
 
 
 

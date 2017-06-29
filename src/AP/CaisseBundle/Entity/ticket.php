@@ -23,7 +23,7 @@ class ticket
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AP\CaisseBundle\Entity\boncommande",mappedBy="ticket")
+     * @ORM\OneToMany(targetEntity="AP\CaisseBundle\Entity\boncommande",cascade={"remove"},mappedBy="ticket")
      * @ORM\JoinColumn(nullable=false)
      */
 

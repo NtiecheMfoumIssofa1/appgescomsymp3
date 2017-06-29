@@ -72,7 +72,7 @@
                                     <li><a href="{{ path('ap_dossiers_categorie') }}">Ventes par catégories</a></li>
 
                                     <li><a href="{{ path('ap_dossiers_ticket') }}">tickets de caisse</a></li>
-                                    <li><a href=""> bons de fabrication</a></li>
+                                     <!--    <li><a href=""> bons de fabrication </a></li> -->
 
 
 
@@ -170,6 +170,7 @@
                                             <th class="column-title"> Espèces </th>
                                             <th class="column-title">Orange Money </th>
                                             <th class="column-title">Carte </th>
+                                            <th class="column-title">Credit </th>
                                             <th class="column-title">Total </th>
                                             <th class="column-title"> </th>
 
@@ -183,6 +184,7 @@
 {% set totalespece = 0 %}
 {% set totalorange = 0 %}
 {% set totalcarte = 0 %}
+{% set totalcredit = 0 %}
                                         {% for ven in vendeur %}
 
                                             {% if ven.balance != 0 %}
@@ -192,12 +194,20 @@
                                             <td class=" ">{{ ven.espece|number_format('0', '.', ' ') }} </td>
                                             <td class=" ">{{ ven.orange|number_format('0', '.', ' ') }}</td>
                                             <td class=" ">{{ ven.carte|number_format('0', '.', ' ') }} </td>
+                                            <td class=" ">{{ ven.credit|number_format('0', '.', ' ') }} </td>
+
                                             <td class=" ">{{ ven.balance }} </td>
-                                            <td  align="center"><a href="{{path('ap_caisse_detail_vendeur', {  'id':ven.id,'total':ven.balance,'from':from,'to':to,'espece':ven.espece,'orange':ven.orange,'carte':ven.carte }) }}" data-toggle="modal" data-target=".bs-example-modal-sm"  ><i class="fa fa-plus-circle" style="font-size:14px;"></i> </a>
+											{% set carte = ven.carte|number_format('0', '.', ' ') %}
+											{% set orange = ven.orange|number_format('0', '.', ' ') %}
+											{% set espece = ven.espece|number_format('0', '.', ' ') %}
+                                            {% set credit = ven.credit|number_format('0', '.', ' ') %}
+
+                                            <td  align="center"><a href="{{path('ap_caisse_detail_vendeur', {  'id':ven.id,'total':ven.balance,'from':from,'to':to,'espece':espece,'orange':orange,'carte':carte,'credit':credit }) }}" data-toggle="modal" data-target=".bs-example-modal-sm"  ><i class="fa fa-plus-circle" style="font-size:14px;"></i> </a>
                                             </td>
                                             {% set totalespece = totalespece + ven.espece  %}
                                             {% set totalorange = totalorange + ven.orange  %}
                                             {% set totalcarte = totalcarte + ven.carte  %}
+                                            {% set totalcredit = totalcredit + ven.credit  %}
                                         </tr>
                                         {% endif %}
 
@@ -210,6 +220,8 @@
                                             <td > {{ totalespece|number_format('0', '.', ' ') }} FCFA </td>
                                             <td class=" ">{{ totalorange|number_format('0', '.', ' ') }} FCFA </td>
                                             <td class=" ">{{ totalcarte|number_format('0', '.', ' ') }} FCFA</td>
+                                            <td class=" ">{{ totalcredit|number_format('0', '.', ' ') }} FCFA</td>
+
                                             <td colspan="2"> {{ total }} FCFA</td>
 
                                         </tr>

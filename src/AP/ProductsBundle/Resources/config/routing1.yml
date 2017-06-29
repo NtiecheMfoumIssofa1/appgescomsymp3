@@ -1,0 +1,11 @@
+ap_products_product:
+    resource: "@APProductsBundle/Resources/config/routing/product.yml"
+    prefix:   /product
+
+ap_products_category:
+    resource: "@APProductsBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+ap_products_homepage:
+    path:     /
+    defaults: { _controller: APProductsBundle:Default:index }

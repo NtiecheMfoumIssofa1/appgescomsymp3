@@ -55,9 +55,11 @@
                 </tbody>
             </table>
             <div style="padding:5px;">
-<h6> Total espece : <span style="float: right"> {{ espece|number_format('0', '.', ' ') }} Fcfa </span></h6>
-                <h6> Total orange money : <span style="float: right"> {{ orange|number_format('0', '.', ' ') }} Fcfa</span></h6>
-                <h6> Total carte : <span style="float: right"> {{ carte|number_format('0', '.', ' ') }} Fcfa</span></h6>
+<h6> Total espece : <span style="float: right"> {{ espece }} Fcfa </span></h6>
+                <h6> Total orange money : <span style="float: right"> {{ orange }} Fcfa</span></h6>
+                <h6> Total carte : <span style="float: right"> {{ carte }} Fcfa</span></h6>
+                <h6> Total credit : <span style="float: right"> {{ credit }} Fcfa</span></h6>
+
                 <h6> TOTAL : <span style="float: right">{{ total }}  Fcfa </span></h6>
             </div>
 
@@ -65,7 +67,7 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 
-            <a href="{{path('ap_caisse_detail_vendeur_print', {  'id':user.id,'total':total,'from':from,'to':to,'espece':espece,'orange':orange,'carte':carte }) }}" target=""  class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
+            <a href="{{path('ap_caisse_detail_vendeur_print', {  'id':user.id,'total':total,'from':from,'to':to,'espece':espece,'orange':orange,'carte':carte,'credit':credit }) }}" target=""  class="btn btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Imprimer </a>
 
         </div>
 

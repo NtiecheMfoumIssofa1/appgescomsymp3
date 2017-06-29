@@ -95,7 +95,12 @@
                     <div class="dashboard_graph"  style="padding: 20px 40px;">
 
 
-                            <ul style="float:left;list-style: none;border: none;padding-left: 11px;"  class="nav-tabs" >
+                            <ul style="float: left;
+    list-style: none;
+    border-bottom: 1px solid white;
+    padding-left: 0px;
+    padding-bottom: 4px;
+    margin-left: 10px;    width: 70.5%;"  class="nav-tabs" >
 
                             {% for cat in categories %}
                                             <li class="lieu {%   if loop.first %} active {% endif %}"  style="
@@ -118,9 +123,23 @@
                             <div class="col-md-2 col-sm-2 col-xs-12 nopad"   >
 
 
-                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
+                                {% if prod.gerstock and prod.qtestock <= 0  %}
+                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" style="    background: rgba(255, 0, 0, 0.57);
+    opacity: 0.4;" >
 
-                                    <a  class="sc-add-to-cart"  >
+                                    <a  class=""  >
+                                        {% else %}
+
+
+
+
+
+                                        <div class="col-md-12 col-sm-12 col-xs-12 nopad">
+
+                                            <a  class="sc-add-to-cart"  >
+
+
+                                                {% endif %}
 
                                     <div class="sc-product-item acc blockmenu   menublok" style="background-color: white;height: 70px" >
                                         <div class="col-md-3 col-sm-3 col-xs-12" >
@@ -211,7 +230,7 @@
 
 
 
-                                                <div style=" padding:0 5px;"> <span style="display: inline-block;text-align: center;width:5%">{{ liste.quantite }}</span> <span style="display: inline-block;text-align: left;width:76%">{{ liste.produit.designation }}</span> <span style="display: inline-block;text-align: center;width:15%">{{ liste.quantite*liste.produit.prixvente }}</span>  </div>
+                                                <div style=" padding:0 5px;"> <span style="display: inline-block;text-align: center;width:5%">{{ liste.quantite }}</span> <span style="display: inline-block;text-align: left;width:65%">{{ liste.produit.designation }}</span> <span style="display: inline-block;text-align: center;width:20%">{{ liste.quantite*liste.produit.prixvente }}</span> <a href="{{path('ap_caisse_annultation_produit', {'id': liste.id,'table':tab.id,'user':app.user.username }) }}" data-toggle="modal" data-target=".bs-example-modal-sm"> <i class="fa fa-remove"></i> </a>  </div>
 
                                                 {% set total = total + liste.quantite*liste.produit.prixvente %}
 
@@ -223,12 +242,13 @@
                                         {% endif %}
 
                                         {%  endfor %}
-
+<br>
 
                                                 <ul class="tabss">
-                                                    <li class="tab-link current" data-tab="tab-1">Espèces</li>
-                                                    <li class="tab-link" data-tab="tab-2">Orange Money</li>
-                                                    <li class="tab-link" data-tab="tab-3">Carte</li>
+                                                    <li class="tab-link current" style="padding: 5px 8px;" data-tab="tab-1">Espèces</li>
+                                                    <li class="tab-link" style="padding: 5px 8px;" data-tab="tab-2">Orange Money</li>
+                                                    <li class="tab-link" style="padding: 5px 8px;" data-tab="tab-3">Carte</li>
+                                                    <li class="tab-link" style="padding: 5px 8px;" data-tab="tab-3">Credit</li>
                                                 </ul>
 
 
@@ -416,10 +436,23 @@
                                             <div class="col-md-2 col-sm-2 col-xs-12 nopad"   >
 
 
-                                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" >
+                                                {% if prod.gerstock and prod.qtestock <= 0  %}
+                                                <div class="col-md-12 col-sm-12 col-xs-12 nopad" style="    background: rgba(255, 0, 0, 0.57);
+    opacity: 0.4;" >
 
-                                                    <a  class="sc-add-to-cart"  >
+                                                    <a  class=""  >
+{% else %}
 
+
+
+
+
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 nopad">
+
+                                                            <a  class="sc-add-to-cart"  >
+
+
+{% endif %}
                                                         <div class="sc-product-item acc blockmenu   menublok" style="background-color: white;height: 70px" >
                                                             <div class="col-md-3 col-sm-3 col-xs-12" >
 
@@ -466,16 +499,7 @@
     padding-bottom: 2px;
     margin-bottom: 0;    margin-top: -35px;">
                                 <h4  style="display:inline-block"> Table {{ tab.nom }} </h4>
-                                {#   <a href="#" class="" style="    background-color: #FFEAEA;
-       border: 1px solid #FFA8A8;
-       -moz-border-radius: 3px;
-       -webkit-border-radius: 3px;
-       border-radius: 3px;
-       color: #FF7474;
-       font-size: 12px;
-       font-weight: 400;float:right;padding:5px 10px;margin-top:4px;">
-                                       <i class="fa fa-close"></i>
-                                       Annuler commande				</a>#}
+
                                 <div class="clearfix"></div>
                             </div>
 
@@ -723,6 +747,28 @@
 
 
         })
+
+
+
+        $('[data-toggle="modal"]').on('click',
+            function(e) {
+
+                e.preventDefault();
+                var $this = $(this)
+                    , $remote = $this.data('remote') || $this.attr('href')
+                    , $modal = $('<div class="modal fade " tabindex="-1" role="dialog" aria-hidden="true" style="display: none;"></div>');
+                $('body').append($modal);
+                $modal.modal({ keyboard: false});
+                $modal.load($remote);
+
+
+
+
+
+
+            }
+        );
+
 
 
     });

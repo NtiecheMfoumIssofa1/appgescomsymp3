@@ -63,15 +63,12 @@
                     <div class="menu_section">
                         <ul class="nav side-menu">
 
-                            <li class="active"><a><i class="fa fa-edit"></i> CATEGORIES </a>
+                            <li class="active"><a><i class="fa fa-edit"></i> Produits </a>
                                 <ul class="nav child_menu">
 
-                                   {% for category in categories %}
-
-                                        <li><a href="">{{ category.nom }}</a></li>
-
-                                    {% endfor %}
-
+                                   <li class="current-page" ><a href="{{ path('product_index') }}">Produits</a></li>
+                                    <li ><a href="{{ path('category_index') }}"> Catégories </a></li>
+                                    <li ><a href="{{ path('fournisseur_index') }}"> Fournisseurs</a></li> 
 
 
 
@@ -121,7 +118,11 @@
                             <div class="x_title">
                                 <button type="button" class="btn btn-success btn-sm"> <a href="{{ path('product_new') }}" class="cw">Nouveau produit</a></button>
                                 <ul class="nav navbar-right panel_toolbox">
-                                    <h5><a href="{{ path('category_index') }}"> <i class="fa fa-cubes"></i> Gestion des catégories </a></h5>
+                                    <h5>
+									<a href="{{ path('category_index') }}"> <i class="fa fa-cubes"></i> Gestion des catégories </a>
+									
+								&nbsp;&nbsp;&nbsp;	<a href="{{ path('fournisseur_index') }}"> <i class="fa fa-users"></i> Gestion des fournisseur </a>
+									</h5>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -138,8 +139,9 @@
                                             <th class="column-title">code d'article </th>
                                             <th class="column-title">Désignation </th>
                                             <th class="column-title">Prix de vente </th>
-                                            <th class="column-title">Prix d'achat </th>
                                             <th class="column-title">Catégorie </th>
+                                            <th class="column-title">Fournisseur </th>
+
                                             <th class="column-title">Gérer en stock </th>
 
                                             <th class="column-title">Qte en stock </th>
@@ -166,11 +168,12 @@
                                                 <td>{{ product.code }}</td>
                                                 <td>{{ product.designation }}</td>
                                                 <td>{{ product.prixvente }}</td>
-                                                <td>{{ product.prixachat }}</td>
                                                 <td>{{ product.category }}</td>
+                                                <td>{{ product.fournisseur }}</td>
+
                                                 <td>{% if product.gerstock %}Oui{% else %}Non{% endif %}</td>
 
-                                                <td> {% if product.divvendu is not null and product.divvendu != 0 %} {{ product.qtestock - 1  }} + {% if product.qtepart/2 == product.divvendu %} 1/2btlle {% else %} {% set nbreconso = product.qtepart-product.divvendu  %} {{ nbreconso }} conso {% endif %}   {% else %} {{ product.qtestock }} {% endif %}  </td>
+                                                <td>{% if product.gerstock %} {% if product.divvendu is not null and product.divvendu != 0 %} {{ product.qtestock - 1  }} + {% if product.qtepart/2 == product.divvendu %} 1/2btlle {% else %} {% set nbreconso = product.qtepart-product.divvendu  %} {{ nbreconso }} conso {% endif %}   {% else %} {{ product.qtestock }} {% endif %} {% else %} -- {% endif %} </td>
                                                 <td>{{ product.qtemin }}</td>
 
 

@@ -68,7 +68,7 @@
 
 
                                     <li><a href="{{ path('ap_dossiers_ticket') }}">tickets de caisse</a></li>
-                                            <li><a href=""> bons de fabrication </a></li>
+                                          <!--    <li><a href=""> bons de fabrication </a></li> -->
 
 
 
@@ -167,6 +167,8 @@
                                             <th class="column-title">qte </th>
                                             <th class="column-title">prix unit </th>
                                             <th class="column-title">prix vte tot </th>
+                                            <th class="column-title">fournisseur </th>
+
 
                                             <th class="column-title">Marge </th>
                                             </th>
@@ -187,7 +189,7 @@
                                             <td class=" ">{{ dets.quantite }}</td>
                                             <td class=" ">{{ dets.produit.prixvente|number_format('0', '.', ' ') }}</td>
                                             <td class=" "> {% set total = dets.quantite*dets.produit.prixvente  %}{{ total|number_format('0', '.', ' ')  }}</td>
-
+                                            <td class=" ">{{ dets.produit.fournisseur }}</td>
 
 
                                             <td class=" last">

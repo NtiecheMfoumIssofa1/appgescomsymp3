@@ -29,6 +29,7 @@ class ProductType extends AbstractType
             'Entier divisible en part'=>'2',
             'Part de produit'=>'3',
                 'Produit composé'=>'4',
+                'Conso uniquement'=>'5',
 
         ),
             'label' => 'Type de produit'
@@ -59,6 +60,7 @@ class ProductType extends AbstractType
 
 
             ->add('category')
+			->add('fournisseur')
             ->add('thumbnail', thumbnailType::class,array('required' => false))
 
         ;

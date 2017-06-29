@@ -142,7 +142,15 @@
 
 
                             <div class="col-md-3 col-sm-3 col-xs-12">
-                                <a href="{{ path('ap_caisse_cloture',{'id':app.user.id,'from':from,'to':to}) }}" data-toggle="modal" data-target=".bs-example-modal-lg"  >
+                                {% set carte = clos.carte|number_format('0', '.', ' ') %}
+                                {% set orange = clos.orange|number_format('0', '.', ' ') %}
+                                {% set espece = clos.espece|number_format('0', '.', ' ') %}
+                                {% set credit = clos.credit|number_format('0', '.', ' ') %}
+                                {% set tot = clos.carte+clos.orange+clos.espece+clos.credit  %}
+                                {% set total = tot|number_format('0', '.', ' ') %}
+
+
+                                <a href="{{ path('ap_caisse_cloture',{'id':app.user.id,'total':total,'from':from,'to':to,'espece':espece,'orange':orange,'carte':carte,'credit':credit}) }}" data-toggle="modal" data-target=".bs-example-modal-lg"  >
 
                                 <div class="bg-green-sky acc blockmenu  menublok" >
 

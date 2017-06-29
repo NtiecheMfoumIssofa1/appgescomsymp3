@@ -45,7 +45,7 @@
 
                                     <td style="padding: 2px ">{{ prod.produit }}</td>
                                     <td style="padding: 2px ">{{ prod.qte }}</td>
-                                    <td style="padding: 2px ">{{ prod.qte*prod.vente }}</td>
+                                    <td style="padding: 2px ">{% set tt = prod.qte*prod.vente %} {{   tt|number_format('0', '.', ' ')}}</td>
 
                                 </tr>
 
@@ -58,19 +58,57 @@
                             </tbody>
                         </table>
 
+                        <div style="padding:5px;">
+                            <h6> Total espece : <span style="float: right"> {{ espece }} Fcfa </span></h6>
+                            <h6> Total orange money : <span style="float: right"> {{ orange }} Fcfa</span></h6>
+                            <h6> Total carte : <span style="float: right"> {{ carte }} Fcfa</span></h6>
+                            <h6> Total credit : <span style="float: right"> {{ credit }} Fcfa</span></h6>
+                            <h6><strong> TOTAL : <span style="float: right">{{ total }}  Fcfa </span> </strong></h6>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-5" style="text-align:center" >
+
+
+
+                        <div style="text-align: center;
+    border: 1px dashed;
+    background-color: rgba(128, 128, 128, 0.19);
+    margin-top: 10px;">
+                        {% set ouvert = 0 %}
+                        {% for tick in app.user.tickets  %}
+
+                            {% if tick.etat == 1 %}
+
+                                {% set ouvert = ouvert +1 %}
+                        {% endif %}
+
+                        {% endfor %}
+
+
+                        {% if ouvert != 0 %}
+
+                <h5>    Vous avez    {{   ouvert }} tables(s) ouvertes  </h5>
+                            <h6> Veuillez encaissez ces tables avant de cloturer votre caisse</h6>
+                        {% endif %}
+                        </div>
+
 
 
 
                     </div>
 
-                    <div class="col-md-5"></div>
-
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-success"><i class="fa fa-print"></i> Cloturer et imprimer</button>
+                <button type="button" class="btn  btn-default " data-dismiss="modal">Fermer</button>
+
+                <a href="{{path('ap_caisse_cloture_vendeur_print', {  'id':app.user.id,'total':total,'from':from,'to':to,'espece':espece,'orange':orange,'carte':carte,'credit':credit }) }}" target=""  class="btn {% if ouvert != 0 %} disabled {% endif %} btn-success" style="padding: 5px 30px;"><i class="fa fa-print"></i> Cloturer et Imprimer </a>
+
+
             </div>
 
         </div>

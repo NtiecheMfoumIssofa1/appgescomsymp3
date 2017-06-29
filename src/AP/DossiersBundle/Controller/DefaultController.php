@@ -180,6 +180,14 @@ $totalvente = number_format($total, '0', '.', ' ');
             }
 
 
+            $statement3 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='credit' AND ticket.date BETWEEN '$yesterday' AND '$day'");
+            $statement3->execute();
+            $cmd3 = $statement3->fetchAll();
+
+            foreach ($cmd3 as $cmdx) {
+                $tmp['credit'] = $cmdx['paiemode'];
+            }
+
 
 
             $tmp['serveur'] = $nom->getUsername();
@@ -268,7 +276,13 @@ $users = [];
             }
 
 
+            $statement3 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='credit' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement3->execute();
+            $cmd3 = $statement3->fetchAll();
 
+            foreach ($cmd3 as $cmdx) {
+                $tmp['credit'] = $cmdx['paiemode'];
+            }
 
 
 
@@ -295,12 +309,17 @@ $output='';
 $totalespece = 0 ;
 $totalorange = 0 ;
 $totalcarte = 0 ;
+$totalcredit = 0 ;
 
         foreach ($users as $u) {
             $cartebon = number_format($u['carte'], '0', '.', ' ');
-            $route = $this->generateUrl('ap_caisse_detail_vendeur',array('id'=>$u['id'],'total'=>$u['balance'],'from'=>$start,'to'=>$end,'espece'=>$u['espece'],'orange'=>$u['orange'],'carte'=>$cartebon) );
+			$orangebon = number_format($u['orange'], '0', '.', ' ');
+			$especebon = number_format($u['espece'], '0', '.', ' ');
+            $creditbon = number_format($u['credit'], '0', '.', ' ');
+
+            $route = $this->generateUrl('ap_caisse_detail_vendeur',array('id'=>$u['id'],'total'=>$u['balance'],'from'=>$start,'to'=>$end,'espece'=>$especebon,'orange'=>$orangebon,'carte'=>$cartebon,'credit'=>$creditbon) );
             if($u['balance']!=0){
-            $output .= '<tr class="even pointer"><td class=" ">'.$u['serveur'].'</td> <td class=" ">'.number_format($u['espece'], '0', '.', ' ').'</td> <td class=" ">'.number_format($u['orange'], '0', '.', ' ').'</td><td class=" ">'.number_format($u['carte'], '0', '.', ' ').'</td><td class=" ">'.$u['balance'].'
+            $output .= '<tr class="even pointer"><td class=" ">'.$u['serveur'].'</td> <td class=" ">'.number_format($u['espece'], '0', '.', ' ').'</td> <td class=" ">'.number_format($u['orange'], '0', '.', ' ').'</td><td class=" ">'.number_format($u['carte'], '0', '.', ' ').'</td><td class=" ">'.number_format($u['credit'], '0', '.', ' ').'</td><td class=" ">'.$u['balance'].'
             <td  align="center"><a href="'.$route.'" data-toggle="modal" data-target=".bs-example-modal-sm"  ><i class="fa fa-plus-circle" style="font-size:14px;"></i> </a>
 
 
@@ -308,13 +327,14 @@ $totalcarte = 0 ;
 $totalespece= $totalespece + $u['espece'];
 $totalorange= $totalorange + $u['orange'];
 $totalcarte= $totalcarte + $u['carte'];
+$totalcredit= $totalcredit + $u['credit'];
 
             }
         }
 
         $output .='<tr class="headings" style="background-color: rgba(173, 230, 173, 0.23);"><td> <strong>GRAND TOTAL</strong></td> <td>'.number_format($totalespece, '0', '.', ' ').' Fcfa</td>
                                             <td class=" ">'.number_format($totalorange, '0', '.', ' ').' Fcfa</td>
-                                            <td class=" ">'.number_format($totalcarte, '0', '.', ' ').' Fcfa</td><td colspan="2" id="total" >'.$totals.' Fcfa</td></tr>
+                                            <td class=" ">'.number_format($totalcarte, '0', '.', ' ').' Fcfa</td><td class=" ">'.number_format($totalcredit, '0', '.', ' ').' Fcfa</td><td colspan="2" id="total" >'.$totals.' Fcfa</td></tr>
                                             
                                             
                                             ';
@@ -389,7 +409,13 @@ $totalcarte= $totalcarte + $u['carte'];
                 $tmp['orange'] = $cmdx['paiemode'];
             }
 
+            $statement3 = $connection->prepare("SELECT SUM(prix) AS paiemode,employes_id,mode FROM ticket WHERE employes_id='$u' AND mode ='credit' AND ticket.date BETWEEN '$start' AND '$end'");
+            $statement3->execute();
+            $cmd3 = $statement3->fetchAll();
 
+            foreach ($cmd3 as $cmdx) {
+                $tmp['credit'] = $cmdx['paiemode'];
+            }
 
 
             $tmp['serveur'] = $nom->getUsername();

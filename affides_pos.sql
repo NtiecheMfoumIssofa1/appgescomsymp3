@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Mer 21 Juin 2017 à 14:01
+-- Généré le :  Jeu 22 Juin 2017 à 10:28
 -- Version du serveur :  5.6.35
 -- Version de PHP :  7.0.15
 
@@ -73,7 +73,33 @@ INSERT INTO `boncommande` (`id`, `ticket_id`, `date`, `annule`) VALUES
 (39, 26, '2017-06-20 14:06:05', 1),
 (40, 27, '2017-06-20 20:53:01', 1),
 (41, 28, '2017-06-20 20:55:32', 1),
-(42, 29, '2017-06-21 02:11:19', 1);
+(42, 29, '2017-06-21 02:11:19', 1),
+(43, 30, '2017-06-21 14:34:43', 1),
+(44, 31, '2017-06-21 14:39:18', 1),
+(45, 32, '2017-06-21 15:12:18', 1),
+(46, 33, '2017-06-21 15:12:33', 1),
+(47, 34, '2017-06-21 15:15:17', 1),
+(48, 35, '2017-06-21 15:18:45', 1),
+(49, 36, '2017-06-21 15:19:07', 1),
+(50, 36, '2017-06-21 15:19:20', 1),
+(51, 36, '2017-06-21 15:19:30', 1),
+(52, 37, '2017-06-21 21:25:00', 1),
+(53, 38, '2017-06-21 21:36:59', 1),
+(54, 39, '2017-06-21 21:43:18', 1),
+(55, 40, '2017-06-21 21:43:25', 1),
+(56, 41, '2017-06-21 21:43:56', 1),
+(57, 42, '2017-06-21 21:46:52', 1),
+(58, 43, '2017-06-21 21:50:02', 1),
+(59, 44, '2017-06-21 21:50:27', 1),
+(60, 45, '2017-06-21 21:50:41', 1),
+(61, 46, '2017-06-21 21:50:55', 1),
+(62, 47, '2017-06-21 21:51:06', 1),
+(63, 48, '2017-06-21 21:51:37', 1),
+(64, 49, '2017-06-21 22:38:51', 1),
+(65, 49, '2017-06-21 22:39:11', 1),
+(66, 49, '2017-06-21 22:39:59', 1),
+(67, 50, '2017-06-22 05:53:59', 1),
+(68, 51, '2017-06-22 05:54:14', 1);
 
 -- --------------------------------------------------------
 
@@ -96,7 +122,6 @@ INSERT INTO `category` (`id`, `nom`, `impression`) VALUES
 (2, 'Whisky', 'Bar'),
 (3, 'vin', 'Bar'),
 (4, 'liqueurs', 'Bar'),
-(5, 'Champagne', 'Bar'),
 (6, 'Rhum', 'Bar'),
 (7, 'Vodka', 'Bar'),
 (8, 'Cocktail', 'Bar'),
@@ -215,7 +240,59 @@ INSERT INTO `commandeprod` (`id`, `bon_id`, `produit_id`, `quantite`, `date`) VA
 (89, 40, 4, 1, '2017-06-20 20:53:01'),
 (90, 41, 3, 1, '2017-06-20 20:55:32'),
 (91, 41, 2, 1, '2017-06-20 20:55:32'),
-(92, 42, 2, 4, '2017-06-21 02:11:20');
+(92, 42, 2, 4, '2017-06-21 02:11:20'),
+(93, 43, 3, 2, '2017-06-21 14:34:43'),
+(94, 43, 4, 2, '2017-06-21 14:34:43'),
+(95, 44, 6, 5, '2017-06-21 14:39:18'),
+(96, 45, 21, 1, '2017-06-21 15:12:18'),
+(97, 46, 20, 1, '2017-06-21 15:12:33'),
+(98, 47, 18, 1, '2017-06-21 15:15:17'),
+(99, 48, 17, 2, '2017-06-21 15:18:45'),
+(100, 49, 21, 3, '2017-06-21 15:19:07'),
+(101, 50, 10, 3, '2017-06-21 15:19:20'),
+(102, 51, 15, 3, '2017-06-21 15:19:30'),
+(103, 52, 2, 4, '2017-06-21 21:25:00'),
+(104, 53, 2, 1, '2017-06-21 21:36:59'),
+(105, 53, 1, 1, '2017-06-21 21:36:59'),
+(106, 54, 3, 1, '2017-06-21 21:43:18'),
+(107, 54, 4, 2, '2017-06-21 21:43:18'),
+(108, 55, 6, 1, '2017-06-21 21:43:25'),
+(109, 55, 4, 3, '2017-06-21 21:43:25'),
+(110, 56, 6, 1, '2017-06-21 21:43:56'),
+(111, 56, 3, 1, '2017-06-21 21:43:56'),
+(112, 57, 2, 1, '2017-06-21 21:46:52'),
+(113, 57, 3, 2, '2017-06-21 21:46:52'),
+(114, 57, 11, 1, '2017-06-21 21:46:52'),
+(115, 57, 12, 2, '2017-06-21 21:46:52'),
+(116, 58, 1, 1, '2017-06-21 21:50:02'),
+(117, 58, 2, 1, '2017-06-21 21:50:02'),
+(118, 58, 6, 3, '2017-06-21 21:50:02'),
+(119, 58, 5, 3, '2017-06-21 21:50:02'),
+(120, 58, 8, 1, '2017-06-21 21:50:02'),
+(121, 58, 18, 1, '2017-06-21 21:50:02'),
+(122, 58, 21, 1, '2017-06-21 21:50:02'),
+(123, 59, 9, 1, '2017-06-21 21:50:27'),
+(124, 59, 10, 2, '2017-06-21 21:50:27'),
+(125, 60, 17, 1, '2017-06-21 21:50:41'),
+(126, 60, 16, 1, '2017-06-21 21:50:41'),
+(127, 60, 20, 3, '2017-06-21 21:50:41'),
+(128, 61, 1, 1, '2017-06-21 21:50:55'),
+(129, 61, 10, 1, '2017-06-21 21:50:55'),
+(130, 61, 14, 2, '2017-06-21 21:50:55'),
+(131, 62, 4, 1, '2017-06-21 21:51:06'),
+(132, 62, 10, 2, '2017-06-21 21:51:06'),
+(133, 62, 9, 1, '2017-06-21 21:51:06'),
+(134, 63, 6, 1, '2017-06-21 21:51:37'),
+(135, 63, 5, 4, '2017-06-21 21:51:37'),
+(136, 64, 6, 1, '2017-06-21 22:38:51'),
+(137, 65, 6, 1, '2017-06-21 22:39:11'),
+(138, 66, 6, 3, '2017-06-21 22:39:59'),
+(139, 67, 4, 4, '2017-06-22 05:53:59'),
+(140, 67, 3, 4, '2017-06-22 05:53:59'),
+(141, 68, 3, 1, '2017-06-22 05:54:14'),
+(142, 68, 2, 1, '2017-06-22 05:54:14'),
+(143, 68, 17, 2, '2017-06-22 05:54:14'),
+(144, 68, 16, 2, '2017-06-22 05:54:14');
 
 -- --------------------------------------------------------
 
@@ -244,8 +321,8 @@ CREATE TABLE `employes` (
 --
 
 INSERT INTO `employes` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`, `couleur`) VALUES
-(1, 'veronique', 'veronique', 'veronique@black.cm', 'veronique@black.cm', 1, NULL, '$2y$13$4R3aQxO8YXCwTkLtWqi/i.vfT4Qy1uhRSkFYzK9Itz/27WIljIHly', NULL, NULL, NULL, 'a:0:{}', '#F39C12'),
-(2, 'josee', 'josee', 'josee@black.cm', 'josee@black.cm', 1, NULL, '$2y$13$g2okr/hRmJf8YOszTGDsJuNO314nMEh6EDIcn87tAKgBnwgbPKHsC', '2017-06-20 20:52:48', NULL, NULL, 'a:0:{}', '#50C1CF'),
+(1, 'veronique', 'veronique', 'veronique@black.cm', 'veronique@black.cm', 1, NULL, '$2y$13$4R3aQxO8YXCwTkLtWqi/i.vfT4Qy1uhRSkFYzK9Itz/27WIljIHly', '2017-06-22 05:02:18', NULL, NULL, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}', '#F39C12'),
+(2, 'josee', 'josee', 'josee@black.cm', 'josee@black.cm', 1, NULL, '$2y$13$g2okr/hRmJf8YOszTGDsJuNO314nMEh6EDIcn87tAKgBnwgbPKHsC', '2017-06-22 04:25:02', NULL, NULL, 'a:0:{}', '#50C1CF'),
 (3, 'sonia', 'sonia', 'sonia@black.cm', 'sonia@black.cm', 1, NULL, '$2y$13$2nqV0ZHMZpbldf1rEKd3OeiTeLTK2LvJUghRl4NLLV5NN/pF1HHMa', NULL, NULL, NULL, 'a:0:{}', '#97a005'),
 (4, 'joseph', 'joseph', 'joseph@black.cm', 'joseph@black.cm', 1, NULL, '$2y$13$ep8/okfS.YYYgQtM0JGu6O.XMDdcjP9.6FTitlNnf5u7q0d.kUgyG', '2017-06-15 13:39:36', NULL, NULL, 'a:0:{}', '#E74C3C'),
 (5, 'achille', 'achille', 'achille@black.cm', 'achille@black.cm', 1, NULL, '$2y$13$BIn3CBLSQS0IvT94JD.Ai.DrWRAmoOJ6mBmpkvpxUo7QQo6w378zC', '2017-06-21 09:39:37', NULL, NULL, 'a:0:{}', '#9B59B6');
@@ -279,25 +356,25 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `category_id`, `thumbnail_id`, `code`, `designation`, `Prixvente`, `prixachat`, `qtestock`, `qtemin`, `gerstock`, `typeproduit`, `qtepart`, `nbrediv`, `divvendu`, `prodparent`) VALUES
-(1, 1, 5, 'sprite', 'Sprite', 1500, 208, 16, 24, 1, 1, NULL, NULL, NULL, NULL),
-(2, 1, 6, 'fanta', 'Fanta', 1500, 188, 15, 6, 1, 1, NULL, NULL, NULL, NULL),
-(3, 1, 8, 'sch_soda', 'Schweppes Soda', 1500, 240, -12, 5, 1, 1, NULL, NULL, NULL, NULL),
-(4, 1, 7, 'cafe', 'Cafe', 1500, 500, 50, 10, 1, 1, NULL, NULL, NULL, NULL),
-(5, 1, NULL, 'the', 'The', 1500, 500, 75, 10, 1, 1, NULL, NULL, NULL, NULL),
-(6, 1, NULL, 'tan_pm', 'Tangui PM', 1000, 158, 2, 10, 1, 1, NULL, NULL, NULL, NULL),
+(1, 1, 5, 'sprite', 'Sprite', 1500, 208, 13, 24, 1, 1, NULL, NULL, NULL, NULL),
+(2, 1, 6, 'fanta', 'Fanta', 1500, 188, 7, 6, 1, 1, NULL, NULL, NULL, NULL),
+(3, 1, 8, 'sch_soda', 'Schweppes Soda', 1500, 240, -23, 5, 1, 1, NULL, NULL, NULL, NULL),
+(4, 1, 7, 'cafe', 'Cafe', 1500, 500, 38, 10, 1, 1, NULL, NULL, NULL, NULL),
+(5, 1, NULL, 'the', 'The', 1500, 500, 68, 10, 1, 1, NULL, NULL, NULL, NULL),
+(6, 1, NULL, 'tan_pm', 'Tangui PM', 1000, 158, -14, 10, 1, 1, NULL, NULL, NULL, NULL),
 (7, 1, NULL, 'mth_e', 'Menthe à eau', 0, 0, -6, 0, 1, 1, NULL, NULL, NULL, NULL),
-(8, 1, NULL, 'Diabo', 'diabolo', 1500, 400, -17, NULL, 0, 4, NULL, NULL, NULL, NULL),
-(9, 3, NULL, 'mer_btle', 'Merlot - Btle', 15000, 3700, 2, 1, 1, 2, 6, NULL, 5, NULL),
+(8, 1, NULL, 'Diabo', 'diabolo', 1500, 400, -18, NULL, 0, 4, NULL, NULL, NULL, NULL),
+(9, 3, NULL, 'mer_btle', 'Merlot - Btle', 15000, 3700, -2, 1, 1, 2, 6, NULL, 1, NULL),
 (10, 3, NULL, 'mer_ver', 'Merlot - verre', 3500, 740, -2, NULL, 0, 3, NULL, 1, NULL, 'mer_btle'),
-(11, 3, NULL, 'medoc', 'Medoc', 20000, 7600, 5, 1, 1, 1, NULL, NULL, NULL, NULL),
-(12, 3, 1, 'ca_sauv', 'Cabernet Sauvignon Cavior', 20000, 8500, 4, 1, 1, 1, NULL, NULL, NULL, NULL),
+(11, 3, NULL, 'medoc', 'Medoc', 20000, 7600, 4, 1, 1, 1, NULL, NULL, NULL, NULL),
+(12, 3, 1, 'ca_sauv', 'Cabernet Sauvignon Cavior', 20000, 8500, 2, 1, 1, 1, NULL, NULL, NULL, NULL),
 (13, 3, NULL, 'H_med', 'Haut-Medoc', 25000, 11500, 7, 3, 1, 1, NULL, NULL, NULL, NULL),
-(14, 3, 2, 'cha_btl', 'Chardonnay - Btle', 15000, 4500, 9, 4, 1, 2, 6, NULL, 3, NULL),
+(14, 3, 2, 'cha_btl', 'Chardonnay - Btle', 15000, 4500, 6, 4, 1, 2, 6, NULL, 0, NULL),
 (15, 3, NULL, 'cha_ve', 'Chardonnay -verre', 3000, 900, -1, NULL, 0, 3, NULL, 1, NULL, 'cha_btl'),
-(16, 2, 9, 'bal_btl', 'Ballantine\'s - Btlle', 25000, 7200, 2, 2, 1, 2, 6, NULL, 0, NULL),
-(17, 2, 10, 'bal_1/2', 'Ballantine\'s - 1/2Btlle', 15000, 3600, NULL, NULL, 0, 3, NULL, 2, NULL, NULL),
-(18, 2, 3, 'bal_con', 'Ballantine\'s - conso', 2500, 514, NULL, NULL, 0, 3, NULL, 1, NULL, NULL),
-(19, 2, 4, 'CH12_B', 'Chivas 12 Years - Btlle', 35000, 15300, 9, 8, 1, 2, 6, NULL, 4, NULL),
+(16, 2, 9, 'bal_btl', 'Ballantine\'s - Btlle', 25000, 7200, -3, 2, 1, 2, 6, NULL, 5, NULL),
+(17, 2, 10, 'bal_1/2', 'Ballantine\'s - 1/2Btlle', 15000, 3600, NULL, NULL, 0, 3, NULL, 2, NULL, 'bal_btl'),
+(18, 2, 3, 'bal_con', 'Ballantine\'s - conso', 2500, 514, NULL, NULL, 0, 3, NULL, 1, NULL, 'bal_btl'),
+(19, 2, 4, 'CH12_B', 'Chivas 12 Years - Btlle', 35000, 15300, 6, 8, 1, 2, 6, NULL, 3, NULL),
 (20, 2, NULL, 'CH12_1/2', 'Chivas 12 Years - 1/2Btlle', 18000, 7650, NULL, NULL, 0, 3, NULL, 2, NULL, 'CH12_B'),
 (21, 2, NULL, 'CH12_C', 'Chivas 12 Years - Conso', 3500, 1093, NULL, NULL, 0, 3, NULL, 1, NULL, 'CH12_B'),
 (22, 10, NULL, 'BrB', 'Brochettes de boeuf', 1000, 540, -6, 0, 0, 1, NULL, NULL, NULL, NULL),
@@ -390,7 +467,7 @@ INSERT INTO `tables` (`id`, `nom`, `lieu`, `occupe`) VALUES
 (27, 'I-27', 'Interieur', 0),
 (28, 'I-28', 'Interieur', 0),
 (29, 'I-29', 'Interieur', 0),
-(30, 'I-30', 'Interieur', 1),
+(30, 'I-30', 'Interieur', 0),
 (31, 'I-31', 'Interieur', 0),
 (32, 'I-32', 'Interieur', 0),
 (33, 'I-33', 'Interieur', 0),
@@ -669,7 +746,7 @@ INSERT INTO `ticket` (`id`, `employes_id`, `tables_id`, `etat`, `date`, `prix`, 
 (16, 5, 5, 0, '2017-06-16 07:52:56', 7000, 'espece'),
 (17, 5, 25, 0, '2017-06-16 07:53:55', 14000, 'espece'),
 (18, 5, 17, 0, '2017-06-16 11:13:00', 13000, 'espece'),
-(19, 5, 30, 1, '2017-06-16 12:00:07', NULL, NULL),
+(19, 5, 30, 0, '2017-06-16 12:00:07', 4500, 'espece'),
 (20, 2, 11, 0, '2017-06-16 12:35:38', 7500, 'espece'),
 (21, 2, 61, 0, '2017-06-16 12:39:08', 11500, 'espece'),
 (22, 5, 13, 0, '2017-06-20 13:52:31', 22500, 'espece'),
@@ -679,7 +756,29 @@ INSERT INTO `ticket` (`id`, `employes_id`, `tables_id`, `etat`, `date`, `prix`, 
 (26, 5, 19, 0, '2017-06-20 14:06:05', 4500, 'espece'),
 (27, 2, 9, 0, '2017-06-20 20:53:01', 8500, 'espece'),
 (28, 2, 12, 0, '2017-06-20 20:55:32', 3000, 'espece'),
-(29, 2, 7, 0, '2017-06-21 02:11:19', 6000, 'espece');
+(29, 2, 7, 0, '2017-06-21 02:11:19', 6000, 'espece'),
+(30, 5, 12, 0, '2017-06-21 14:34:43', 6000, 'espece'),
+(31, 5, 20, 0, '2017-06-21 14:39:18', 5000, 'espece'),
+(32, 5, 27, 0, '2017-06-21 15:12:18', 3500, 'Orange Money'),
+(33, 5, 31, 0, '2017-06-21 15:12:33', 18000, 'Carte'),
+(34, 5, 13, 0, '2017-06-21 15:15:17', 2500, 'espece'),
+(35, 5, 12, 0, '2017-06-21 15:18:45', 30000, 'Orange Money'),
+(36, 5, 9, 0, '2017-06-21 15:19:07', 30000, 'Carte'),
+(37, 5, 8, 0, '2017-06-21 21:25:00', 6000, 'Orange Money'),
+(38, 5, 3, 0, '2017-06-21 21:36:59', 3000, 'especes'),
+(39, 5, 13, 0, '2017-06-21 21:43:18', 4500, 'especes'),
+(40, 5, 27, 0, '2017-06-21 21:43:25', 5500, 'especes'),
+(41, 5, 33, 0, '2017-06-21 21:43:56', 2500, 'Orange Money'),
+(42, 5, 87, 0, '2017-06-21 21:46:52', 64500, 'especes'),
+(43, 1, 8, 0, '2017-06-21 21:50:02', 18000, 'especes'),
+(44, 1, 30, 0, '2017-06-21 21:50:27', 22000, 'especes'),
+(45, 1, 19, 0, '2017-06-21 21:50:41', 94000, 'Carte'),
+(46, 1, 92, 0, '2017-06-21 21:50:55', 35000, 'Carte'),
+(47, 1, 28, 0, '2017-06-21 21:51:06', 23500, 'Orange Money'),
+(48, 1, 41, 0, '2017-06-21 21:51:37', 7000, 'Orange Money'),
+(49, 1, 12, 0, '2017-06-21 22:38:51', 5000, 'especes'),
+(50, 1, 8, 0, '2017-06-22 05:53:59', 12000, 'Orange Money'),
+(51, 1, 20, 0, '2017-06-22 05:54:14', 83000, 'especes');
 
 --
 -- Index pour les tables exportées
@@ -765,7 +864,7 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT pour la table `boncommande`
 --
 ALTER TABLE `boncommande`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT pour la table `category`
 --
@@ -775,7 +874,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT pour la table `commandeprod`
 --
 ALTER TABLE `commandeprod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 --
 -- AUTO_INCREMENT pour la table `employes`
 --
@@ -805,7 +904,7 @@ ALTER TABLE `thumbnail`
 -- AUTO_INCREMENT pour la table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- Contraintes pour les tables exportées
 --

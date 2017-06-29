@@ -98,7 +98,7 @@ class DefaultController extends Controller
         $produit = $em->getRepository('APProductsBundle:Product');
 
 
-
+        $u = $this->getUser();
 
 
         $donnes = explode('|',$id);
@@ -119,7 +119,7 @@ if(!is_null($prod)){
                 $newqte = $prod->getQtestock() + $txt[1];
                 $entre = new stockoperation();
 
-
+                $entre->setEmployes($u);
                 $entre->setIdtrans($trans);
                 $entre->setDate($date);
                 $entre->setIdprod($prod->getId());
@@ -166,6 +166,7 @@ if(!is_null($prod)){
         $produit = $em->getRepository('APProductsBundle:Product');
 
 
+        $u = $this->getUser();
 
 
 
@@ -187,7 +188,7 @@ if(!is_null($prod)){
                 $newqte = $prod->getQtestock() + $txt[1];
                 $entre = new stockoperation();
 
-
+                $entre->setEmployes($u);
                 $entre->setIdtrans($trans);
                 $entre->setDate($date);
                 $entre->setIdprod($prod->getId());

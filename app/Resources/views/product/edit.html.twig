@@ -1,28 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,6 +138,11 @@
                                     {{ form_widget(edit_form.category, {'attr': {'class': 'form-control'}}) }}
 
                                     <br>
+									
+									<label for="email">{{ form_label(edit_form.fournisseur, "fournisseur") }}</label>
+                                    {{ form_widget(edit_form.fournisseur, {'attr': {'class': 'form-control'}}) }}
+
+                                    <br>
 
                                     <div class="col-md-6" style="padding-left: 0">
                                         <label for="fullname">{{ form_label(edit_form.prixachat, "prix d'achat") }}</label>
@@ -179,12 +160,14 @@
 
                                     <br>
                                     <div id="quantite">
+
+
                                         <div class="col-md-6" style="padding-left: 0">
-                                            <label for="fullname">{{ form_label(edit_form.qtestock, "Quantité en stock") }}</label>
-                                            {{ form_widget(edit_form.qtestock, {'attr': {'class': 'form-control'}}) }}
+                                            <label for="fullname">{{ form_label(edit_form.qtestock, "quantité minimale") }}</label>
+                                            {{ form_widget(edit_form.qtestock, {'attr': {'class': 'form-control','disabled':'disabled'} }) }}
                                         </div>
 
-                                        <div class="col-md-6" style="padding-right: 0">
+                                        <div class="col-md-6" style="padding-left: 0">
                                             <label for="fullname">{{ form_label(edit_form.qtemin, "quantité minimale") }}</label>
                                             {{ form_widget(edit_form.qtemin, {'attr': {'class': 'form-control'}}) }}
                                         </div>
@@ -220,7 +203,12 @@
 
                                     </div>
 
+									<div id="compose">
+                                        <label for="email">{{ form_label(edit_form.children, "composé de:") }}</label>
+                                        {{ form_widget(edit_form.children, {'attr': {'class': 'form-control'}}) }}
+                                        <br>
 
+                                    </div>
 
                                     <div id="gerer">
                                         {{ form_widget(edit_form.gerstock) }}
@@ -229,8 +217,10 @@
 
                                     </div>
 
-
-
+									<br>
+ <label for="email">{{ form_label(edit_form.thumbnail, "Vignette produit") }}</label>
+                                    {{ form_widget(edit_form.thumbnail, {'attr': {'class': 'form-control'}}) }}
+                                    <br>
 
                                     <center>
 
@@ -300,18 +290,46 @@
 <script>
     $(document).ready(function(){
 
+        var qui =  $("select#ap_productsbundle_product_typeproduit option:selected").attr('value');
+
+
+
+
         var quantite = $('#quantite');
         var nbredivi = $('#nbredivi');
         var portion = $('#portion');
         var gerer = $('#gerer');
         var parent = $('#parent');
+        var compose = $('#compose');
 
 
-        portion.hide();
-        quantite.hide();
-        nbredivi.hide();
-        gerer.hide();
-        parent.hide();
+
+
+        if(qui == 3){
+            portion.hide();
+            quantite.hide();
+            gerer.hide();
+            compose.hide();
+        }else if(qui == 1){
+
+            nbredivi.hide();
+            parent.hide();
+            compose.hide();
+            portion.hide();
+        }else if(qui == 2){
+
+            nbredivi.hide();
+            parent.hide();
+            compose.hide();
+        }else if(qui == 4){
+
+            portion.hide();
+            quantite.hide();
+            nbredivi.hide();
+            gerer.hide();
+            parent.hide();
+        }
+
 
 
 
@@ -326,6 +344,8 @@
                 portion.hide();
                 nbredivi.hide();
                 parent.hide();
+                compose.hide();
+
 
             }else if( typeprod == '2'){
 
@@ -337,6 +357,8 @@
 
                 nbredivi.hide();
                 parent.hide();
+                compose.hide();
+                compose.hide();
 
 
             }else if (typeprod == '3'){
@@ -348,9 +370,22 @@
                 portion.hide();
                 quantite.hide();
                 gerer.hide();
+                compose.hide();
+
+            }else if (typeprod == '4'){
+
+                compose.show();
+                nbredivi.hide();
+                parent.hide();
+
+
+                portion.hide();
+                quantite.hide();
+                gerer.hide();
 
 
             }
+
         });
 
 
@@ -358,6 +393,8 @@
 
     });
 </script>
+
+
 
 
 

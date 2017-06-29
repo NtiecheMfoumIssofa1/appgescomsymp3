@@ -46,19 +46,19 @@
 <body >
 
 
-<h3><img src="./images/posnic.png" style="width:90px;display: inline-block;float:left;margin-right: 20px;" ></h3>
+<h3><img src="./images/posnic.png" style="width:90px;display: inline-block;float:left;margin-right: 40px;" ></h3>
 
 
 <h3 style="color:black;text-align:left;font-size: 16px;">  ventes  par catégorie   du <span style="color:#41AF4B;" id="yes">{{ from }}</span> au  <span style="color:#41AF4B" id="day">{{ to }}</span></h3>
 
 <br>
 
-                                <div class="table-responsive mt8" style="margin-left: 80px;position: relative;">
+                                <div class="table-responsive mt8" style="margin-left: 35px;position: relative;">
 
 
                                     {% for categorie in cat %}
 
-                                  <div style="background-color: #eae9e9;padding:5px 10px;margin:30px 0px 0px;width: 90%">  <h4 style="line-height:0;margin:0px;"> {{ categorie.nom }} </h4></div>
+                                  <div style="background-color: #eae9e9;padding:5px 10px;margin:30px 0px 0px;width: 85%">  <h4 style="line-height:0;margin:0px;"> {{ categorie.nom }} </h4></div>
                                         <table class="table table-striped jambo_table " style="width: 90%" >
                                             <thead>
                                             <tr>
@@ -131,7 +131,7 @@
 
                                     {% endfor %}
 
-                                    <div  style="background-color:#eee;padding: 15px;margin:10px 80px;width:90%;">
+                                    <div  style="background-color:#eee;padding: 15px;margin:10px 10px;width:85%;">
                                         <strong style="margin-right: 300px;"> GRAND TOTAL </strong>
                                         <span style="margin-left: 300px;font-size: 16px "> {{ total|number_format('0', '.', ' ') }} Fcfa</span>
 

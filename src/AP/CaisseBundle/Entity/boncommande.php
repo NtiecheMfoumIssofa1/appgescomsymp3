@@ -22,7 +22,7 @@ class boncommande
 
 
     /**
-     * @ORM\OneToMany(targetEntity="AP\CaisseBundle\Entity\commandeprod",mappedBy="bon")
+     * @ORM\OneToMany(targetEntity="AP\CaisseBundle\Entity\commandeprod",cascade={"remove"},mappedBy="bon")
      */
 
     private $commandeprods;

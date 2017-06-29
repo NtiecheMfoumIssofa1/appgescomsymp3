@@ -59,6 +59,8 @@
                             <th> Espèces </th>
                             <th>Orange Money </th>
                             <th>Carte </th>
+                            <th>Credit </th>
+
                             <th>Total </th>
 
 
@@ -70,6 +72,7 @@
                         {% set totalespece = 0 %}
                         {% set totalorange = 0 %}
                         {% set totalcarte = 0 %}
+                        {% set totalcredit = 0 %}
                         {% for ven in vendeur %}
 
                             {% if ven.balance != 0 %}
@@ -79,11 +82,15 @@
                                     <td>{{ ven.espece|number_format('0', '.', ' ') }} </td>
                                     <td>{{ ven.orange|number_format('0', '.', ' ') }}</td>
                                     <td>{{ ven.carte|number_format('0', '.', ' ') }} </td>
+                                    <td>{{ ven.credit|number_format('0', '.', ' ') }} </td>
+
                                     <td>{{ ven.balance }} </td>
 
                                     {% set totalespece = totalespece + ven.espece  %}
                                     {% set totalorange = totalorange + ven.orange  %}
                                     {% set totalcarte = totalcarte + ven.carte  %}
+                                    {% set totalcredit = totalcredit + ven.credit  %}
+
                                 </tr>
                             {% endif %}
 
@@ -96,6 +103,8 @@
                             <td > {{ totalespece|number_format('0', '.', ' ') }} Fcfa </td>
                             <td class=" ">{{ totalorange|number_format('0', '.', ' ') }} Fcfa </td>
                             <td class=" ">{{ totalcarte|number_format('0', '.', ' ') }} Fcfa</td>
+                            <td class=" ">{{ totalcredit|number_format('0', '.', ' ') }} Fcfa</td>
+
                             <td > {{ total }} Fcfa</td>
 
                         </tr>
