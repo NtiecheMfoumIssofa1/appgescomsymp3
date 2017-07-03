@@ -116,7 +116,18 @@ class DefaultController extends Controller
 
 if(!is_null($prod)){
 
-                $newqte = $prod->getQtestock() + $txt[1];
+//               if($prod->getTypeproduit() == 5 ){
+//                   $aj = $txt[1] * $prod->getQtepart();
+//                   $newqte = $prod->getQtestock() + $aj;
+//
+//
+//               }else{
+//                   $newqte = $prod->getQtestock() + $txt[1];
+//
+//               }
+
+    $newqte = $prod->getQtestock() + $txt[1];
+
                 $entre = new stockoperation();
 
                 $entre->setEmployes($u);

@@ -44,18 +44,18 @@ class ProductType extends AbstractType
                 ,
                 'required' => false
             ))
-            ->add('prodparent',EntityType::class,array(
-                'class' => 'APProductsBundle:Product',
-                'query_builder' => function(EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->where('c.typeproduit = :type')
-                        ->setParameter('type', '2')
-                        ->orderBy('c.designation', 'ASC');
-                },
-                'empty_data'  => null,
-                'required' => false
-
-            )   )
+//            ->add('prodparent',EntityType::class,array(
+//                'class' => 'APProductsBundle:Product',
+//                'query_builder' => function(EntityRepository $er) {
+//                    return $er->createQueryBuilder('c')
+//                        ->where('c.typeproduit = :type')
+//                        ->setParameter('type', '2')
+//                        ->orderBy('c.designation', 'ASC');
+//                },
+//                'empty_data'  => null,
+//                'required' => false
+//
+//            )   )
 
 
 

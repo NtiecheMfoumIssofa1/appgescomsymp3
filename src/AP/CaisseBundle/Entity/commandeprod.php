@@ -50,6 +50,13 @@ class commandeprod
      */
     private $quantite;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="prix", type="integer")
+     */
+    private $prix;
+
 
     /**
      * @var \DateTime
@@ -172,5 +179,29 @@ class commandeprod
     {
 
         return $this->date;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param integer $prix
+     *
+     * @return commandeprod
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return integer
+     */
+    public function getPrix()
+    {
+        return $this->prix;
     }
 }

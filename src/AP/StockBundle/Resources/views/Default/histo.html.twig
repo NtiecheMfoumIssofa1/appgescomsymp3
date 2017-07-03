@@ -153,7 +153,7 @@
                                               <td>{{ listeop.quantiteprec }}</td>
                                               <td>{{ listeop.quantite }}</td>
                                               <td>{{ listeop.cause }}</td>
-                                              <td>{{ listeop.employes.username }}</td>
+                                              <td> {% if listeop.employes is not null %}  {{ listeop.employes.username }} {% else %} -- {% endif %} </td>
 
                                           </tr>
 

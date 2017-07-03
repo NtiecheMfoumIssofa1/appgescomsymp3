@@ -24,7 +24,7 @@ class stockoperation
 
     /**
      * @ORM\ManyToOne(targetEntity="AP\UsersBundle\Entity\employes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $employes;
 
@@ -59,7 +59,7 @@ class stockoperation
     /**
      * @var int
      *
-     * @ORM\Column(name="quantiteprec", type="integer")
+     * @ORM\Column(name="quantiteprec", type="integer",nullable=true)
      */
     private $quantiteprec;
 

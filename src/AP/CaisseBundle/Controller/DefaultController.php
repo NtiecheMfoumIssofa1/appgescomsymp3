@@ -167,17 +167,17 @@ class DefaultController extends Controller
 	 $printer -> setJustification(Printer::JUSTIFY_LEFT);
 	 $printer ->setReverseColors(false);
 	 $printer -> setTextSize(1, 1);
-	$printer -> text("Serveur:".$employe->getUsername()."\n");
+	$printer -> text("Serveur: ".strtoupper($employe->getUsername())."\n");
 	
 	
 	 $printer -> feed(1);
 	 $printer -> setJustification(Printer::JUSTIFY_LEFT);
 	 $printer ->setReverseColors(false);
 	 $printer -> setTextSize(2, 1);
-	$printer -> text("Table:".$table->getNom()."     Ticket:".$ticket->getId()."\n");
+	$printer -> text("Table:".$table->getNom()."\n");
 	$printer -> text("------------------------\n");
 	 $printer -> setTextSize(1, 1);
-	$printer -> text("QTE   ARTICLE\n");
+	$printer -> text("ARTICLE                            QTE\n");
 	$printer -> text("---------------------------------------\n");
 		
 		
@@ -219,17 +219,17 @@ class DefaultController extends Controller
 	 $printer1 -> setJustification(Printer::JUSTIFY_LEFT);
 	 $printer1 ->setReverseColors(false);
 	 $printer1 -> setTextSize(1, 1);
-	$printer1 -> text("Serveur:".$employe->getUsername()."\n");
+	$printer1 -> text("Serveur: ".strtoupper($employe->getUsername())."\n");
 	
 	
 	 $printer1 -> feed(1);
 	 $printer1 -> setJustification(Printer::JUSTIFY_LEFT);
 	 $printer1 ->setReverseColors(false);
 	 $printer1 -> setTextSize(2, 1);
-	$printer1 -> text("Table: ".$table->getNom()."     Ticket:".$ticket->getId()."\n");
+	$printer1 -> text("Table: ".$table->getNom()."\n");
 	$printer1 -> text("--------------------\n");
 	 $printer1 -> setTextSize(1, 1);
-	$printer1 -> text("QTE  ARTICLE\n");
+	$printer1 -> text("ARTICLE                       QTE\n");
 	$printer1 -> text("----------------------------------\n");
 	
 	
@@ -275,17 +275,17 @@ class DefaultController extends Controller
 	 $printer2 -> setJustification(Printer::JUSTIFY_LEFT);
 	 $printer2 ->setReverseColors(false);
 	 $printer2 -> setTextSize(1, 1);
-	$printer2 -> text("Serveur:".$employe->getUsername()."\n");
+	$printer2 -> text("Serveur: ".strtoupper($employe->getUsername())."\n");
 	
 	
 	 $printer2 -> feed(1);
 	 $printer2 -> setJustification(Printer::JUSTIFY_LEFT);
 	 $printer2 ->setReverseColors(false);
 	 $printer2 -> setTextSize(2, 1);
-	$printer2 -> text("Table: ".$table->getNom()."     Ticket:".$ticket->getId()."\n");
+	$printer2 -> text("Table: ".$table->getNom()."\n");
 	$printer2 -> text("--------------------\n");
 	 $printer2 -> setTextSize(1, 1);
-	$printer2 -> text("QTE  ARTICLE\n");
+	$printer2 -> text("ARTICLE                       QTE\n");
 	$printer2 -> text("----------------------------------\n");
 
 
@@ -353,9 +353,15 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
 
 
 
-            }else
+            }elseif($pr->getTypeproduit() == 1)
             {
             $pr->setstock($p->product_quantity);
+            }elseif($pr->getTypeproduit() == 2)
+            {
+                $pr->setstock($p->product_quantity);
+            }elseif($pr->getTypeproduit() == 5)
+            {
+                $pr->setstock($p->product_quantity);
             }
 
 
@@ -367,30 +373,47 @@ if($parent->getDivvendu()+$p->product_quantity == $parent->getQtepart()){
             $cmdprod->setBon($bon);
             $cmdprod->setProduit($pr);
             $cmdprod->setQuantite($p->product_quantity);
+            $cmdprod->setPrix($p->product_quantity * $pr->getPrixvente());
 
             $em->persist($cmdprod);
             $em->persist($pr);
 
 
-			
+		// si produit destiné a la cuisine
+
 		if($pr->getCategory()->getImpression() == "Cuisine"){
 			$cui = "on";
+            $taille = strlen($pr->getDesignation());
+            $ajout = 37 - $taille  ;
 			$printer1 -> setTextSize(1, 2);
-	$printer1 -> text($p->product_quantity." ".$pr->getDesignation()."\n");
+	$printer1 -> text($pr->getDesignation().str_repeat(" ", $ajout) .$p->product_quantity."\n");
 	$printer1 -> feed(1);
-			}elseif($pr->getCategory()->getImpression() == "Chicha")
+
+
+
+
+        }elseif($pr->getCategory()->getImpression() == "Chicha")
   {
 	$chi= "chi";
+      $taille = strlen($pr->getDesignation());
+      $ajout = 37 - $taille  ;
 $printer2 -> setTextSize(1, 2);
-	$printer2 -> text($p->product_quantity." ".$pr->getDesignation()."\n");
+//	$printer2 -> text($p->product_quantity." ".$pr->getDesignation()."\n");
+
+            $printer2 -> text($pr->getDesignation().str_repeat(" ", $ajout) .$p->product_quantity."\n");
+
 	$printer2 -> feed(1);
 
 }else{
 	
   $baron = "on";
+            $taille = strlen($pr->getDesignation());
+            $ajout = 37 - $taille  ;
 	 $printer -> setTextSize(1, 2);
-	$printer -> text($p->product_quantity."  ".$pr->getDesignation()."\n");
-	$printer -> feed(1);	
+
+            $printer -> text($pr->getDesignation().str_repeat(" ", $ajout) .$p->product_quantity."\n");
+
+	$printer -> feed(1);
 }
 
 
@@ -1322,9 +1345,14 @@ group by commandeprod.produit_id");
         $bon = $em
             ->getRepository('APCaisseBundle:boncommande')->find($cmd->getBon()->getId());
 
+$ticket = $em
+    ->getRepository('APCaisseBundle:ticket')->find($bon->getTicket());
 
-       $num = count($bon->getCommandeprods());
 
+       $num = count($ticket->getBoncommandes());
+
+
+        $num1 = count($bon->getCommandeprods());
 
         $tab = $em
             ->getRepository('APCaisseBundle:tables')->find($table);
@@ -1345,6 +1373,22 @@ group by commandeprod.produit_id");
         }
 
         }elseif ( $prod->getTypeproduit() == 2 ) {
+
+
+            if($prod->getGerstock()){
+                $newqte = $prod->getQtestock() + $cmd->getQuantite();
+
+                $prod->setQtestock($newqte);
+                $em->persist($prod);
+
+
+
+                $em->flush();
+
+            }
+
+
+        }elseif ( $prod->getTypeproduit() == 5 ) {
 
 
             if($prod->getGerstock()){
@@ -1437,10 +1481,10 @@ group by commandeprod.produit_id");
 
 
 
-            if($parent->getDivvendu() - $cmd->getQuantite() < 0  AND $parent->getDivvendu() == 0 ){
+            if($parent->getDivvendu() - $demiprod < 0  AND $parent->getDivvendu() == 0 ){
 
                 $newqte = $parent->getQtestock()+1;
-                $newdiv =  $parent->getQtepart() - $cmd->getQuantite();
+                $newdiv =  $parent->getQtepart() - $demiprod;
                 $parent->setQtestock($newqte);
                 $parent->setDivvendu($newdiv);
 
@@ -1449,13 +1493,13 @@ group by commandeprod.produit_id");
                 $em->flush();
 
 
-            }elseif ($parent->getDivvendu() - $cmd->getQuantite() < 0  AND $parent->getDivvendu() > 0 ){
+            }elseif ($parent->getDivvendu() - $demiprod < 0  AND $parent->getDivvendu() > 0 ){
 
 
 
                 $newqte = $parent->getQtestock()+1;
 
-                $newdi =  $parent->getDivvendu() - $cmd->getQuantite();
+                $newdi =  $parent->getDivvendu() - $demiprod;
 
                 $newdiv =  $parent->getQtepart() - $newdi;
 
@@ -1471,7 +1515,7 @@ group by commandeprod.produit_id");
 
 
 
-                $newdiv =  $parent->getDivvendu() - $cmd->getQuantite();
+                $newdiv =  $parent->getDivvendu() - $demiprod;
                 $parent->setDivvendu($newdiv);
 
                 $em->persist($parent);
@@ -1598,7 +1642,7 @@ group by commandeprod.produit_id");
 
 
 
-        if($num == 1){
+        if($num == 1 AND $num1 == 1){
 
             $tab->setOccupe(0);
             $ticket = $em
@@ -1607,7 +1651,18 @@ group by commandeprod.produit_id");
             $em->remove($ticket);
             $em->flush();
 
-        }else{
+        }elseif( $num1 == 1 ){
+            $em->remove($bon);
+            $em->flush();
+
+        }
+
+
+        else{
+
+
+
+
         $em->remove($cmd);
         $em->flush();
         }

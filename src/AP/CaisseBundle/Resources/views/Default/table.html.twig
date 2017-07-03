@@ -141,14 +141,14 @@
 
                                                 {% endif %}
 
-                                    <div class="sc-product-item acc blockmenu   menublok" style="background-color: white;height: 70px" >
+                                    <div class="sc-product-item acc blockmenu   menublok" style="background-color: white;height: 80px" >
                                         <div class="col-md-3 col-sm-3 col-xs-12" >
 
                                             {% if prod.thumbnail is  null  %}
-                                                <img src="{{ asset('imgprod/def.jpg') }}" style="width: 80%">
+                                                <img src="{{ asset('imgprod/def.jpg') }}" style="width: 90%">
 
                                             {% else %}
-                                                <img src="{{ asset( prod.thumbnail.uploadDir() ~ prod.thumbnail.url) }}" style="width: 80%">
+                                                <img src="{{ asset( prod.thumbnail.uploadDir() ~ prod.thumbnail.url) }}" style="width: 110%">
 
                                             {% endif %}
                                         </div>
@@ -436,7 +436,7 @@
                                             <div class="col-md-2 col-sm-2 col-xs-12 nopad"   >
 
 
-                                                {% if prod.gerstock and prod.qtestock <= 0  %}
+                                                {% if prod.gerstock and prod.qtestock <=  0  %}
                                                 <div class="col-md-12 col-sm-12 col-xs-12 nopad" style="    background: rgba(255, 0, 0, 0.57);
     opacity: 0.4;" >
 
@@ -453,20 +453,20 @@
 
 
 {% endif %}
-                                                        <div class="sc-product-item acc blockmenu   menublok" style="background-color: white;height: 70px" >
+                                                        <div class="sc-product-item acc blockmenu   menublok" style="background-color: white;height: 80px" >
                                                             <div class="col-md-3 col-sm-3 col-xs-12" >
 
                                                                 {% if prod.thumbnail is  null  %}
                                                                     <img src="{{ asset('imgprod/def.jpg') }}" style="width: 80%">
 
                                                                 {% else %}
-                                                                    <img src="{{ asset( prod.thumbnail.uploadDir() ~ prod.thumbnail.url) }}" style="width: 80%">
+                                                                    <img src="{{ asset( prod.thumbnail.uploadDir() ~ prod.thumbnail.url) }}" style="width: 110%">
 
                                                                 {% endif %}
                                                             </div>
                                                             <div class="col-md-9 col-sm-9 col-xs-12"  >
                                                                 <h2 data-name="product_name" style="text-transform: uppercase;color:black;font-size: 0.9em"> {{ prod.designation }}</h2>
-                                                                <h5> {{ prod.prixvente }} Fcfa</h5>
+                                                                <h5> {{ prod.prixvente }}  Fcfa</h5>
 
                                                                 <input name="product_price" value="{{ prod.prixvente }}" type="hidden" />
                                                                 <input name="product_id" value="{{ prod.id }}" type="hidden" />
